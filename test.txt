@@ -1,7 +1,7 @@
 
 <PROGRAMME_DOMUS>
 
-<DECLARATION_APPAREILS>
+<DECLARATION_APPAREILS> 
 eclairage e1, e2, e3.
 volet v1, v2, v3, v4.
 chauffage rad1.

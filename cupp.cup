@@ -86,7 +86,7 @@ dad::= nom MOT PT  dad   // eclairage e1,e2,,,, .
 
 |  APPAREIL nom  PT dad  // autreappareil(cafeteria) cafe .
 
-| nom nom AO MOT AF  dad // definir mon eclairage_salon = {e1,e2}
+| nom nom EGAL AO MOT AF PT dad // definir mon eclairage_salon = {e1,e2}
 
 |  ; //sortir
 
