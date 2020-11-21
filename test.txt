@@ -1,0 +1,13 @@
+
+<PROGRAMME_DOMUS>
+
+<DECLARATION_APPAREILS>
+eclairage e1, e2, e3.
+volet v1, v2, v3, v4.
+chauffage rad1.
+alarme a1.
+fenetre fen.
+autre_appareil(cafetiere) cafe.
+autre_appareil(hifi) hf.
+definir mon_eclairage_salon = {e2,e3}.
+</DECLARATION_APPAREILS>

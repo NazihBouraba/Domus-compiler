@@ -1,0 +1,64 @@
+// Specification JCup
+import java.util.HashMap; 
+import java_cup.runtime.*;
+import java.lang.*;
+
+parser code {:
+	public static void main(String args[]) throws Exception {
+		new parser(new Yylex(System.in)).parse();
+	}
+:}
+action code {:
+
+
+
+
+:}
+non terminal axiome;
+non terminal table;
+non terminal da;
+non terminal dad;
+non terminal S;
+non terminal nom;
+non terminal Integer exp;
+terminal String PARFERM;
+terminal Integer NOMBRE;
+terminal String ID;
+terminal String AJOUT;
+terminal String EXE;
+terminal String Loop;
+terminal String DO;
+terminal String Action;
+terminal String Done;
+terminal String ENS;
+terminal String PDO;
+terminal String PDF;
+terminal String DAO;
+terminal String DAF;
+terminal String TYPE;
+terminal String PT;
+terminal String TYPEAUTRE;
+terminal String DEF;
+terminal String AO;
+terminal String AF;
+terminal String VIRG;
+terminal String nap;
+
+
+
+
+
+
+
+S ::= PDO da PDF;
+
+da ::= DAO  dad    DAF  ;
+dad::= TYPE nom PT | TYPEAUTRE nap PT | DEF ENS AO nom AF PT ;
+nom ::= ID VIRG nom|  ID ;
+
+
+
+
+
+
+
