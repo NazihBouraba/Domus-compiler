@@ -14,35 +14,13 @@ action code {:
 
 
 :}
-non terminal axiome;
-non terminal table;
-non terminal da;
-non terminal dad;
-non terminal S;
-non terminal nom;
-non terminal Integer exp;
-terminal String PARFERM;
-terminal Integer NOMBRE;
-terminal String ID;
-terminal String AJOUT;
-terminal String EXE;
-terminal String Loop;
-terminal String DO;
-terminal String Action;
-terminal String Done;
-terminal String ENS;
-terminal String PDO;
-terminal String PDF;
-terminal String DAO;
-terminal String DAF;
-terminal String TYPE;
-terminal String PT;
-terminal String TYPEAUTRE;
-terminal String DEF;
-terminal String AO;
-terminal String AF;
-terminal String VIRG;
-terminal String nap;
+
+non terminal S; // axiome
+
+non terminal da; // declaration appareils
+non terminal dad; // declaration appareils detaillé
+
+non terminal MOT; // mot pour generer des nom,nom,nom,nom
 
 
 
@@ -50,11 +28,70 @@ terminal String nap;
 
 
 
+
+
+
+terminal String ACTION; // .allumer .eteindre ....
+
+
+terminal String PDO; // debut programme domus
+terminal String PDF; // fin programme domus
+
+terminal String DAO; // debut declaration appareil
+terminal String DAF; // fin declaration appareil
+
+terminal String DIO; // debut declaration interface
+terminal String DIF; // fin declaration interface
+
+terminal String DSO; // debut declaration scenario
+terminal String DSF; // fin declaration scenario
+
+terminal String DCO; // debut declaration commande
+terminal String DCF; // fin declaration commande
+
+
+terminal String DSCO; // debut declaration d'un scenario
+terminal String DSCF; // fin declaration d'un scenario
+
+terminal String VG; //","
+terminal String PT; // "."
+terminal String nom; // chaine de caractere
+terminal String APPAREIL; // autreappareil(cafe)
+terminal String AO; // "{"
+terminal String AF; // "}"
+terminal String PO; // "("
+terminal String PF; // ")"
+terminal String EGAL; // "="
+terminal String DEGAL; // "=="
+terminal String DP; // ":"
+terminal String PV; // ";"
+terminal String H; // "double cotte"
+terminal String ETAT; // .allumé ..
+
+
+
+
+
+
+
+
+//axiome
 S ::= PDO da PDF;
 
-da ::= DAO  dad    DAF  ;
-dad::= TYPE nom PT | TYPEAUTRE nap PT | DEF ENS AO nom AF PT ;
-nom ::= ID VIRG nom|  ID ;
+
+//declaration des appareils
+da ::= DAO dad DAF  ;
+
+dad::= nom MOT PT  dad   // eclairage e1,e2,,,, .
+
+|  APPAREIL nom  PT dad  // autreappareil(cafeteria) cafe .
+
+| nom nom AO MOT AF  dad // definir mon eclairage_salon = {e1,e2}
+
+|  ; //sortir
+
+
+MOT ::= nom VG MOT| nom ;
 
 
 

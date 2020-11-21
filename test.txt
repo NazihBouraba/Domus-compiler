@@ -11,3 +11,5 @@ autre_appareil(cafetiere) cafe.
 autre_appareil(hifi) hf.
 definir mon_eclairage_salon = {e2,e3}.
 </DECLARATION_APPAREILS>
+
+</PROGRAMME_DOMUS>

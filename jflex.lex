@@ -10,52 +10,28 @@ import java_cup.runtime.Symbol;
 
 date = "(" ([0-9]{4} | _ ) ","([0-9]{2}  | _ ) "," ([0-9]{2}) "," ([0-9]{2}) "," ([0-9]{2}) ")"
 
-
+acti = "."("ouvrir" |"fermer" | "éteindre" | "allumer" | "tamiser" |"allumer_partiel"|"allumer_éco"|"fermer partiel")
 pdo = "<PROGRAMME_DOMUS>"
 pdf = "</PROGRAMME_DOMUS>"
-
 dao = "<DECLARATION_APPAREILS>"
 daf = "</DECLARATION_APPAREILS>"
-
 dio = "<DECLARATION_INTERFACES>"
 dif = "</DECLARATION_INTERFACES>"
-
 dso = "<DECLARATION_SCENARII>"
 dsf = "</DECLARATION_SCENARII>"
-
-
-
+nom = ([a-zA-Z] |  [0-9] | "_")+ | "(" ([a-zA-Z] |  [0-9] | "_") +  ")"
+appareil = ([a-zA-Z] |  [0-9] | "_")+ "(" ([a-zA-Z] |  [0-9] | "_") +  ")"
 dco = "<DECLARATION_COMMANDES>"
 dcf = "</DECLARATION_COMMANDES>"
-
 dsceno = "<SCENARIO "(([a-zA-Z])+([0-9])+)">"
 dscenf = "</SCENARIO "(([a-zA-Z])+([0-9])+)">"
-
-type = ("eclairage" | "volet" | "chauffage" | "alarme" | "fenetre" )
-
-ap = "autre_appareil"  
-
-nap = "("(([a-zA-Z])+)")"
-
-nom_ens = (([a-zA-Z])+)"="
-
-id = (([a-zA-Z])+)[0-9]+
-
 h = \"      // le "
 
 %%
 
-
 {pdo}  { return new Symbol(sym.PDO); }            //PROGRAMME DOMUS
 {pdf}  { return new Symbol(sym.PDF); }
-
-
-        
-{id}  { return new Symbol(sym.ID); }
-{nom_ens}  { return new Symbol(sym.ENS); }
-{nap}  { return new Symbol(sym.nap); }
-
-
+   
 {dao}  { return new Symbol(sym.DAO); }           // DECLARATION_APPAREILS
 {daf}  { return new Symbol(sym.DAF); }
 
@@ -71,9 +47,9 @@ h = \"      // le "
 {dsceno}  { return new Symbol(sym.DSCO); }         // DECLARATION_SCENARIO
 {dscenf}  { return new Symbol(sym.DSCF); }
 
-scenario_id  { return new Symbol(sym.scenario_id); }
 
-"=="  { return new Symbol(sym.EGAL); }
+"=="  { return new Symbol(sym.DEGAL); }
+"="  { return new Symbol(sym.EGAL); }
 ":"  { return new Symbol(sym.DP); }
 ";"  { return new Symbol(sym.PV); }
 "."  { return new Symbol(sym.PT); }
@@ -84,55 +60,15 @@ scenario_id  { return new Symbol(sym.scenario_id); }
 "}"  { return new Symbol(sym.AF); }
 {h} { return new Symbol(sym.H); }     
 
+".etat" { return new Symbol(sym.ETAT); }    
+
+{nom} {return new Symbol(sym.nom, new String(yytext())); }  // n'import quel mot 
+{appareil} {return new Symbol(sym.APPAREIL, new String(yytext())); }    // autre_appareil
+{acti} {return new Symbol(sym.ACTION, new String(yytext())); }    // autre_appareil
 
 
-//{mot} {return new Symbol(sym.MOT, new String(yytext())); }  // pour interfaces aussi
+                  
 
-{ap} { return new Symbol(sym.TYPEAUTRE); }                     // autre_appareil
-
-"definir" { return new Symbol(sym.DEF); }                             // les noms des symboles a remplir comme le mot en fichier .cup
-"executer" { return new Symbol(sym.EXE); }
-"associer" { return new Symbol(sym.b); }
-
-{type}  {return new Symbol(sym.TYPE, new String(yytext())); } 
-
-
-"programmer" { return new Symbol(sym.b); }
-"message" { return new Symbol(sym.b); }
-"pourtout" { return new Symbol(sym.Loop); }
-"faire" { return new Symbol(sym.DO); }
-"fait" { return new Symbol(sym.Done); }
-"si" { return new Symbol(sym.b); }
-"alors" { return new Symbol(sym.b); }
-"sinon" { return new Symbol(sym.b); }
-"fsi" { return new Symbol(sym.b); }
-("ouvrir" |"fermer" | "eteindre" | "allumer" | "tamiser") { return new Symbol(sym.Action); }
-
-
-"etat" { return new Symbol(sym.b); }
-"allumer_partiel" { return new Symbol(sym.b); }
-"allumer_eco" { return new Symbol(sym.b); }
-"ouvrir_partiel" { return new Symbol(sym.b); }
-"fermer_partiel" { return new Symbol(sym.b); }
-"allume" { return new Symbol(sym.b); }
-"eteint" { return new Symbol(sym.b); }
-"demi" { return new Symbol(sym.b); }
-"eco" { return new Symbol(sym.b); }
-"ouvert" { return new Symbol(sym.b); }
-"ferme" { return new Symbol(sym.b); }
-
-"telephone" { return new Symbol(sym.b); }
-
-"tablette" { return new Symbol(sym.b); }
-"tv" { return new Symbol(sym.b); }
-"hif" { return new Symbol(sym.b); }
-"cafetiere" { return new Symbol(sym.b); }
-"video_proj" { return new Symbol(sym.b); }
-"lave_vaisselle" { return new Symbol(sym.b); }
-"lave_linge" { return new Symbol(sym.b); }
-"seche_linge" { return new Symbol(sym.b); }
-"ordinateur" { return new Symbol(sym.b); }
-"portail" { return new Symbol(sym.b); }
 
 
 

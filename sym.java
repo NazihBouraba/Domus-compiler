@@ -6,53 +6,65 @@
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int DAO = 14;
-  public static final int PARFERM = 2;
-  public static final int Loop = 7;
-  public static final int TYPEAUTRE = 18;
-  public static final int Action = 9;
-  public static final int DAF = 15;
-  public static final int ID = 4;
-  public static final int AO = 20;
-  public static final int PT = 17;
-  public static final int DO = 8;
-  public static final int TYPE = 16;
-  public static final int NOMBRE = 3;
+  public static final int DEGAL = 24;
+  public static final int EGAL = 23;
+  public static final int DAO = 5;
+  public static final int ETAT = 28;
+  public static final int DSCO = 13;
+  public static final int DSO = 9;
+  public static final int DAF = 6;
+  public static final int nom = 17;
+  public static final int DSCF = 14;
+  public static final int DSF = 10;
+  public static final int PV = 26;
+  public static final int DP = 25;
+  public static final int AO = 19;
+  public static final int PT = 16;
+  public static final int H = 27;
+  public static final int PO = 21;
   public static final int EOF = 0;
-  public static final int VIRG = 22;
-  public static final int DEF = 19;
-  public static final int AF = 21;
-  public static final int EXE = 6;
+  public static final int AF = 20;
+  public static final int APPAREIL = 18;
   public static final int error = 1;
-  public static final int PDO = 12;
-  public static final int Done = 10;
-  public static final int PDF = 13;
-  public static final int ENS = 11;
-  public static final int AJOUT = 5;
+  public static final int PDO = 3;
+  public static final int PF = 22;
+  public static final int DCO = 11;
+  public static final int VG = 15;
+  public static final int ACTION = 2;
+  public static final int DIO = 7;
+  public static final int PDF = 4;
+  public static final int DCF = 12;
+  public static final int DIF = 8;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
-  "PARFERM",
-  "NOMBRE",
-  "ID",
-  "AJOUT",
-  "EXE",
-  "Loop",
-  "DO",
-  "Action",
-  "Done",
-  "ENS",
+  "ACTION",
   "PDO",
   "PDF",
   "DAO",
   "DAF",
-  "TYPE",
+  "DIO",
+  "DIF",
+  "DSO",
+  "DSF",
+  "DCO",
+  "DCF",
+  "DSCO",
+  "DSCF",
+  "VG",
   "PT",
-  "TYPEAUTRE",
-  "DEF",
+  "nom",
+  "APPAREIL",
   "AO",
   "AF",
-  "VIRG"
+  "PO",
+  "PF",
+  "EGAL",
+  "DEGAL",
+  "DP",
+  "PV",
+  "H",
+  "ETAT"
   };
 }
 
