@@ -82,7 +82,7 @@ terminal String ETAT; // .allumé ..
 
 
 //axiome
-S ::= PDO da ds PDF;
+S ::= PDO da ds PDF  {:System.out.println("analyse terminée"); :};
 
 
 //declaration des appareils
@@ -112,7 +112,9 @@ scenario ::= nom nom DP x nom nom ACTION PV nom PV scenario   // pourtout v:vole
 
 | nom ACTION PV scenario // e1.allumer 
 
-| nom PO nom ETAT DEGAL nom PF nom nom ACTION PV nom PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi;
+| nom PO nom ETAT DEGAL nom PF nom nom ACTION PV sinon PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
+
+
 
 | ;
 
@@ -122,6 +124,7 @@ scenario ::= nom nom DP x nom nom ACTION PV nom PV scenario   // pourtout v:vole
 
 MOT ::= nom VG MOT| nom ;
 x ::= nom | APPAREIL ;
+sinon ::= nom |nom nom ACTION PV nom ; // fsi ou bien sinon e1.eteidre; fsi
 
 
 

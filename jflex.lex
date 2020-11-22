@@ -25,6 +25,7 @@ dco = "<DECLARATION_COMMANDES>"
 dcf = "</DECLARATION_COMMANDES>"
 dsceno = "<SCENARIO "(([a-zA-Z])+([0-9])*)">"
 dscenf = "</SCENARIO "(([a-zA-Z])+([0-9])*)">"
+
 h = \"      // le "
 
 %%
