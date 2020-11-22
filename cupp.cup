@@ -20,7 +20,13 @@ non terminal S; // axiome
 non terminal da; // declaration appareils
 non terminal dad; // declaration appareils detaillé
 
+non terminal ds; // declaration des scenarios
+non terminal dsd; // declaration scenarios detaillés
+non terminal scenario; // genere un scenario
+
 non terminal MOT; // mot pour generer des nom,nom,nom,nom
+non terminal x; // genere soit appareil ou nom
+non terminal sinon; // genere le blok sinon apres si
 
 
 
@@ -76,7 +82,7 @@ terminal String ETAT; // .allumé ..
 
 
 //axiome
-S ::= PDO da PDF;
+S ::= PDO da ds PDF;
 
 
 //declaration des appareils
@@ -91,9 +97,30 @@ dad::= nom MOT PT  dad   // eclairage e1,e2,,,, .
 |  ; //sortir
 
 
+
+
+
+// declaration des scenarios
+
+ds ::= DSO dsd DSF  ;
+
+dsd :== DSCO scenario DSCF dsd // declaration plusieurs scenarios
+| scenario
+| ;  
+
+scenario ::= nom nom DP x nom nom ACTION PV nom PV scenario   // pourtout v:volet faire v.ouvrir ; fait;
+
+| nom ACTION  scenario // e1.allumer 
+
+| nom PO nom ETAT DEGAL nom PF nom nom ACTION PV nom PV sinon  scenario//si(rad1.etat == eteint) alors rad1.allumer;fsi;
+
+
+
+
+
 MOT ::= nom VG MOT| nom ;
-
-
+x ::= nom | appareil ;
+sinon:== nom ACTION | ;
 
 
 
