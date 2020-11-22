@@ -8,7 +8,7 @@ import java_cup.runtime.Symbol;
 %line
 %column
 
-date = "(" ([0-9]{4} | _ ) ","([0-9]{2}  | _ ) "," ([0-9]{2}) "," ([0-9]{2}) "," ([0-9]{2}) ")"
+date = "(" ([0-9]* | _ ) ","([0-9]*  | _ ) "," ([0-9]*) "," ([0-9]*) "," ([0-9]*) ")"
 
 acti = "."("ouvrir" |"fermer" | "eteindre" | "allumer" | "tamiser" |"allumer_partiel"|"allumer_éco"|"fermer partiel")
 pdo = "<PROGRAMME_DOMUS>"

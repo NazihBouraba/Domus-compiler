@@ -28,6 +28,11 @@ non terminal MOT; // mot pour generer des nom,nom,nom,nom
 non terminal x; // genere soit appareil ou nom
 non terminal sinon; // genere le blok sinon apres si
 
+non terminal di;
+non terminal dc; // declaration commandes 
+non terminal dat;
+non terminal xx;
+non terminal did,dcd;
 
 
 
@@ -38,7 +43,7 @@ non terminal sinon; // genere le blok sinon apres si
 
 
 terminal String ACTION; // .allumer .eteindre ....
-
+terminal String DATE;
 
 terminal String PDO; // debut programme domus
 terminal String PDF; // fin programme domus
@@ -82,7 +87,7 @@ terminal String ETAT; // .allumé ..
 
 
 //axiome
-S ::= PDO da ds PDF  {:System.out.println("analyse terminée"); :};
+S ::= PDO da di ds dc PDF  {:System.out.println("analyse terminée"); :};
 
 
 //declaration des appareils
@@ -118,6 +123,14 @@ scenario ::= nom nom DP x nom nom ACTION PV nom PV scenario   // pourtout v:vole
 
 | ;
 
+di ::= DIO did DIF  ;  //<DECLARATION_INTERFACES>
+did ::= nom MOT PT did | ; // interrupteur b1, b2.
+
+dc::= DCO dcd DCF ;//<DECLARATION_COMMANDES>
+dcd ::= nom nom EGAL xx dcd |  ;
+xx::= nom PT |  AO MOT AF PT   |  AO dat AF PT | DATE PT  ; 
+
+dat ::= DATE VG DATE ;
 
 
 
