@@ -104,23 +104,25 @@ dad::= nom MOT PT  dad   // eclairage e1,e2,,,, .
 
 ds ::= DSO dsd DSF  ;
 
-dsd :== DSCO scenario DSCF dsd // declaration plusieurs scenarios
-| scenario
+dsd ::= DSCO scenario DSCF dsd // declaration plusieurs scenarios
+
 | ;  
 
 scenario ::= nom nom DP x nom nom ACTION PV nom PV scenario   // pourtout v:volet faire v.ouvrir ; fait;
 
-| nom ACTION  scenario // e1.allumer 
+| nom ACTION PV scenario // e1.allumer 
 
-| nom PO nom ETAT DEGAL nom PF nom nom ACTION PV nom PV sinon  scenario//si(rad1.etat == eteint) alors rad1.allumer;fsi;
+| nom PO nom ETAT DEGAL nom PF nom nom ACTION PV nom PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi;
+
+| ;
 
 
 
 
 
 MOT ::= nom VG MOT| nom ;
-x ::= nom | appareil ;
-sinon:== nom ACTION | ;
+x ::= nom | APPAREIL ;
+
 
 
 

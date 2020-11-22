@@ -10,7 +10,7 @@ import java_cup.runtime.Symbol;
 
 date = "(" ([0-9]{4} | _ ) ","([0-9]{2}  | _ ) "," ([0-9]{2}) "," ([0-9]{2}) "," ([0-9]{2}) ")"
 
-acti = "."("ouvrir" |"fermer" | "éteindre" | "allumer" | "tamiser" |"allumer_partiel"|"allumer_éco"|"fermer partiel")
+acti = "."("ouvrir" |"fermer" | "eteindre" | "allumer" | "tamiser" |"allumer_partiel"|"allumer_éco"|"fermer partiel")
 pdo = "<PROGRAMME_DOMUS>"
 pdf = "</PROGRAMME_DOMUS>"
 dao = "<DECLARATION_APPAREILS>"
@@ -23,8 +23,8 @@ nom = (([a-zA-Z] |  [0-9] | "_")+ | ("(" ([a-zA-Z] |  [0-9] | "_") +  ")"))
 appareil = ([a-zA-Z] |  [0-9] | "_")+ "(" ([a-zA-Z] |  [0-9] | "_") +  ")"
 dco = "<DECLARATION_COMMANDES>"
 dcf = "</DECLARATION_COMMANDES>"
-dsceno = "<SCENARIO "(([a-zA-Z])+([0-9])+)">"
-dscenf = "</SCENARIO "(([a-zA-Z])+([0-9])+)">"
+dsceno = "<SCENARIO "(([a-zA-Z])+([0-9])*)">"
+dscenf = "</SCENARIO "(([a-zA-Z])+([0-9])*)">"
 h = \"      // le "
 
 %%

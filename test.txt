@@ -12,4 +12,17 @@ autre_appareil(hifi) hf.
 definir mon_eclairage_salon = {e2,e3}.
 </DECLARATION_APPAREILS>
 
+<DECLARATION_SCENARII>
+
+<SCENARIO bonjour>
+pourtout v:volet faire v.ouvrir; fait;
+a1.eteindre;
+cafe.allumer;
+si (rad1.etat == eteint) alors rad1.allumer; fsi;
+hf.allumer;
+
+</SCENARIO bonjour>
+
+</DECLARATION_SCENARII>
+
 </PROGRAMME_DOMUS>
