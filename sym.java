@@ -6,36 +6,39 @@
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int DEGAL = 25;
-  public static final int EGAL = 24;
-  public static final int DAO = 6;
-  public static final int ETAT = 29;
-  public static final int DSCO = 14;
-  public static final int DSO = 10;
+  public static final int DEGAL = 26;
+  public static final int EGAL = 25;
+  public static final int DAO = 7;
+  public static final int ETAT = 30;
+  public static final int DSCO = 15;
+  public static final int DSO = 11;
   public static final int DATE = 3;
-  public static final int DAF = 7;
-  public static final int nom = 18;
-  public static final int DSCF = 15;
-  public static final int DSF = 11;
-  public static final int PV = 27;
-  public static final int DP = 26;
-  public static final int AO = 20;
-  public static final int PT = 17;
-  public static final int H = 28;
-  public static final int PO = 22;
+  public static final int DAF = 8;
+  public static final int nom = 19;
+  public static final int MSG = 31;
+  public static final int DSCF = 16;
+  public static final int cm = 32;
+  public static final int DSF = 12;
+  public static final int PV = 28;
+  public static final int DP = 27;
+  public static final int AO = 21;
+  public static final int PT = 18;
+  public static final int H = 29;
+  public static final int PO = 23;
   public static final int EOF = 0;
-  public static final int AF = 21;
-  public static final int APPAREIL = 19;
+  public static final int AF = 22;
+  public static final int APPAREIL = 20;
   public static final int error = 1;
   public static final int PDO = 4;
-  public static final int PF = 23;
-  public static final int DCO = 12;
-  public static final int VG = 16;
+  public static final int PF = 24;
+  public static final int DCO = 13;
+  public static final int VG = 17;
   public static final int ACTION = 2;
-  public static final int DIO = 8;
+  public static final int DIO = 9;
+  public static final int COTE = 6;
   public static final int PDF = 5;
-  public static final int DCF = 13;
-  public static final int DIF = 9;
+  public static final int DCF = 14;
+  public static final int DIF = 10;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -43,6 +46,7 @@ public class sym {
   "DATE",
   "PDO",
   "PDF",
+  "COTE",
   "DAO",
   "DAF",
   "DIO",
@@ -66,7 +70,9 @@ public class sym {
   "DP",
   "PV",
   "H",
-  "ETAT"
+  "ETAT",
+  "MSG",
+  "cm"
   };
 }
 

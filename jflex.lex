@@ -34,14 +34,21 @@ nom = (([a-zA-Z] |  [0-9] | "_")+ | ("(" ([a-zA-Z] |  [0-9] | "_") +  ")"))
 appareil = ([a-zA-Z] |  [0-9] | "_")+ "(" ([a-zA-Z] |  [0-9] | "_") +  ")"
 dco = "<DECLARATION_COMMANDES>"
 dcf = "</DECLARATION_COMMANDES>"
-dsceno = "<SCENARIO "(([a-zA-Z])+([0-9])*)">"
-dscenf = "</SCENARIO "(([a-zA-Z])+([0-9])*)">"
+dsceno = "<SCENARIO "([a-zA-Z] |  [0-9] | "_")+ ">"
+dscenf = "</SCENARIO "([a-zA-Z] |  [0-9] | "_")+ ">"
 WHITE_SPACE_CHAR = [\ \n\r\t\f]
 
 h = "//".* 
+cote= \"
+
+
+cm = \".* \"
 
 %%
 
+{cote} {return new Symbol(sym.COTE);}
+
+{cm} {return new Symbol(sym.cm);}
 
 {date} {return new Symbol(sym.DATE);}
 
@@ -62,6 +69,8 @@ h = "//".*
 
 {dsceno}  { return new Symbol(sym.DSCO); }         // DECLARATION_SCENARIO
 {dscenf}  { return new Symbol(sym.DSCF); }
+
+ 
 
 {WHITE_SPACE_CHAR}  { }
 

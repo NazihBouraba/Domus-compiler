@@ -86,6 +86,10 @@ non terminal dc; // declaration commandes
 non terminal dat;
 non terminal w;
 non terminal did,dcd;
+non terminal mesgouact;
+non terminal msgs;
+non terminal msg;
+
 
 
 
@@ -100,6 +104,8 @@ terminal String DATE;
 
 terminal String PDO; // debut programme domus
 terminal String PDF; // fin programme domus
+
+terminal String COTE;
 
 terminal String DAO; // debut declaration appareil
 terminal String DAF; // fin declaration appareil
@@ -131,6 +137,8 @@ terminal String DP; // ":"
 terminal String PV; // ";"
 terminal String H; // "double cotte"
 terminal String ETAT; // .allumé ..
+terminal String MSG; // MESSGE("VGFDGDFGFDG")
+terminal String cm; // "VGFDGDFGFDG"
 
 
 
@@ -148,7 +156,7 @@ da ::= DAO dad DAF  ;
 
 dad::= nom MOT PT  dad   // eclairage e1,e2,,,, .
 
-|  APPAREIL nom  PT dad  // autreappareil(cafeteria) cafe .
+|  APPAREIL MOT  PT dad  // autreappareil(cafeteria) cafe .
 
 | nom nom EGAL AO MOT AF PT dad // definir mon eclairage_salon = {e1,e2}
 
@@ -166,13 +174,16 @@ dsd ::= DSCO scenario DSCF dsd // declaration plusieurs scenarios
 
 | ;  
 
-scenario ::= nom nom DP x nom nom ACTION PV nom PV scenario   // pourtout v:volet faire v.ouvrir ; fait;
+scenario ::= nom nom DP x nom mesgouact PV nom PV scenario   // pourtout v:volet faire v.ouvrir ; fait;
 
 | nom ACTION PV scenario // e1.allumer 
 
-| nom PO nom ETAT DEGAL nom PF nom nom ACTION PV sinon PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
+| nom nom PV scenario// executer_scenario soirée;
 
-| ;
+| nom PO nom ETAT DEGAL nom PF nom mesgouact PV sinon PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
+
+| msgs PV  scenario// afficher un message 
+|;
 
 di ::= DIO did DIF  ;  //<DECLARATION_INTERFACES>
 did ::= nom MOT PT did | ; // interrupteur b1, b2.
@@ -185,12 +196,13 @@ dat ::= DATE VG dat | DATE;
 
 
 
-
+mesgouact ::= nom ACTION | msgs ;
 MOT ::= nom VG MOT| nom ;
 x ::= nom | APPAREIL ;
-sinon ::= nom |nom nom ACTION PV nom ; // fsi ou bien sinon e1.eteidre; fsi
+sinon ::= nom scenario   |nom nom ACTION PV nom | nom msgs PV nom  |; // fsi ou bien sinon e1.eteidre; fsi
 
-
+msgs ::= nom PO msg PF ;
+msg ::= nom VG msg | cm VG msg | nom | cm | nom ETAT msg | nom ETAT;
 
 
 
