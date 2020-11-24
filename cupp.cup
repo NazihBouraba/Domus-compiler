@@ -99,7 +99,7 @@ non terminal msg;
 
 
 
-terminal String ACTION; // .allumer .eteindre ....
+terminal String ACTION; // allumer eteindre ....
 terminal String DATE;
 
 terminal String PDO; // debut programme domus
@@ -138,8 +138,13 @@ terminal String PV; // ";"
 terminal String H; // "double cotte"
 terminal String ETAT; // .allumé ..
 terminal String MSG; // MESSGE("VGFDGDFGFDG")
-terminal String cm; // "VGFDGDFGFDG"
-
+terminal String CHAINE; // "VGFDGDFGFDG"
+terminal String APPAREIL_TYPE; // eclairage volet
+terminal String AUTRE_APPAREIL; // autre_appareil(cafe)
+terminal String DEFINIR; // definir
+terminal String INTERFACE_TYPE ; // interrupteur
+terminal String ASSOCIER ; // associer
+terminal String PROGRAMMER ; // associer
 
 
 
@@ -154,11 +159,11 @@ S ::= PDO da di ds dc PDF  {:System.out.println("analyse terminée"); :};
 //declaration des appareils
 da ::= DAO dad DAF  ;
 
-dad::= nom MOT PT  dad   // eclairage e1,e2,,,, .
+dad::= APPAREIL_TYPE MOT PT  dad   // eclairage e1,e2,,,, .
 
-|  APPAREIL MOT  PT dad  // autreappareil(cafeteria) cafe .
+|  AUTRE_APPAREIL MOT  PT dad  // autreappareil(cafeteria) cafe .
 
-| nom nom EGAL AO MOT AF PT dad // definir mon eclairage_salon = {e1,e2}
+| DEFINIR nom EGAL AO MOT AF PT dad // definir mon eclairage_salon = {e1,e2}
 
 |  ; //sortir
 
@@ -185,23 +190,43 @@ scenario ::= nom nom DP x nom mesgouact PV nom PV scenario   // pourtout v:volet
 | msgs PV  scenario// afficher un message 
 |;
 
-di ::= DIO did DIF  ;  //<DECLARATION_INTERFACES>
-did ::= nom MOT PT did | ; // interrupteur b1, b2.
 
-dc::= DCO dcd DCF ;//<DECLARATION_COMMANDES>
-dcd ::= nom nom EGAL w dcd |  ;
-w::= nom PT |  AO MOT AF PT   |  AO dat AF PT | DATE PT  ; 
+
+
+
+//<DECLARATION_INTERFACES>
+
+di ::= DIO did DIF  ;  
+did ::= INTERFACE_TYPE MOT PT did | ; // interrupteur b1, b2.
+
+
+//<DECLARATION_COMMANDES>
+dc::= DCO dcd DCF ;
+
+dcd ::= ASSOCIER nom EGAL nom PT dcd 
+
+| ASSOCIER nom EGAL AO MOT AF PT  dcd 
+
+|PROGRAMMER nom EGAL AO dat AF PT dcd 
+
+|PROGRAMMER nom EGAL DATE PT dcd 
+
+| ;
+
+
 
 dat ::= DATE VG dat | DATE;
 
-
-
 mesgouact ::= nom ACTION | msgs ;
+
 MOT ::= nom VG MOT| nom ;
+
 x ::= nom | APPAREIL ;
+
 sinon ::= nom scenario   |nom nom ACTION PV nom | nom msgs PV nom  |; // fsi ou bien sinon e1.eteidre; fsi
 
 msgs ::= nom PO msg PF ;
+
 msg ::= nom VG msg | cm VG msg | nom | cm | nom ETAT msg | nom ETAT;
 
 
