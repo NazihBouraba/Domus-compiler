@@ -12,6 +12,12 @@ autre_appareil(hifi) hf.
 definir mon_eclairage_salon = {e2,e3}.
 </DECLARATION_APPAREILS>
 
+<DECLARATION_INTERFACES>
+interrupteur b1, b2.
+mobile t1.
+telecommande c1.
+</DECLARATION_INTERFACES>
+
 <DECLARATION_SCENARII>
 
 <SCENARIO bonjour>
@@ -24,5 +30,14 @@ hf.allumer;
 </SCENARIO bonjour>
 
 </DECLARATION_SCENARII>
+
+<DECLARATION_COMMANDES>
+associer b1 = bonjour.
+associer b2 = depart.
+associer t1 = depart.
+associer c1 = {noel1,noel2,noel3}.
+
+programmer soiree_musique = {(2017,11,20,19,30),(2017,11,21,19,30)}.
+</DECLARATION_COMMANDES>
 
 </PROGRAMME_DOMUS>

@@ -30,6 +30,9 @@ h = \"      // le "
 
 %%
 
+
+{date} {return new Symbol(sym.DATE);}
+
 {pdo}  { return new Symbol(sym.PDO); }            //PROGRAMME DOMUS
 {pdf}  { return new Symbol(sym.PDF); }
    

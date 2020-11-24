@@ -31,7 +31,7 @@ non terminal sinon; // genere le blok sinon apres si
 non terminal di;
 non terminal dc; // declaration commandes 
 non terminal dat;
-non terminal xx;
+non terminal w;
 non terminal did,dcd;
 
 
@@ -119,18 +119,16 @@ scenario ::= nom nom DP x nom nom ACTION PV nom PV scenario   // pourtout v:vole
 
 | nom PO nom ETAT DEGAL nom PF nom nom ACTION PV sinon PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
 
-
-
 | ;
 
 di ::= DIO did DIF  ;  //<DECLARATION_INTERFACES>
 did ::= nom MOT PT did | ; // interrupteur b1, b2.
 
 dc::= DCO dcd DCF ;//<DECLARATION_COMMANDES>
-dcd ::= nom nom EGAL xx dcd |  ;
-xx::= nom PT |  AO MOT AF PT   |  AO dat AF PT | DATE PT  ; 
+dcd ::= nom nom EGAL w dcd |  ;
+w::= nom PT |  AO MOT AF PT   |  AO dat AF PT | DATE PT  ; 
 
-dat ::= DATE VG DATE ;
+dat ::= DATE VG dat | DATE;
 
 
 

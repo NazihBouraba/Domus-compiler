@@ -6,39 +6,41 @@
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int DEGAL = 24;
-  public static final int EGAL = 23;
-  public static final int DAO = 5;
-  public static final int ETAT = 28;
-  public static final int DSCO = 13;
-  public static final int DSO = 9;
-  public static final int DAF = 6;
-  public static final int nom = 17;
-  public static final int DSCF = 14;
-  public static final int DSF = 10;
-  public static final int PV = 26;
-  public static final int DP = 25;
-  public static final int AO = 19;
-  public static final int PT = 16;
-  public static final int H = 27;
-  public static final int PO = 21;
+  public static final int DEGAL = 25;
+  public static final int EGAL = 24;
+  public static final int DAO = 6;
+  public static final int ETAT = 29;
+  public static final int DSCO = 14;
+  public static final int DSO = 10;
+  public static final int DATE = 3;
+  public static final int DAF = 7;
+  public static final int nom = 18;
+  public static final int DSCF = 15;
+  public static final int DSF = 11;
+  public static final int PV = 27;
+  public static final int DP = 26;
+  public static final int AO = 20;
+  public static final int PT = 17;
+  public static final int H = 28;
+  public static final int PO = 22;
   public static final int EOF = 0;
-  public static final int AF = 20;
-  public static final int APPAREIL = 18;
+  public static final int AF = 21;
+  public static final int APPAREIL = 19;
   public static final int error = 1;
-  public static final int PDO = 3;
-  public static final int PF = 22;
-  public static final int DCO = 11;
-  public static final int VG = 15;
+  public static final int PDO = 4;
+  public static final int PF = 23;
+  public static final int DCO = 12;
+  public static final int VG = 16;
   public static final int ACTION = 2;
-  public static final int DIO = 7;
-  public static final int PDF = 4;
-  public static final int DCF = 12;
-  public static final int DIF = 8;
+  public static final int DIO = 8;
+  public static final int PDF = 5;
+  public static final int DCF = 13;
+  public static final int DIF = 9;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
   "ACTION",
+  "DATE",
   "PDO",
   "PDF",
   "DAO",
