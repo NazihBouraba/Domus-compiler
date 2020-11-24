@@ -6,39 +6,56 @@
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int DEGAL = 26;
-  public static final int EGAL = 25;
-  public static final int DAO = 7;
-  public static final int ETAT = 30;
-  public static final int DSCO = 15;
-  public static final int DSO = 11;
-  public static final int DATE = 3;
-  public static final int DAF = 8;
-  public static final int nom = 19;
-  public static final int MSG = 31;
-  public static final int DSCF = 16;
-  public static final int cm = 32;
-  public static final int DSF = 12;
-  public static final int PV = 28;
-  public static final int DP = 27;
-  public static final int AO = 21;
   public static final int PT = 18;
-  public static final int H = 29;
-  public static final int PO = 23;
-  public static final int EOF = 0;
+  public static final int FSI = 47;
   public static final int AF = 22;
-  public static final int APPAREIL = 20;
-  public static final int error = 1;
-  public static final int PDO = 4;
+  public static final int PO = 23;
+  public static final int DAO = 7;
+  public static final int EGAL = 25;
+  public static final int SI = 40;
   public static final int PF = 24;
-  public static final int DCO = 13;
+  public static final int DAF = 8;
+  public static final int ASSOCIER = 37;
   public static final int VG = 17;
-  public static final int ACTION = 2;
-  public static final int DIO = 9;
+  public static final int APPAREIL_TYPE = 33;
+  public static final int DSO = 11;
   public static final int COTE = 6;
-  public static final int PDF = 5;
+  public static final int H = 29;
+  public static final int MSG = 31;
+  public static final int DATE = 3;
+  public static final int DSF = 12;
+  public static final int INTERFACE_TYPE = 36;
+  public static final int DCO = 13;
+  public static final int DIO = 9;
+  public static final int DEGAL = 26;
+  public static final int EOF = 0;
+  public static final int FAIT = 44;
+  public static final int ETAT = 30;
   public static final int DCF = 14;
+  public static final int error = 1;
+  public static final int cm = 39;
   public static final int DIF = 10;
+  public static final int FAIRE = 45;
+  public static final int POURTOUT = 43;
+  public static final int DSCO = 15;
+  public static final int SINON = 42;
+  public static final int ACTION = 2;
+  public static final int ALORS = 49;
+  public static final int AUTRE_APPAREIL = 34;
+  public static final int DSCF = 16;
+  public static final int PDO = 4;
+  public static final int MESSAGE = 41;
+  public static final int PROGRAMMER = 38;
+  public static final int ETATS = 46;
+  public static final int PDF = 5;
+  public static final int APPAREIL = 20;
+  public static final int DEFINIR = 35;
+  public static final int nom = 19;
+  public static final int CHAINE = 32;
+  public static final int EXECUTER_SCENARIO = 48;
+  public static final int AO = 21;
+  public static final int DP = 27;
+  public static final int PV = 28;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -72,7 +89,24 @@ public class sym {
   "H",
   "ETAT",
   "MSG",
-  "cm"
+  "CHAINE",
+  "APPAREIL_TYPE",
+  "AUTRE_APPAREIL",
+  "DEFINIR",
+  "INTERFACE_TYPE",
+  "ASSOCIER",
+  "PROGRAMMER",
+  "cm",
+  "SI",
+  "MESSAGE",
+  "SINON",
+  "POURTOUT",
+  "FAIT",
+  "FAIRE",
+  "ETATS",
+  "FSI",
+  "EXECUTER_SCENARIO",
+  "ALORS"
   };
 }
 

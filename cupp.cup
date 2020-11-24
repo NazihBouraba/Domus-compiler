@@ -145,6 +145,19 @@ terminal String DEFINIR; // definir
 terminal String INTERFACE_TYPE ; // interrupteur
 terminal String ASSOCIER ; // associer
 terminal String PROGRAMMER ; // associer
+terminal String cm ; // message
+terminal String SI ; // si
+terminal String MESSAGE ; // message
+terminal String SINON ; // sinon
+terminal String POURTOUT ; // pourtout
+terminal String FAIT ; // fait
+terminal String FAIRE ; // faire
+terminal String ETATS ; // ETATS
+terminal String FSI ; // fsi
+terminal String EXECUTER_SCENARIO; // fsi
+terminal String ALORS ; // fsi
+
+
 
 
 
@@ -153,7 +166,7 @@ terminal String PROGRAMMER ; // associer
 
 
 //axiome
-S ::= PDO da di ds dc PDF  {:System.out.println("analyse terminée"); :};
+S ::= PDO da di  dc PDF  {:System.out.println("analyse terminée"); :};
 
 
 //declaration des appareils
@@ -227,7 +240,7 @@ sinon ::= nom scenario   |nom nom ACTION PV nom | nom msgs PV nom  |; // fsi ou 
 
 msgs ::= nom PO msg PF ;
 
-msg ::= nom VG msg | cm VG msg | nom | cm | nom ETAT msg | nom ETAT;
+msg ::= nom VG msg |cm VG msg | nom | cm | nom ETAT msg | nom ETAT;
 
 
 

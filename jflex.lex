@@ -22,11 +22,11 @@ import java_cup.runtime.Symbol;
 date = "(" ([0-9]* | _ ) ","([0-9]*  | _ ) "," ([0-9]*) "," ([0-9]*) "," ([0-9]*) ")"
 
 
-type_appareil = ("volet"|"eclairage"|"interrupteur"|"fenetre"|"alarme"|"chauffage")
+type_appareil = ("volet"|"eclairage"|"fenetre"|"alarme"|"chauffage")
 
 type_interface = ("mobile"|"telephone"|"telecommande"|"tablette"|"interrupteur")
 
-autre_appareil = "autre_appareil("("tv"|"hifi"|"cafeteria")")"
+autre_appareil = "autre_appareil("("tv"|"hifi"|"cafetiere"|"video_proj"|"lave_linge"|"lave_vaisselle"|"portail")")"
 
 acti = ("ouvrir" |"fermer" | "eteindre" | "allumer" | "tamiser" |"allumer_partiel"|"allumer_éco"|"fermer partiel"|"eco" |"demi")
 
