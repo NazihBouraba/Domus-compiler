@@ -57,7 +57,7 @@ dif = "</DECLARATION_INTERFACES>"
 dso = "<DECLARATION_SCENARII>"
 dsf = "</DECLARATION_SCENARII>"
 
-nom = (([a-zA-Z] |  [0-9] | "_")+ | ("(" ([a-zA-Z] |  [0-9] | "_") +  ")"))
+nom = ([a-zA-Z]+[0-9]* | "_")+ 
 
 dco = "<DECLARATION_COMMANDES>"
 dcf = "</DECLARATION_COMMANDES>"

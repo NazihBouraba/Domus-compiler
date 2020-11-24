@@ -198,12 +198,14 @@ scenario ::= POURTOUT nom DP x FAIRE mesgouact PV FAIT PV scenario   // pourtout
 
 | EXECUTER_SCENARIO nom PV scenario// executer_scenario soirée;
 
-| SI PO nom PT ETAT DEGAL ETATS PF ALORS mesgouact PV sinon FSI PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
+| SI PO nom PT ETAT DEGAL ETATS PF ALORS scenario  sinon  FSI PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
 
 | msgs PV  scenario// afficher un message 
+
+
 |;
 
-sinon ::= SINON scenario   |; // 
+sinon ::= SINON scenario   | ; // 
 x ::= nom | APPAREIL_TYPE | AUTRE_APPAREIL ;
 
 

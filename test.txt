@@ -1,21 +1,35 @@
 <PROGRAMME_DOMUS>
-// Programme de test 2  avec erreurs syntaxiques (5, 6 ou 7) et sémantiques (16)
+// Programme de test 1 sans erreur
+
 // déclaration des appareils
 <DECLARATION_APPAREILS>
-	eclairage e1, e2, e3. 
-	volet v1, e2, e3, v4.
-	autre_appareil(hifi) e3.
+	eclairage e1, e2, e3.
+	volet v1, v2, v3, v4.
+	autre_appareil(hifi) hf.
 	chauffage r1, rad1.
-	alarme a1,a2,a1.
-	volet v5, si.
+	alarme a1,a2,a3.
+	volet v5.
+	fenetre fen.
 	autre_appareil(cafetiere) cafe.
+	autre_appareil(tv) matv, tv1, tv2.
+	autre_appareil(video_proj) proj.
+	autre_appareil(lave_vaisselle) lv.
+	autre_appareil(lave_linge) ll.
+	autre_appareil(portail) port.
+
+	// déclaration d'un ensemble d'appareils (type énuméré utilisateur)
+	definir mon_eclairage_salon = {e2,e3}.
+	definir elec_salon = {matv,proj,tv1}.
 </DECLARATION_APPAREILS>
 
 // déclaration des interfaces
 <DECLARATION_INTERFACES>
-    interrupteur b1, b3.
-    telecommande zap, a2.
-    interrupteur message, b2. 
+   	interrupteur b1.
+	mobile t1.
+	telephone tel1.
+	tablette tab1.
+	telecommande zap.
+	interrupteur b2.
 </DECLARATION_INTERFACES>
 
 // déclaration des scenarii
@@ -23,44 +37,81 @@
 
 	// déclaration du scenario bonjour
 	<SCENARIO bonjour>
-		pourtout v1:volet faire v1.ouvrir; fait;
+		pourtout v:volet faire v.ouvrir; fait;
 		a1.eteindre;
 		cafe.allumer;
-		si (rad1.etat == eteint) alors rad1.allumer; fsi;
+		si (rad1.etat == eteint) alors si (rad1.etat == eteint) alors rad1.allumer; fsi;fsi;
 		hf.allumer;
 	</SCENARIO bonjour>
 
+	<SCENARIO soiree>
+		pourtout v:volet faire v.fermer; fait;
+		pourtout e:mon_eclairage_salon faire e.allumer; fait;
+	</SCENARIO soiree>
+
+	<SCENARIO soiree_musique>
+		executer_scenario soiree; 
+		hf.allumer;
+	</SCENARIO soiree_musique>
+
+	<SCENARIO depart>
+		pourtout v:volet faire v.fermer; fait;
+		pourtout e:eclairage faire e.eteindre; fait;
+		si (fen.etat == ferme) alors a1.allumer; 
+		sinon message("Attention : la fenêtre ",fen," est ouverte !"); fsi;
+		pourtout e:autre_appareil faire e.eteindre; fait;
+	</SCENARIO depart>
+
 	// déclaration du scenario de test
-	<SCENARIO rad1>
-		e1.allumer;
-		cafe.eteindre;
-	</SCENARIO rad1>
+	<SCENARIO test>
+		pourtout e:elec_salon faire message("Etat de ",e," = ",e.etat); fait;
+		pourtout e:autre_appareil(tv) faire e.allumer; fait;
+		executer_scenario soiree_musique; 
+		
+	// test de l'alarme
+		si (a1.etat == eteint) alors a1.allumer_partiel; fsi;
+		si (a1.etat == demi) alors a1.allumer;
+		sinon si (a1.etat == allume) alors a1.eteindre; 
+			sinon a2.allumer; fsi;  fsi;
+		
+		si (r1.etat == eco) alors r1.allumer; fsi;
+		si (r1.etat == eteint) alors r1.allumer_eco; // chauffage
+		sinon si (r1.etat == allume) alors r1.eteindre;  // fin chauffage
+			sinon message(" bip !"); fsi;  fsi;
 
-	<SCENARIO bonjour>
-		si (a1.etat == allume) alors message(a1," allumée "); fsi;
-	</SCENARIO bonjour>
+		si (fen.etat == ouvert) alors message("fenêtre ouverte !"); fsi;
 
-	<SCENARIO test3>
-		pourtout bonjour:volet faire bonjour.ouvrir; fait;
-		cafe.eteindre;
-	</SCENARIO test3>
+		si (cafe.etat == allume) alors cafe.eteindre; fsi ;
+		si (cafe.etat == eteint) alors cafe.allumer; fsi;
+	</SCENARIO test>
 
-	<SCENARIO sinon>
-		a1.eteindre;
-	</SCENARIO sinon>
+	<SCENARIO test2>
+		si (e1.etat == eteint) alors e1.allumer;
+		sinon si (e1.etat == demi) alors e1.eteindre; fsi;  fsi;	
+		si (e2.etat == allume) alors e2.tamiser; fsi ;
 
-	<SCENARIO test4>
-		pourtout etat:volet faire etat.ouvrir; fait;
-		cafe.eteindre;
-	</SCENARIO test5>
-
+		si (v1.etat == ouvert) alors v1.fermer_partiel; fsi;
+		si (v1.etat == ferme) alors v1.ouvrir_partiel; message(" alors ");
+		sinon si (v1.etat == demi) alors v1.fermer; 
+			sinon v1.ouvrir; message(" sinon "); fsi; fsi;
+	</SCENARIO test2>
 // fin scenarii
 </DECLARATION_SCENARII>
 
 // déclaration des commandes
 <DECLARATION_COMMANDES>
 	associer b1 = bonjour.
-	associer b4 = test4.
+	associer tel1 = test.
+	associer tab1 = test.
+	associer zap = test.
+
+	// le scenario soirée est lancé tous les soirs du premier jour de chaque mois 2012 à 18h.
+	programmer test2 = (_,1,1,6,0).
+	programmer soiree = (2012,_,1,18,0).    
+	programmer soiree_musique = {(2012,11,20,19,30),(2012,11,21,19,30)}.
+
+	associer b2 = depart.
+	associer t1 = depart.
 </DECLARATION_COMMANDES>
 </PROGRAMME_DOMUS>
 
