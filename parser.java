@@ -186,6 +186,59 @@ public class parser extends java_cup.runtime.lr_parser {
 		new parser(new Yylex(System.in)).parse();
 	}
 
+	public void syntax_error(Symbol cur_token) { 
+		// n'interrompt pas la compil... 
+		// on est par defaut dans l'etat error qui permet ensuite la recup
+		// par défaut : report_error("syntax error", null);
+		report_error("Syntaxe incorrecte <"+tokenToString(cur_token)+">", null);        
+	}
+
+	public void report_error(String message, Object info) {   
+		// n'interrompt pas la compil
+		if (info == null) System.err.println("Mon erreur <"+ ptext()+ "> ligne "+ pline() + ", colonne " + pcolumn() + " : " + message);
+		else System.err.println("Mon erreur <"+ptext()+ "> ligne "+ pline() + ", colonne " + pcolumn() + " : " +message+" : "+info);
+		System.err.println("-> mais on continue l'analyse... ");
+	}
+
+	public void unrecovered_syntax_error(Symbol cur_token) {
+    	// par defaut : report_fatal_error("Couldn't repair and continue parse", null);
+		// on n'a pas reussi a faire de la recup
+		report_fatal_error("Recuperation impossible <"+tokenToString(cur_token)+">", null);   // interrompt la compil     
+	}
+
+	public void report_fatal_error(String message, Object info) {  
+		// qd cette fct est appelee, message vaut par defaut "Couldn't repair and continue parse"
+		String m = "Mon erreur fatale <"+ ptext()+ "> ligne " + pline() + ", colonne " + pcolumn() + " : " + message;
+		if (info == null) System.err.println(m);
+		else System.err.println(m+" : "+info);
+		System.err.println("-> arrêt de l'analyse...");
+		done_parsing(); // interrompt la compil
+  	}
+
+	public int pline(){
+		return ((Yylex)getScanner()).getYyLine();
+	}
+	public int pcolumn(){
+		return ((Yylex)getScanner()).getYyColumn();
+	}
+	public String ptext(){
+		return ((Yylex)getScanner()).getYyText();
+	}
+
+	public String tokenToString (Symbol token) {
+// qqs exemples pour voir...
+   //  switch (token.sym) {
+//	case sym.SI : return "SI"; 
+//	case sym.CHAINE : return "CHAINE "+token.value;  
+//	case sym.ENTIER : return "ENTIER "+token.value;  
+	//  ... A compléter !!
+	return "Token imprévu ou error";
+	//}
+}
+
+
+
+
 
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})

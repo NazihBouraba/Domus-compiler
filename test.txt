@@ -1,43 +1,40 @@
-
 <PROGRAMME_DOMUS>
 
-<DECLARATION_APPAREILS> 
-eclairage e1, e2, e3.
-volet v1, v2, v3, v4.
-chauffage rad1.
-alarme a1.
-fenetre fen.
-autre_appareil(cafetiere) cafe.
-autre_appareil(hifi) hf.
-definir mon_eclairage_salon = {e2,e3}.
+
+<DECLARATION_APPAREILS>
+	eclairage e1, e2, e3. 
+	volet v1, 2v2 ,v3.
+	alarme a1.
 </DECLARATION_APPAREILS>
 
+
 <DECLARATION_INTERFACES>
-interrupteur b1, b2.
-mobile t1.
-telecommande c1.
+    interrupteur b1.
+    telecommande $tc.
+    mobile m. 
 </DECLARATION_INTERFACES>
 
+
 <DECLARATION_SCENARII>
+	
+	<SCENARIO bonjour>
+		e1.allumer;
+		
+		si (v1.etat == ouvert) alors v1.fermer; fsi;
+	</SCENARIO bonjour>
 
-<SCENARIO bonjour>
-pourtout v:volet faire v.ouvrir; fait;
-a1.eteindre;
-cafe.allumer;
-si (rad1.etat == eteint) alors rad1.allumer; fsi;
-hf.allumer;
-
-</SCENARIO bonjour>
+	<SCENARIO test>
+		pourtout v:volet faire v.ouvrir; fait;
+		#?!!
+		e1.eteindre;
+	</SCENARIO test>
 
 </DECLARATION_SCENARII>
 
+
 <DECLARATION_COMMANDES>
-associer b1 = bonjour.
-associer b2 = depart.
-associer t1 = depart.
-associer c1 = {noel1,noel2,noel3}.
-
-programmer soiree_musique = {(2017,11,20,19,30),(2017,11,21,19,30)}.
+	associer b1 = bonjour.
+	associer m = test.
 </DECLARATION_COMMANDES>
-
 </PROGRAMME_DOMUS>
+
