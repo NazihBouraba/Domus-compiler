@@ -37,7 +37,7 @@
 
 	// déclaration du scenario bonjour
 	<SCENARIO bonjour>
-		pourtout v:volet faire v.ouvrir; fait;
+		pourtout v:volet faire v.ouvrir;pourtout v:volet faire v.ouvrir;  fait;fait;
 		a1.eteindre;
 		cafe.allumer;
 		si (rad1.etat == eteint) alors si (rad1.etat == eteint) alors rad1.allumer; fsi;fsi;
