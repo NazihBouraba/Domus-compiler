@@ -204,7 +204,7 @@ scenario ::= POURTOUT nom DP x FAIRE mesgouact PV FAIT PV scenario   // pourtout
 |;
 
 sinon ::= SINON scenario   |; // 
-x ::= nom | APPAREIL_TYPE ;
+x ::= nom | APPAREIL_TYPE | AUTRE_APPAREIL ;
 
 
 //<DECLARATION_INTERFACES>
@@ -230,7 +230,7 @@ dcd ::= ASSOCIER nom EGAL nom PT dcd
 
 dat ::= DATE VG dat | DATE;
 
-mesgouact ::= nom PT ACTION | msgs ;
+mesgouact ::= nom PT ACTION | msgs |mesgouact PV  nom PT ACTION  | mesgouact PV  msgs   ;
 
 MOT ::= nom VG MOT| nom ;
 
@@ -238,9 +238,9 @@ MOT ::= nom VG MOT| nom ;
 
 
 
-msgs ::= nom PO msg PF ;
+msgs ::= MESSAGE PO msg PF ;
 
-msg ::= nom VG msg |cm VG msg | nom | cm | nom ETAT msg | nom ETAT;
+msg ::= nom VG msg |cm VG msg | nom | cm | nom PT ETAT msg | nom PT ETAT;
 
 
 

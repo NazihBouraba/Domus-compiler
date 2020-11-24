@@ -1,65 +1,66 @@
 <PROGRAMME_DOMUS>
-// Programme de test 1 sans erreur
-
+// Programme de test 2  avec erreurs syntaxiques (5, 6 ou 7) et sémantiques (16)
 // déclaration des appareils
 <DECLARATION_APPAREILS>
-	eclairage e1, e2, e3.
-	volet v1, v2, v3, v4.
-	autre_appareil(hifi) hf.
+	eclairage e1, e2, e3. 
+	volet v1, e2, e3, v4.
+	autre_appareil(hifi) e3.
 	chauffage r1, rad1.
-	alarme a1,a2,a3.
-	volet v5.
-	fenetre fen.
+	alarme a1,a2,a1.
+	volet v5, si.
 	autre_appareil(cafetiere) cafe.
-	autre_appareil(tv) matv, tv1, tv2.
-	autre_appareil(video_proj) proj.
-	autre_appareil(lave_vaisselle) lv.
-	autre_appareil(lave_linge) ll.
-	autre_appareil(portail) port.
-
-	// déclaration d'un ensemble d'appareils (type énuméré utilisateur)
-	definir mon_eclairage_salon = {e2,e3}.
-	definir elec_salon = {matv,proj,tv1}.
 </DECLARATION_APPAREILS>
 
 // déclaration des interfaces
 <DECLARATION_INTERFACES>
-   	interrupteur b1.
-	mobile t1.
-	telephone tel1.
-	tablette tab1.
-	telecommande zap.
-	interrupteur b2.
+    interrupteur b1, b3.
+    telecommande zap, a2.
+    interrupteur message, b2. 
 </DECLARATION_INTERFACES>
 
+// déclaration des scenarii
 <DECLARATION_SCENARII>
-<SCENARIO bonjour>
-pourtout v:volet faire v.ouvrir; fait;
-a1.eteindre;
-cafe.allumer;
-si (a1.etat == éteint) alors a1.allumer_partiel; fsi;
-si (a1.etat == demi) alors a1.allumer;
-sinon si (a1.etat == allumé) alors a1.eteindre; 
-sinon a2.allumer; fsi;  fsi;
-hf.allumer;
-</SCENARIO bonjour>
-</DECLARATION_SCENARII>
 
+	// déclaration du scenario bonjour
+	<SCENARIO bonjour>
+		pourtout v1:volet faire v1.ouvrir; fait;
+		a1.eteindre;
+		cafe.allumer;
+		si (rad1.etat == eteint) alors rad1.allumer; fsi;
+		hf.allumer;
+	</SCENARIO bonjour>
+
+	// déclaration du scenario de test
+	<SCENARIO rad1>
+		e1.allumer;
+		cafe.eteindre;
+	</SCENARIO rad1>
+
+	<SCENARIO bonjour>
+		si (a1.etat == allume) alors message(a1," allumée "); fsi;
+	</SCENARIO bonjour>
+
+	<SCENARIO test3>
+		pourtout bonjour:volet faire bonjour.ouvrir; fait;
+		cafe.eteindre;
+	</SCENARIO test3>
+
+	<SCENARIO sinon>
+		a1.eteindre;
+	</SCENARIO sinon>
+
+	<SCENARIO test4>
+		pourtout etat:volet faire etat.ouvrir; fait;
+		cafe.eteindre;
+	</SCENARIO test5>
+
+// fin scenarii
+</DECLARATION_SCENARII>
 
 // déclaration des commandes
 <DECLARATION_COMMANDES>
 	associer b1 = bonjour.
-	associer tel1 = test.
-	associer tab1 = test.
-	associer zap = test.
-
-	// le scenario soirée est lancé tous les soirs du premier jour de chaque mois 2012 à 18h.
-	programmer test2 = (_,1,1,6,0).
-	programmer soiree = (2012,_,1,18,0).    
-	programmer soiree_musique = {(2012,11,20,19,30),(2012,11,21,19,30)}.
-
-	associer b2 = depart.
-	associer t1 = depart.
+	associer b4 = test4.
 </DECLARATION_COMMANDES>
 </PROGRAMME_DOMUS>
 
