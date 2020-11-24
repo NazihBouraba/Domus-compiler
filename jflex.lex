@@ -28,7 +28,7 @@ type_interface = ("mobile"|"telephone"|"telecommande"|"tablette"|"interrupteur")
 
 autre_appareil = "autre_appareil("("tv"|"hifi"|"cafetiere"|"video_proj"|"lave_linge"|"lave_vaisselle"|"portail")")"
 
-acti = ("ouvrir" |"fermer" | "eteindre" | "allumer" | "tamiser" |"allumer_partiel"|"allumer_éco"|"fermer partiel"|"eco" |"demi")
+acti = ("ouvrir" |"fermer" | "eteindre" | "allumer" | "tamiser" |"allumer_partiel"|"allumer_éco"|"fermer partiel"|"eco" )
 
 etats = ("allumé"|"éteint"|"demi"|"éco"|"fermé"|"ouvert")
 

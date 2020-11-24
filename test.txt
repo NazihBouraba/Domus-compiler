@@ -32,6 +32,18 @@
 	interrupteur b2.
 </DECLARATION_INTERFACES>
 
+<DECLARATION_SCENARII>
+<SCENARIO bonjour>
+pourtout v:volet faire v.ouvrir; fait;
+a1.eteindre;
+cafe.allumer;
+si (a1.etat == éteint) alors a1.allumer_partiel; fsi;
+si (a1.etat == demi) alors a1.allumer;
+sinon si (a1.etat == allumé) alors a1.eteindre; 
+sinon a2.allumer; fsi;  fsi;
+hf.allumer;
+</SCENARIO bonjour>
+</DECLARATION_SCENARII>
 
 
 // déclaration des commandes

@@ -166,7 +166,7 @@ terminal String ALORS ; // fsi
 
 
 //axiome
-S ::= PDO da di  dc PDF  {:System.out.println("analyse terminée"); :};
+S ::= PDO da di ds dc PDF  {:System.out.println("analyse terminée"); :};
 
 
 //declaration des appareils
@@ -192,19 +192,19 @@ dsd ::= DSCO scenario DSCF dsd // declaration plusieurs scenarios
 
 | ;  
 
-scenario ::= nom nom DP x nom mesgouact PV nom PV scenario   // pourtout v:volet faire v.ouvrir ; fait;
+scenario ::= POURTOUT nom DP x FAIRE mesgouact PV FAIT PV scenario   // pourtout v:volet faire v.ouvrir ; fait;
 
-| nom ACTION PV scenario // e1.allumer 
+| nom PT ACTION PV scenario // e1.allumer 
 
-| nom nom PV scenario// executer_scenario soirée;
+| EXECUTER_SCENARIO nom PV scenario// executer_scenario soirée;
 
-| nom PO nom ETAT DEGAL nom PF nom mesgouact PV sinon PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
+| SI PO nom PT ETAT DEGAL ETATS PF ALORS mesgouact PV sinon FSI PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
 
 | msgs PV  scenario// afficher un message 
 |;
 
-
-
+sinon ::= SINON scenario   |; // 
+x ::= nom | APPAREIL_TYPE ;
 
 
 //<DECLARATION_INTERFACES>
@@ -230,13 +230,13 @@ dcd ::= ASSOCIER nom EGAL nom PT dcd
 
 dat ::= DATE VG dat | DATE;
 
-mesgouact ::= nom ACTION | msgs ;
+mesgouact ::= nom PT ACTION | msgs ;
 
 MOT ::= nom VG MOT| nom ;
 
-x ::= nom | APPAREIL ;
 
-sinon ::= nom scenario   |nom nom ACTION PV nom | nom msgs PV nom  |; // fsi ou bien sinon e1.eteidre; fsi
+
+
 
 msgs ::= nom PO msg PF ;
 
