@@ -1,7 +1,9 @@
 // Specification JCup
 import java.util.HashMap; 
+import java.util.ArrayList; 
 import java_cup.runtime.*;
 import java.lang.*;
+
 
 parser code {:
 	public static void main(String args[]) throws Exception {
@@ -63,6 +65,8 @@ parser code {:
 :}
 action code {:
 
+HashMap<String, String> variables = new HashMap<String, String>();
+ArrayList<String> Global = new ArrayList<String>();
 
 
 
@@ -89,12 +93,6 @@ non terminal did,dcd;
 non terminal mesgouact;
 non terminal msgs;
 non terminal msg;
-
-
-
-
-
-
 
 
 
@@ -166,13 +164,27 @@ terminal String ALORS ; // fsi
 
 
 //axiome
-S ::= PDO da di ds dc PDF  {:System.out.println("analyse terminée"); :};
+S ::= PDO da di ds dc PDF  {:System.out.println(variables); System.out.println("analyse terminée"); :};
 
 
 //declaration des appareils
 da ::= DAO dad DAF  ;
 
-dad::= APPAREIL_TYPE MOT PT  dad   // eclairage e1,e2,,,, .
+dad::= APPAREIL_TYPE:type MOT  PT {:
+
+
+
+
+for (int i=0;i<Global.size();i++){if (!variables.containsKey(Global.get(i))) {
+  variables.put(Global.get(i),type);} else {System.out.println("La variable "+Global.get(i)+" existe deja");}}
+Global.clear();
+
+
+
+
+
+
+:}  dad   // eclairage e1,e2,,,, .
 
 |  AUTRE_APPAREIL MOT  PT dad  // autreappareil(cafeteria) cafe .
 
@@ -234,7 +246,7 @@ dat ::= DATE VG dat | DATE;
 
 mesgouact ::= nom PT ACTION | msgs |mesgouact PV  nom PT ACTION  | mesgouact PV  msgs   ;
 
-MOT ::= nom VG MOT| nom ;
+MOT ::= nom:x {:Global.add(x);:}VG MOT| nom:x{:Global.add(x);:};
 
 
 
