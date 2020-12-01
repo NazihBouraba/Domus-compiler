@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.ArrayList; 
 import java_cup.runtime.*;
 import java.lang.*;
+import java.util.*;
 
 
 parser code {:
@@ -60,6 +61,31 @@ parser code {:
 	//}
 }
 
+	public void verifier_date(String date){
+	 String result = "";
+	 for(int i =1 ; i<date.length()-1;i++)
+	 {
+         result += date.charAt(i);
+	 }
+  
+
+	 String[] res = result.split(",");
+     Calendar cal = Calendar.getInstance();
+     cal.setLenient(false);
+	 if(res[0].length()!=4){ report_error("Erreur format date",result);}
+     cal.set(Integer.parseInt(res[0]),Integer.parseInt(res[1]), Integer.parseInt(res[2]));
+     try {
+        cal.getTime();
+     }
+    catch (Exception e) {
+    report_error("Erreur format date",result);
+    }
+
+
+
+
+	}
+
 
 
 :}
@@ -87,7 +113,7 @@ non terminal sinon; // genere le blok sinon apres si
 
 non terminal di;
 non terminal dc; // declaration commandes 
-non terminal dat;
+non terminal String dat;
 non terminal w;
 non terminal did,dcd;
 non terminal mesgouact;
@@ -236,13 +262,14 @@ dcd ::= ASSOCIER nom EGAL nom PT dcd
 
 |PROGRAMMER nom EGAL AO dat AF PT dcd 
 
-|PROGRAMMER nom EGAL DATE PT dcd 
+|PROGRAMMER nom EGAL DATE:d PT dcd 
 
 | ;
 
 
 
-dat ::= DATE VG dat | DATE;
+dat ::= DATE:dd VG dat {: verifier_date(dd); :} 
+| DATE:dd {: verifier_date(dd); :}  ;
 
 mesgouact ::= nom PT ACTION | msgs |mesgouact PV  nom PT ACTION  | mesgouact PV  msgs   ;
 
