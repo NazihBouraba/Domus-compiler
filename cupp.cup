@@ -1,6 +1,6 @@
 // Specification JCup
-import java.util.HashMap; 
-import java.util.ArrayList; 
+import java.util.*; 
+
 import java_cup.runtime.*;
 import java.lang.*;
 import java.util.*;
@@ -92,8 +92,19 @@ parser code {:
 action code {:
 
 HashMap<String, String> variables = new HashMap<String, String>();
+HashMap<String, String> commandes = new HashMap<String, String>();
 ArrayList<String> Global = new ArrayList<String>();
+List<String> eclairage = Arrays.asList("etat", "allumer", "eteindre", "tamiser");
+List<String> alarme = Arrays.asList("etat","allumer", "allumer_partiel", "eteindre");
+List<String> chauffage = Arrays.asList("etat", "allumer","allumer_eco", "eteindre");
+List<String> fenvol = Arrays.asList("etat", "ouvrir","ouvrir_partiel", "fermer", "fermer_partiel");
+List<String> autre = Arrays.asList("etat", "allumer", "eteindre");
+
 String use="" ;
+
+
+
+
 
 
 :}
@@ -190,7 +201,7 @@ terminal String ALORS ; // fsi
 
 
 //axiome
-S ::= PDO da di ds dc PDF  {:System.out.println(variables); System.out.println("analyse terminée"); :};
+S ::= PDO da di ds dc PDF  {: System.out.println(commandes);System.out.println("analyse terminée"); :};
 
 
 //declaration des appareils
@@ -198,30 +209,28 @@ da ::= DAO dad DAF  ;
 
 dad::= APPAREIL_TYPE:type MOT  PT {:
 
-
-
-for (int i=0;i<Global.size();i++){if (!variables.containsKey(Global.get(i))) {
-  variables.put(Global.get(i),type);} else {report_error("La variable "+Global.get(i)+" existe deja",Global.get(i));}}
-Global.clear();
-
-
-
-
-
-
+  for (int i=0;i<Global.size();i++){if (!variables.containsKey(Global.get(i))) {
+    variables.put(Global.get(i),type);} else {report_error("La variable "+Global.get(i)+" existe deja",Global.get(i));}}
+   Global.clear();
 :}  dad   // eclairage e1,e2,,,, .
 
+
+
 |  AUTRE_APPAREIL:autre MOT  PT {:
-
-
-
-for (int j=0;j<Global.size();j++){if (!variables.containsKey(Global.get(j))) {
-
-  variables.put(Global.get(j),autre);} else {report_error("La variable "+Global.get(j)+" existe deja",Global.get(j));}}
-Global.clear();
+   for (int j=0;j<Global.size();j++){if (!variables.containsKey(Global.get(j))) {
+   variables.put(Global.get(j),autre);} else {report_error("La variable "+Global.get(j)+" existe deja",Global.get(j));}}
+   Global.clear();
 :}  dad  // autreappareil(cafeteria) cafe .
 
-| DEFINIR nom EGAL AO MOT AF PT dad // definir mon eclairage_salon = {e1,e2}
+
+
+
+
+| DEFINIR nom:name EGAL AO MOT AF PT {:
+   if (!variables.containsKey(name)) {
+   variables.put(name,variables.get(Global.get(0)));} else {report_error("La variable "+name+" existe deja",name);}
+   Global.clear();
+:} dad // definir mon eclairage_salon = {e1,e2}
 
 |  ; //sortir
 
@@ -233,13 +242,55 @@ Global.clear();
 
 ds ::= DSO dsd DSF  ;
 
-dsd ::= DSCO scenario DSCF dsd // declaration plusieurs scenarios
+dsd ::= DSCO:open {:  
+String[] str = open.split(" ");
+String u = str[1];
+String us= u.substring(0,u.length() - 1 );
+commandes.put(us,"scenario");
+
+               :} scenario DSCF:fin     dsd // declaration plusieurs scenarios
 
 | ;  
 
 scenario ::= POURTOUT nom:n DP x {: variables.put(n,use); use=""; :} FAIRE scenario  FAIT PV scenario  {: variables.remove(n);:} // pourtout v:volet faire v.ouvrir ; fait;
 
-| nom:n {:if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);} :}  PT ACTION PV scenario // e1.allumer 
+| nom:n   PT ACTION:action {:if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);}             
+           else {
+String str = variables.get(n) ; 
+if (str.startsWith("autre_appareil(")){str = "autre_appareil"; }
+boolean b = false ; 
+
+
+switch(str){
+                        case  "eclairage" :
+                               if (eclairage.contains(action)) { b = true ;}
+                      		break;
+			case "alarme" :
+                                if (alarme.contains(action)) { b = true;} ;
+                    		  break;
+			case "chauffage" :
+                                if (chauffage.contains(action)) { b = true;} ;
+                    		  break;
+			case "fenetre" :
+                                 if (fenvol.contains(action)){ b = true;} ;
+                     		 break;
+			case  "volet" :
+                                if (fenvol.contains(action)) {b = true ;};
+                     		 break;
+			case  "autre_appareil" :
+                               if (autre.contains(action))  {b = true;} ;
+                     		 break;
+                       default : 
+                               b = false ;
+}
+if (variables.containsKey(variables.get(n))) {b = true;}
+if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable "+n,action);     }
+
+
+}
+
+
+   :} PV scenario // e1.allumer 
 
 | EXECUTER_SCENARIO nom PV scenario// executer_scenario soirée;
 
@@ -251,25 +302,43 @@ scenario ::= POURTOUT nom:n DP x {: variables.put(n,use); use=""; :} FAIRE scena
 |;
 
 sinon ::= SINON scenario   | ; // 
+
 x ::= nom:n {:use=n;:} | APPAREIL_TYPE:n {:use=n;:} | AUTRE_APPAREIL:n {:use=n;:};
 
 
 //<DECLARATION_INTERFACES>
 
 di ::= DIO did DIF  ;  
-did ::= INTERFACE_TYPE MOT PT did | ; // interrupteur b1, b2.
+did ::= INTERFACE_TYPE:type MOT PT {:
+   for (int j=0;j<Global.size();j++){if (!commandes.containsKey(Global.get(j))) {
+   commandes.put(Global.get(j),type);} else {report_error("L'interface "+Global.get(j)+" existe deja",Global.get(j));}}
+   Global.clear();
+
+:}  did | ; // interrupteur b1, b2.
 
 
 //<DECLARATION_COMMANDES>
 dc::= DCO dcd DCF ;
 
-dcd ::= ASSOCIER nom EGAL nom PT dcd 
+dcd ::= ASSOCIER nom:name  EGAL nom PT dcd {: if (!commandes.containsKey(name)){report_error("L'interface "+name+" n'a pas été declarée",name);}
 
-| ASSOCIER nom EGAL AO MOT AF PT  dcd 
 
-|PROGRAMMER nom EGAL AO dat AF PT dcd 
+ :}
 
-|PROGRAMMER nom EGAL DATE:d PT dcd 
+| ASSOCIER nom:name EGAL AO MOT AF PT  dcd {: if (!commandes.containsKey(name)){report_error("L'interface "+name+" n'a pas été declarée",name);}
+
+
+ :}
+
+|PROGRAMMER nom:name EGAL AO dat AF PT dcd {: if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
+
+
+ :}
+
+|PROGRAMMER nom:name EGAL DATE:d PT dcd {: if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
+
+
+ :}
 
 | ;
 

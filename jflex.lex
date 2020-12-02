@@ -94,8 +94,8 @@ chaine = \".* \"
 {dco}  { return new Symbol(sym.DCO); }             // DECLARATION_COMMANDES
 {dcf}  { return new Symbol(sym.DCF); }
 
-{dsceno}  { return new Symbol(sym.DSCO); }         // DECLARATION_SCENARIO
-{dscenf}  { return new Symbol(sym.DSCF); }
+{dsceno}  { return new Symbol(sym.DSCO , new String(yytext())); }         // DECLARATION_SCENARIO
+{dscenf}  { return new Symbol(sym.DSCF , new String(yytext())); }
 
  
 

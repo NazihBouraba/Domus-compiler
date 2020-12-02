@@ -3,7 +3,7 @@
 
 // déclaration des appareils
 <DECLARATION_APPAREILS>
-	eclairage e1, e1, e3.
+	eclairage e1, e2, e3.
 	volet v1, v2, v3, v4.
 	autre_appareil(hifi) hf.
 	chauffage r1, rad1.
@@ -27,7 +27,7 @@
    	interrupteur b1.
 	mobile t1.
 	telephone tel1.
-	tablette tab1.
+	tablette tab1,t1.
 	telecommande zap.
 	interrupteur b2.
 </DECLARATION_INTERFACES>
@@ -103,10 +103,10 @@
 	associer b1 = bonjour.
 	associer tel1 = test.
 	associer tab1 = test.
-	associer zap = test.
+	associer za = test.
 
 	
-	programmer test2 = (_,1,1,6,0).
+	programmer tes = (_,1,1,6,0).
 	programmer soiree = (2012,_,1,18,0).    
 	programmer soiree_musique = {(2012,11,20,19,30),(2012,11,21,19,30)}.
 
