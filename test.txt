@@ -3,7 +3,7 @@
 
 // déclaration des appareils
 <DECLARATION_APPAREILS>
-	eclairage e1, e2, e3.
+	eclairage e1, e1, e3.
 	volet v1, v2, v3, v4.
 	autre_appareil(hifi) hf.
 	chauffage r1, rad1.
@@ -38,7 +38,7 @@
 	// déclaration du scenario bonjour
 	<SCENARIO bonjour>
 		pourtout v:volet faire v.ouvrir;pourtout v:volet faire v.ouvrir;  fait;fait;
-		a1.eteindre;
+		zzzzzzzz.eteindre;
 		cafe.allumer;
 		si (rad1.etat == eteint) alors si (rad1.etat == eteint) alors rad1.allumer; fsi;fsi;
 		hf.allumer;
@@ -105,7 +105,7 @@
 	associer tab1 = test.
 	associer zap = test.
 
-	// le scenario soirée est lancé tous les soirs du premier jour de chaque mois 2012 à 18h.
+	
 	programmer test2 = (_,1,1,6,0).
 	programmer soiree = (2012,_,1,18,0).    
 	programmer soiree_musique = {(2012,11,20,19,30),(2012,11,21,19,30)}.

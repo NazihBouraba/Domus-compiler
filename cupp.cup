@@ -93,7 +93,7 @@ action code {:
 
 HashMap<String, String> variables = new HashMap<String, String>();
 ArrayList<String> Global = new ArrayList<String>();
-
+String use="" ;
 
 
 :}
@@ -200,9 +200,8 @@ dad::= APPAREIL_TYPE:type MOT  PT {:
 
 
 
-
 for (int i=0;i<Global.size();i++){if (!variables.containsKey(Global.get(i))) {
-  variables.put(Global.get(i),type);} else {System.out.println("La variable "+Global.get(i)+" existe deja");}}
+  variables.put(Global.get(i),type);} else {report_error("La variable "+Global.get(i)+" existe deja",Global.get(i));}}
 Global.clear();
 
 
@@ -212,7 +211,15 @@ Global.clear();
 
 :}  dad   // eclairage e1,e2,,,, .
 
-|  AUTRE_APPAREIL MOT  PT dad  // autreappareil(cafeteria) cafe .
+|  AUTRE_APPAREIL:autre MOT  PT {:
+
+
+
+for (int j=0;j<Global.size();j++){if (!variables.containsKey(Global.get(j))) {
+
+  variables.put(Global.get(j),autre);} else {report_error("La variable "+Global.get(j)+" existe deja",Global.get(j));}}
+Global.clear();
+:}  dad  // autreappareil(cafeteria) cafe .
 
 | DEFINIR nom EGAL AO MOT AF PT dad // definir mon eclairage_salon = {e1,e2}
 
@@ -230,9 +237,9 @@ dsd ::= DSCO scenario DSCF dsd // declaration plusieurs scenarios
 
 | ;  
 
-scenario ::= POURTOUT nom DP x FAIRE   scenario  FAIT PV scenario   // pourtout v:volet faire v.ouvrir ; fait;
+scenario ::= POURTOUT nom:n DP x {: variables.put(n,use); use=""; :} FAIRE scenario  FAIT PV scenario  {: variables.remove(n);:} // pourtout v:volet faire v.ouvrir ; fait;
 
-| nom PT ACTION PV scenario // e1.allumer 
+| nom:n {:if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);} :}  PT ACTION PV scenario // e1.allumer 
 
 | EXECUTER_SCENARIO nom PV scenario// executer_scenario soirée;
 
@@ -244,7 +251,7 @@ scenario ::= POURTOUT nom DP x FAIRE   scenario  FAIT PV scenario   // pourtout 
 |;
 
 sinon ::= SINON scenario   | ; // 
-x ::= nom | APPAREIL_TYPE | AUTRE_APPAREIL ;
+x ::= nom:n {:use=n;:} | APPAREIL_TYPE:n {:use=n;:} | AUTRE_APPAREIL:n {:use=n;:};
 
 
 //<DECLARATION_INTERFACES>
@@ -273,7 +280,7 @@ dat ::= DATE:dd VG dat {: verifier_date(dd); :}
 
 mesgouact ::= nom PT ACTION | msgs |mesgouact PV  nom PT ACTION  | mesgouact PV  msgs   ;
 
-MOT ::= nom:x {:Global.add(x);:}VG MOT| nom:x{:Global.add(x);:};
+MOT ::= nom:x {:Global.add(x);:}VG MOT | nom:x {: Global.add(x); :};
 
 
 

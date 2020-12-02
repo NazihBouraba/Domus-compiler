@@ -77,7 +77,7 @@ chaine = \".* \"
 
 {chaine} {return new Symbol(sym.cm);}
 
-{date} {return new Symbol(sym.DATE);}
+{date} {return new Symbol(sym.DATE, new String(yytext()));}
 
 {pdo}  { return new Symbol(sym.PDO); }            //PROGRAMME DOMUS
 {pdf}  { return new Symbol(sym.PDF); }
