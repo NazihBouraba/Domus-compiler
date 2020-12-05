@@ -582,6 +582,59 @@ file.write("ma_liste_ens_appareils.add("+key+ ");\n");
 
 
 
+for (String key : commandes.keySet())
+{String str = commandes.get(key) ;
+switch(str){
+                        case  "mobile" :
+                               file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeAppareil."+str.toUpperCase()+");\n");
+      file.write("ma_liste_interface.add("+key+");\n");  
+
+                      		break;
+			case "telephone" :
+                               file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeAppareil."+str.toUpperCase()+");\n");
+      file.write("ma_liste_interface.add("+key+");\n");  
+
+                    		  break;
+
+			case "telecommande" :
+                          file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeAppareil."+str.toUpperCase()+");\n");
+      file.write("ma_liste_interface.add("+key+");\n");  
+
+                    		  break;
+			case "tablette" :
+                       file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeAppareil."+str.toUpperCase()+");\n");
+      file.write("ma_liste_interface.add("+key+");\n");  
+
+                     		 break;
+			case  "interrupteur" :
+                    file.write("CInterface   "+key+ " = new CInterface(\""+key+"\",TypeAppareil."+str.toUpperCase()+");\n");
+      file.write("ma_liste_interface.add("+key+");\n");  
+
+                     		 break;
+                       case  "ordinateur" :
+                    file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeAppareil."+str.toUpperCase()+");\n");
+      file.write("ma_liste_interface.add("+key+");\n");  
+
+                     		 break;
+			
+             
+                       default : ;      
+
+
+
+
+}  }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
