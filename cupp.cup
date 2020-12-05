@@ -106,6 +106,13 @@ parser code {:
 }
 
 
+
+			public int index_of_scenario(HashMap<String,Integer> h ,String nom_sce)
+			{
+                     return h.get(nom_sce);
+			}
+
+
                 
 
 
@@ -198,6 +205,7 @@ action code {:
 
 HashMap<String, String> variables = new HashMap<String, String>();
 HashMap<String, String> commandes = new HashMap<String, String>();
+HashMap<String, Integer> scenario_ordre = new HashMap<String, Integer>();
 HashMap<String, String> scenario_map = new HashMap<String, String>();
 ArrayList<String> Global = new ArrayList<String>();
 List<String> eclairage = Arrays.asList("etat", "allumer", "eteindre", "tamiser");
@@ -211,6 +219,7 @@ String use="" ;
 FileWriter file = null; 
 int f =0 ;
 int c=0;
+int ordre=0;
 String scenario_nom="";
 String message_content = " ";
 
@@ -526,7 +535,11 @@ String us= u.substring(0,u.length() - 1 );
 scenario_nom = us ;
 commandes.put(us,"scenario");
 
-               :} scenario DSCF:fin {:scenario_map.put(scenario_nom,scenario_contenu); scenario_nom=""; scenario_contenu="";   :}      dsd // declaration plusieurs scenarios
+               :} scenario DSCF:fin {:scenario_map.put(scenario_nom,scenario_contenu);  
+			     scenario_ordre.put(scenario_nom,ordre);
+				 ordre++;
+				 scenario_nom=""; scenario_contenu=""; 
+			    :}      dsd // declaration plusieurs scenarios
 
 | ;  
 
@@ -601,7 +614,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
 
    :} PV scenario // e1.allumer 
 
-| EXECUTER_SCENARIO nom PV scenario// executer_scenario soirée;
+| EXECUTER_SCENARIO nom:n PV {: scenario_contenu+="\n this.execScenarioNum("+index_of_scenario(scenario_ordre,n) +");\n  " ;  :}  scenario  // executer_scenario soirée;
 
 | SI PO nom:n PT ETAT DEGAL ETATS:e {:
 c=1;
