@@ -278,3 +278,16 @@ ma_liste_interface.add(b1);
    appareil.appliquer(TypeActionAppareil.allumer); } 
 } 
  " ; 
+CProgrammation p1 = new CProgrammation(soiree_musique);
+CDate p1d1 = new CDate(2012,11,21,19,30);
+p1.addDate(p1d1);
+CDate p1d2 = new CDate(2012,11,20,19,30);
+p1.addDate(p1d2);
+ma_liste_programmations.add(p1);
+CProgrammation p2 = new CProgrammation(soiree);
+CDate p2d1 = new CDate(2012,_,1,18,0);
+p2.addDate(p2d1);
+ma_liste_programmations.add(p2);
+monHabitat = new HabitatSpecific(ma_liste_appareils,ma_liste_ens_appareils, ma_liste_scenarios,ma_liste_interfaces, ma_liste_programmations);
+}
+}
