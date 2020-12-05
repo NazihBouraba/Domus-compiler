@@ -33,24 +33,25 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\070\000\002\024\002\000\002\025\002\000\002\026" +
+    "\000\073\000\002\024\002\000\002\025\002\000\002\026" +
     "\002\000\002\002\013\000\002\002\004\000\002\003\005" +
     "\000\002\027\002\000\002\004\007\000\002\030\002\000" +
     "\002\004\007\000\002\031\002\000\002\004\013\000\002" +
     "\004\002\000\002\005\005\000\002\032\002\000\002\006" +
-    "\007\000\002\006\002\000\002\033\002\000\002\007\014" +
-    "\000\002\034\002\000\002\007\010\000\002\007\006\000" +
-    "\002\007\020\000\002\007\005\000\002\007\002\000\002" +
-    "\012\004\000\002\012\002\000\002\011\003\000\002\011" +
-    "\003\000\002\011\003\000\002\013\005\000\002\035\002" +
-    "\000\002\017\007\000\002\017\002\000\002\014\005\000" +
-    "\002\020\010\000\002\020\012\000\002\020\012\000\002" +
-    "\020\010\000\002\020\002\000\002\015\005\000\002\015" +
-    "\003\000\002\021\005\000\002\021\003\000\002\021\007" +
-    "\000\002\021\005\000\002\036\002\000\002\010\006\000" +
-    "\002\010\003\000\002\022\006\000\002\023\005\000\002" +
-    "\023\005\000\002\023\003\000\002\023\003\000\002\023" +
-    "\006\000\002\023\005" });
+    "\007\000\002\006\002\000\002\033\002\000\002\034\002" +
+    "\000\002\007\015\000\002\035\002\000\002\007\010\000" +
+    "\002\007\006\000\002\036\002\000\002\007\021\000\002" +
+    "\007\005\000\002\007\002\000\002\037\002\000\002\012" +
+    "\005\000\002\012\002\000\002\011\003\000\002\011\003" +
+    "\000\002\011\003\000\002\013\005\000\002\040\002\000" +
+    "\002\017\007\000\002\017\002\000\002\014\005\000\002" +
+    "\020\010\000\002\020\012\000\002\020\012\000\002\020" +
+    "\010\000\002\020\002\000\002\015\005\000\002\015\003" +
+    "\000\002\021\005\000\002\021\003\000\002\021\007\000" +
+    "\002\021\005\000\002\041\002\000\002\010\006\000\002" +
+    "\010\003\000\002\022\006\000\002\023\005\000\002\023" +
+    "\005\000\002\023\003\000\002\023\003\000\002\023\006" +
+    "\000\002\023\005" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -58,17 +59,17 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\211\000\004\006\004\001\002\000\004\011\001\001" +
+    "\000\214\000\004\006\004\001\002\000\004\011\001\001" +
     "\002\000\004\002\006\001\002\000\004\002\ufffd\001\002" +
     "\000\004\011\011\001\002\000\004\013\000\001\002\000" +
     "\012\012\ufff5\043\013\044\015\045\012\001\002\000\004" +
     "\025\033\001\002\000\004\025\016\001\002\000\004\012" +
-    "\026\001\002\000\004\025\016\001\002\000\010\023\uffd3" +
-    "\024\uffd1\030\uffd1\001\002\000\004\024\020\001\002\000" +
+    "\026\001\002\000\004\025\016\001\002\000\010\023\uffd0" +
+    "\024\uffce\030\uffce\001\002\000\004\024\020\001\002\000" +
     "\012\012\ufff9\043\ufff9\044\ufff9\045\ufff9\001\002\000\012" +
     "\012\ufff5\043\013\044\015\045\012\001\002\000\004\012" +
     "\ufff8\001\002\000\004\023\024\001\002\000\004\025\016" +
-    "\001\002\000\006\024\uffd2\030\uffd2\001\002\000\004\013" +
+    "\001\002\000\006\024\uffcf\030\uffcf\001\002\000\004\013" +
     "\ufffc\001\002\000\004\024\030\001\002\000\012\012\ufffb" +
     "\043\ufffb\044\ufffb\045\ufffb\001\002\000\012\012\ufff5\043" +
     "\013\044\015\045\012\001\002\000\004\012\ufffa\001\002" +
@@ -77,72 +78,74 @@ public class parser extends java_cup.runtime.lr_parser {
     "\024\040\001\002\000\012\012\ufff7\043\ufff7\044\ufff7\045" +
     "\ufff7\001\002\000\012\012\ufff5\043\013\044\015\045\012" +
     "\001\002\000\004\012\ufff6\001\002\000\004\013\044\001" +
-    "\002\000\006\014\uffe0\046\205\001\002\000\004\015\uffff" +
+    "\002\000\006\014\uffdd\046\210\001\002\000\004\015\uffff" +
     "\001\002\000\004\015\047\001\002\000\006\016\ufff1\021" +
     "\107\001\002\000\004\017\052\001\002\000\004\007\106" +
-    "\001\002\000\010\020\uffda\047\053\050\055\001\002\000" +
+    "\001\002\000\010\020\uffd7\047\053\050\055\001\002\000" +
     "\004\025\074\001\002\000\004\020\073\001\002\000\004" +
     "\025\056\001\002\000\004\033\057\001\002\000\006\005" +
     "\061\027\060\001\002\000\004\005\065\001\002\000\004" +
-    "\024\062\001\002\000\010\020\uffda\047\053\050\055\001" +
-    "\002\000\004\020\uffdb\001\002\000\004\030\070\001\002" +
-    "\000\006\023\066\030\uffd8\001\002\000\004\005\065\001" +
-    "\002\000\004\030\uffd9\001\002\000\004\024\071\001\002" +
-    "\000\010\020\uffda\047\053\050\055\001\002\000\004\020" +
-    "\uffdc\001\002\000\004\007\uffdf\001\002\000\004\033\075" +
+    "\024\062\001\002\000\010\020\uffd7\047\053\050\055\001" +
+    "\002\000\004\020\uffd8\001\002\000\004\030\070\001\002" +
+    "\000\006\023\066\030\uffd5\001\002\000\004\005\065\001" +
+    "\002\000\004\030\uffd6\001\002\000\004\024\071\001\002" +
+    "\000\010\020\uffd7\047\053\050\055\001\002\000\004\020" +
+    "\uffd9\001\002\000\004\007\uffdc\001\002\000\004\033\075" +
     "\001\002\000\006\025\076\027\077\001\002\000\004\024" +
     "\104\001\002\000\004\025\016\001\002\000\004\030\101" +
-    "\001\002\000\004\024\102\001\002\000\010\020\uffda\047" +
-    "\053\050\055\001\002\000\004\020\uffdd\001\002\000\010" +
-    "\020\uffda\047\053\050\055\001\002\000\004\020\uffde\001" +
+    "\001\002\000\004\024\102\001\002\000\010\020\uffd7\047" +
+    "\053\050\055\001\002\000\004\020\uffda\001\002\000\010" +
+    "\020\uffd7\047\053\050\055\001\002\000\004\020\uffdb\001" +
     "\002\000\004\002\ufffe\001\002\000\016\022\ufff3\025\ufff3" +
     "\052\ufff3\053\ufff3\055\ufff3\062\ufff3\001\002\000\004\016" +
-    "\111\001\002\000\004\017\ufff4\001\002\000\016\022\uffe9" +
+    "\111\001\002\000\004\017\ufff4\001\002\000\016\022\uffe7" +
     "\025\114\052\115\053\113\055\121\062\117\001\002\000" +
-    "\004\031\171\001\002\000\004\024\164\001\002\000\004" +
-    "\031\145\001\002\000\004\022\143\001\002\000\004\025" +
-    "\140\001\002\000\004\036\136\001\002\000\004\025\122" +
+    "\004\031\174\001\002\000\004\024\167\001\002\000\004" +
+    "\031\146\001\002\000\004\022\144\001\002\000\004\025" +
+    "\141\001\002\000\004\036\137\001\002\000\004\025\122" +
     "\001\002\000\004\035\123\001\002\000\010\025\127\043" +
-    "\124\044\126\001\002\000\004\057\uffe5\001\002\000\004" +
-    "\057\ufff0\001\002\000\004\057\uffe4\001\002\000\004\057" +
-    "\uffe6\001\002\000\004\057\131\001\002\000\016\025\114" +
-    "\052\115\053\113\055\121\056\uffe9\062\117\001\002\000" +
-    "\004\056\133\001\002\000\004\036\134\001\002\000\024" +
-    "\022\uffe9\025\114\052\115\053\113\054\uffe9\055\121\056" +
-    "\uffe9\061\uffe9\062\117\001\002\000\012\022\uffef\054\uffef" +
-    "\056\uffef\061\uffef\001\002\000\024\022\uffe9\025\114\052" +
-    "\115\053\113\054\uffe9\055\121\056\uffe9\061\uffe9\062\117" +
-    "\001\002\000\012\022\uffea\054\uffea\056\uffea\061\uffea\001" +
-    "\002\000\004\036\141\001\002\000\024\022\uffe9\025\114" +
-    "\052\115\053\113\054\uffe9\055\121\056\uffe9\061\uffe9\062" +
-    "\117\001\002\000\012\022\uffec\054\uffec\056\uffec\061\uffec" +
-    "\001\002\000\006\016\ufff1\021\107\001\002\000\004\016" +
-    "\ufff2\001\002\000\004\025\146\001\002\000\004\024\147" +
-    "\001\002\000\004\040\150\001\002\000\004\034\151\001" +
-    "\002\000\004\060\152\001\002\000\004\032\153\001\002" +
-    "\000\004\063\154\001\002\000\020\025\114\052\115\053" +
-    "\113\054\uffe9\055\121\061\uffe9\062\117\001\002\000\006" +
-    "\054\156\061\uffe7\001\002\000\016\025\114\052\115\053" +
-    "\113\055\121\061\uffe9\062\117\001\002\000\004\061\160" +
-    "\001\002\000\004\036\161\001\002\000\024\022\uffe9\025" +
-    "\114\052\115\053\113\054\uffe9\055\121\056\uffe9\061\uffe9" +
-    "\062\117\001\002\000\012\022\uffeb\054\uffeb\056\uffeb\061" +
-    "\uffeb\001\002\000\004\061\uffe8\001\002\000\004\004\165" +
-    "\001\002\000\004\036\uffee\001\002\000\004\036\167\001" +
-    "\002\000\024\022\uffe9\025\114\052\115\053\113\054\uffe9" +
-    "\055\121\056\uffe9\061\uffe9\062\117\001\002\000\012\022" +
-    "\uffed\054\uffed\056\uffed\061\uffed\001\002\000\006\025\173" +
-    "\051\172\001\002\000\006\023\203\032\uffcc\001\002\000" +
-    "\010\023\176\024\177\032\uffcd\001\002\000\004\032\175" +
-    "\001\002\000\004\036\uffd0\001\002\000\006\025\173\051" +
-    "\172\001\002\000\004\040\200\001\002\000\010\025\173" +
-    "\032\uffca\051\172\001\002\000\004\032\uffcb\001\002\000" +
-    "\004\032\uffcf\001\002\000\006\025\173\051\172\001\002" +
-    "\000\004\032\uffce\001\002\000\004\025\016\001\002\000" +
-    "\004\014\207\001\002\000\004\015\uffe3\001\002\000\004" +
-    "\024\211\001\002\000\006\014\uffe2\046\uffe2\001\002\000" +
-    "\006\014\uffe0\046\205\001\002\000\004\014\uffe1\001\002" +
-    "" });
+    "\125\044\126\001\002\000\004\057\ufff0\001\002\000\004" +
+    "\057\uffe2\001\002\000\004\057\uffe1\001\002\000\004\057" +
+    "\uffe3\001\002\000\004\057\131\001\002\000\016\025\114" +
+    "\052\115\053\113\055\121\056\uffe7\062\117\001\002\000" +
+    "\004\056\133\001\002\000\004\036\uffef\001\002\000\004" +
+    "\036\135\001\002\000\024\022\uffe7\025\114\052\115\053" +
+    "\113\054\uffe7\055\121\056\uffe7\061\uffe7\062\117\001\002" +
+    "\000\012\022\uffee\054\uffee\056\uffee\061\uffee\001\002\000" +
+    "\024\022\uffe7\025\114\052\115\053\113\054\uffe7\055\121" +
+    "\056\uffe7\061\uffe7\062\117\001\002\000\012\022\uffe8\054" +
+    "\uffe8\056\uffe8\061\uffe8\001\002\000\004\036\142\001\002" +
+    "\000\024\022\uffe7\025\114\052\115\053\113\054\uffe7\055" +
+    "\121\056\uffe7\061\uffe7\062\117\001\002\000\012\022\uffeb" +
+    "\054\uffeb\056\uffeb\061\uffeb\001\002\000\006\016\ufff1\021" +
+    "\107\001\002\000\004\016\ufff2\001\002\000\004\025\147" +
+    "\001\002\000\004\024\150\001\002\000\004\040\151\001" +
+    "\002\000\004\034\152\001\002\000\004\060\153\001\002" +
+    "\000\004\032\uffea\001\002\000\004\032\155\001\002\000" +
+    "\004\063\156\001\002\000\020\025\114\052\115\053\113" +
+    "\054\uffe7\055\121\061\uffe7\062\117\001\002\000\006\054" +
+    "\160\061\uffe4\001\002\000\016\025\uffe6\052\uffe6\053\uffe6" +
+    "\055\uffe6\061\uffe6\062\uffe6\001\002\000\004\061\162\001" +
+    "\002\000\004\036\163\001\002\000\024\022\uffe7\025\114" +
+    "\052\115\053\113\054\uffe7\055\121\056\uffe7\061\uffe7\062" +
+    "\117\001\002\000\012\022\uffe9\054\uffe9\056\uffe9\061\uffe9" +
+    "\001\002\000\016\025\114\052\115\053\113\055\121\061" +
+    "\uffe7\062\117\001\002\000\004\061\uffe5\001\002\000\004" +
+    "\004\170\001\002\000\004\036\uffed\001\002\000\004\036" +
+    "\172\001\002\000\024\022\uffe7\025\114\052\115\053\113" +
+    "\054\uffe7\055\121\056\uffe7\061\uffe7\062\117\001\002\000" +
+    "\012\022\uffec\054\uffec\056\uffec\061\uffec\001\002\000\006" +
+    "\025\176\051\175\001\002\000\006\023\206\032\uffc9\001" +
+    "\002\000\010\023\201\024\202\032\uffca\001\002\000\004" +
+    "\032\200\001\002\000\004\036\uffcd\001\002\000\006\025" +
+    "\176\051\175\001\002\000\004\040\203\001\002\000\010" +
+    "\025\176\032\uffc7\051\175\001\002\000\004\032\uffc8\001" +
+    "\002\000\004\032\uffcc\001\002\000\006\025\176\051\175" +
+    "\001\002\000\004\032\uffcb\001\002\000\004\025\016\001" +
+    "\002\000\004\014\212\001\002\000\004\015\uffe0\001\002" +
+    "\000\004\024\214\001\002\000\006\014\uffdf\046\uffdf\001" +
+    "\002\000\006\014\uffdd\046\210\001\002\000\004\014\uffde" +
+    "\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -150,11 +153,11 @@ public class parser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\211\000\004\002\004\001\001\000\004\024\006\001" +
+    "\000\214\000\004\002\004\001\001\000\004\024\006\001" +
     "\001\000\002\001\001\000\002\001\001\000\004\003\007" +
     "\001\001\000\004\025\042\001\001\000\004\004\013\001" +
     "\001\000\002\001\001\000\004\010\026\001\001\000\002" +
-    "\001\001\000\004\010\016\001\001\000\004\036\022\001" +
+    "\001\001\000\004\010\016\001\001\000\004\041\022\001" +
     "\001\000\002\001\001\000\004\030\020\001\001\000\004" +
     "\004\021\001\001\000\002\001\001\000\002\001\001\000" +
     "\004\010\024\001\001\000\002\001\001\000\002\001\001" +
@@ -163,7 +166,7 @@ public class parser extends java_cup.runtime.lr_parser {
     "\001\001\000\004\010\035\001\001\000\002\001\001\000" +
     "\002\001\001\000\004\031\040\001\001\000\004\004\041" +
     "\001\001\000\002\001\001\000\004\013\044\001\001\000" +
-    "\004\017\205\001\001\000\004\026\045\001\001\000\004" +
+    "\004\017\210\001\001\000\004\026\045\001\001\000\004" +
     "\005\047\001\001\000\004\006\107\001\001\000\004\014" +
     "\050\001\001\000\002\001\001\000\004\020\053\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
@@ -180,28 +183,30 @@ public class parser extends java_cup.runtime.lr_parser {
     "\115\022\117\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
-    "\011\124\001\001\000\002\001\001\000\004\033\127\001" +
+    "\011\123\001\001\000\004\033\127\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\006\007\131\022\117\001\001\000\002\001\001\000" +
-    "\002\001\001\000\006\007\134\022\117\001\001\000\002" +
-    "\001\001\000\006\007\136\022\117\001\001\000\002\001" +
-    "\001\000\002\001\001\000\006\007\141\022\117\001\001" +
-    "\000\002\001\001\000\004\006\143\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\006\007\154\022\117\001\001\000\004" +
-    "\012\156\001\001\000\006\007\162\022\117\001\001\000" +
-    "\002\001\001\000\002\001\001\000\006\007\161\022\117" +
+    "\004\034\133\001\001\000\002\001\001\000\006\007\135" +
+    "\022\117\001\001\000\002\001\001\000\006\007\137\022" +
+    "\117\001\001\000\002\001\001\000\002\001\001\000\006" +
+    "\007\142\022\117\001\001\000\002\001\001\000\004\006" +
+    "\144\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\004\034\165\001\001\000\002\001\001\000\006" +
-    "\007\167\022\117\001\001\000\002\001\001\000\004\023" +
-    "\173\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\004\023\201\001\001\000" +
-    "\002\001\001\000\004\023\200\001\001\000\002\001\001" +
-    "\000\002\001\001\000\004\023\203\001\001\000\002\001" +
-    "\001\000\004\010\207\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\004\035\211\001\001\000" +
-    "\004\017\212\001\001\000\002\001\001" });
+    "\001\000\004\036\153\001\001\000\002\001\001\000\002" +
+    "\001\001\000\006\007\156\022\117\001\001\000\004\012" +
+    "\160\001\001\000\004\037\164\001\001\000\002\001\001" +
+    "\000\002\001\001\000\006\007\163\022\117\001\001\000" +
+    "\002\001\001\000\006\007\165\022\117\001\001\000\002" +
+    "\001\001\000\002\001\001\000\004\035\170\001\001\000" +
+    "\002\001\001\000\006\007\172\022\117\001\001\000\002" +
+    "\001\001\000\004\023\176\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
+    "\023\204\001\001\000\002\001\001\000\004\023\203\001" +
+    "\001\000\002\001\001\000\002\001\001\000\004\023\206" +
+    "\001\001\000\002\001\001\000\004\010\212\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
+    "\040\214\001\001\000\004\017\215\001\001\000\002\001" +
+    "\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -326,7 +331,7 @@ public class parser extends java_cup.runtime.lr_parser {
 		
                          FileWriter fileWriter = null;
                 try{
-			fileWriter = new FileWriter("/home/zaki/Desktop/Git/CMaisonUser.java\n");
+			fileWriter = new FileWriter("/home/utilisateur/Bureau \n");
                      
 			//inherited method from java.io.OutputStreamWriter 
 		} catch (Exception e) {
@@ -335,10 +340,6 @@ public class parser extends java_cup.runtime.lr_parser {
 
                 return fileWriter ; 
                 
-
-
-
-
 }
 public String types(String s){
 
@@ -386,21 +387,38 @@ switch(s){
 
 }}
 
-    
 
+	public String retourner_type(String s){
 
+switch(s){
+                        case  "eclairage" :
+                            return "TypeAppareil.ECLAIRAGE";
+                      	
+						case "alarme" :
+                             return  "TypeAppareil.ALARME";
+                    		  
 
+						case "chauffage" :
+                              return "TypeAppareil.CHAUFFAGE";
+							
+							
+						case "fenetre" :
+                      		 return "TypeAppareil.FENETRE";
+						
 
+						case  "volet" :
+                   			 return "TypeAppareil.VOLET";
+							 
+						case  "autre_appareil" :
+                             return "TypeAppareil.AutreAppareil";
+                     	
+             
+           default :          
+         return s;                   
 
+}
 
-
-
-
-
-
-
-
-
+	}
 
 
 
@@ -422,8 +440,11 @@ List<String> chauffage = Arrays.asList("etat", "allumer","allumer_eco", "eteindr
 List<String> fenvol = Arrays.asList("etat", "ouvrir","ouvrir_partiel", "fermer", "fermer_partiel");
 List<String> autre = Arrays.asList("etat", "allumer", "eteindre");
 String ens = "";
+String scenario_contenu="";
 String use="" ;
 FileWriter file = null; 
+int f =0 ;
+int c=0;
 
 
 
@@ -782,27 +803,53 @@ commandes.put(us,"scenario");
 		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int typeleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int typeright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String type = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
  variables.put(n,use); use=""; 
+f = 1;
+scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)\n {" ;
+scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+")) \n   ";
+
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$7",25, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // scenario ::= POURTOUT nom DP x NT$7 FAIRE scenario FAIT PV scenario 
+          case 18: // NT$8 ::= 
             {
-              Object RESULT =null;
-              // propagate RESULT from NT$7
-                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-5)).value;
-		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).right;
-		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-8)).value;
-		 variables.remove(n);
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("scenario",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              Object RESULT =(Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
+		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).right;
+		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-6)).value;
+		int typeleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
+		int typeright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
+		String type = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
+scenario_contenu+="} \n"; 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$8",26, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // NT$8 ::= 
+          case 19: // scenario ::= POURTOUT nom DP x NT$7 FAIRE scenario FAIT NT$8 PV scenario 
+            {
+              Object RESULT =null;
+              // propagate RESULT from NT$8
+                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)).right;
+		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-9)).value;
+		int typeleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).left;
+		int typeright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).right;
+		String type = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-7)).value;
+		 variables.remove(n);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("scenario",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 20: // NT$9 ::= 
             {
               Object RESULT =null;
 		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -811,8 +858,26 @@ commandes.put(us,"scenario");
 		int actionleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int actionright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String action = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+
+
 if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);}             
            else {
+if(f == 1){
+  scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+");  \n";
+	f =0;
+}
+else if (c==1){
+
+scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action+"); } } } \n " ;
+ c=0;
+
+}
+else{
+scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)  \n {" ;
+scenario_contenu+="  if (appareil.getNomAppareil().equals("+n+"))  \n   ";
+scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+"); } \n";		
+		   }	 
+
 String str = variables.get(n) ; 
 if (str.startsWith("autre_appareil(")){str = "autre_appareil"; }
 if (variables.containsKey(str)){String[] k = variables.get(str).split(",");str =variables.get( k[0] );}
@@ -849,15 +914,15 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
 
 
    
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$8",26, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$9",27, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // scenario ::= nom PT ACTION NT$8 PV scenario 
+          case 21: // scenario ::= nom PT ACTION NT$9 PV scenario 
             {
               Object RESULT =null;
-              // propagate RESULT from NT$8
+              // propagate RESULT from NT$9
                 RESULT = (Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
 		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).right;
@@ -871,7 +936,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // scenario ::= EXECUTER_SCENARIO nom PV scenario 
+          case 22: // scenario ::= EXECUTER_SCENARIO nom PV scenario 
             {
               Object RESULT =null;
 
@@ -880,16 +945,44 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // scenario ::= SI PO nom PT ETAT DEGAL ETATS PF ALORS scenario sinon FSI PV scenario 
+          case 23: // NT$10 ::= 
             {
               Object RESULT =null;
+		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
+		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
+		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String e = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("scenario",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-13)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+c=1;
+scenario_contenu+="\n for(CAppareil appareil : this.l_appareils){ \n  ";
+scenario_contenu+="if (appareil.getNomAppareil().equals("+n+")){ \n ";
+scenario_contenu+= "if (appareil.etatAppareil.equals(TypeEtatAppareil."+e+")) { \n";
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$10",28, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // scenario ::= msgs PV scenario 
+          case 24: // scenario ::= SI PO nom PT ETAT DEGAL ETATS NT$10 PF ALORS scenario sinon FSI PV scenario 
+            {
+              Object RESULT =null;
+              // propagate RESULT from NT$10
+                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-7)).value;
+		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-12)).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-12)).right;
+		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-12)).value;
+		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)).right;
+		String e = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-8)).value;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("scenario",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-14)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 25: // scenario ::= msgs PV scenario 
             {
               Object RESULT =null;
 
@@ -898,7 +991,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // scenario ::= 
+          case 26: // scenario ::= 
             {
               Object RESULT =null;
 
@@ -907,16 +1000,27 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // sinon ::= SINON scenario 
+          case 27: // NT$11 ::= 
             {
               Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("sinon",8, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+scenario_contenu+=" \n else { \n"; 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$11",29, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // sinon ::= 
+          case 28: // sinon ::= SINON NT$11 scenario 
+            {
+              Object RESULT =null;
+              // propagate RESULT from NT$11
+                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		scenario_contenu+="} \n";
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("sinon",8, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 29: // sinon ::= 
             {
               Object RESULT =null;
 
@@ -925,43 +1029,43 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 27: // x ::= nom 
+          case 30: // x ::= nom 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		use=n;
+		 RESULT = n; use=n;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("x",7, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 28: // x ::= APPAREIL_TYPE 
+          case 31: // x ::= APPAREIL_TYPE 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		use=n;
+		  RESULT = n; use=n;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("x",7, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // x ::= AUTRE_APPAREIL 
+          case 32: // x ::= AUTRE_APPAREIL 
             {
-              Object RESULT =null;
+              String RESULT =null;
 		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		use=n;
+		 RESULT = n; use=n;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("x",7, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 30: // di ::= DIO did DIF 
+          case 33: // di ::= DIO did DIF 
             {
               Object RESULT =null;
 
@@ -970,7 +1074,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 31: // NT$9 ::= 
+          case 34: // NT$12 ::= 
             {
               Object RESULT =null;
 		int typeleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -982,15 +1086,15 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
    Global.clear();
 
 
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$9",27, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$12",30, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 32: // did ::= INTERFACE_TYPE MOT PT NT$9 did 
+          case 35: // did ::= INTERFACE_TYPE MOT PT NT$12 did 
             {
               Object RESULT =null;
-              // propagate RESULT from NT$9
+              // propagate RESULT from NT$12
                 RESULT = (Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		int typeleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
 		int typeright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
@@ -1001,7 +1105,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 33: // did ::= 
+          case 36: // did ::= 
             {
               Object RESULT =null;
 
@@ -1010,7 +1114,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 34: // dc ::= DCO dcd DCF 
+          case 37: // dc ::= DCO dcd DCF 
             {
               Object RESULT =null;
 
@@ -1019,7 +1123,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 35: // dcd ::= ASSOCIER nom EGAL nom PT dcd 
+          case 38: // dcd ::= ASSOCIER nom EGAL nom PT dcd 
             {
               Object RESULT =null;
 		int nameleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
@@ -1034,7 +1138,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 36: // dcd ::= ASSOCIER nom EGAL AO MOT AF PT dcd 
+          case 39: // dcd ::= ASSOCIER nom EGAL AO MOT AF PT dcd 
             {
               Object RESULT =null;
 		int nameleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).left;
@@ -1049,7 +1153,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 37: // dcd ::= PROGRAMMER nom EGAL AO dat AF PT dcd 
+          case 40: // dcd ::= PROGRAMMER nom EGAL AO dat AF PT dcd 
             {
               Object RESULT =null;
 		int nameleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).left;
@@ -1064,7 +1168,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 38: // dcd ::= PROGRAMMER nom EGAL DATE PT dcd 
+          case 41: // dcd ::= PROGRAMMER nom EGAL DATE PT dcd 
             {
               Object RESULT =null;
 		int nameleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
@@ -1082,7 +1186,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 39: // dcd ::= 
+          case 42: // dcd ::= 
             {
               Object RESULT =null;
 
@@ -1091,7 +1195,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 40: // dat ::= DATE VG dat 
+          case 43: // dat ::= DATE VG dat 
             {
               String RESULT =null;
 		int ddleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
@@ -1103,7 +1207,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 41: // dat ::= DATE 
+          case 44: // dat ::= DATE 
             {
               String RESULT =null;
 		int ddleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1115,7 +1219,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 42: // mesgouact ::= nom PT ACTION 
+          case 45: // mesgouact ::= nom PT ACTION 
             {
               Object RESULT =null;
 
@@ -1124,7 +1228,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 43: // mesgouact ::= msgs 
+          case 46: // mesgouact ::= msgs 
             {
               Object RESULT =null;
 
@@ -1133,7 +1237,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 44: // mesgouact ::= mesgouact PV nom PT ACTION 
+          case 47: // mesgouact ::= mesgouact PV nom PT ACTION 
             {
               Object RESULT =null;
 
@@ -1142,7 +1246,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 45: // mesgouact ::= mesgouact PV msgs 
+          case 48: // mesgouact ::= mesgouact PV msgs 
             {
               Object RESULT =null;
 
@@ -1151,22 +1255,22 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 46: // NT$10 ::= 
+          case 49: // NT$13 ::= 
             {
               Object RESULT =null;
 		int xleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int xright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String x = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 Global.add(x);
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$10",28, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$13",31, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 47: // MOT ::= nom NT$10 VG MOT 
+          case 50: // MOT ::= nom NT$13 VG MOT 
             {
               Object RESULT =null;
-              // propagate RESULT from NT$10
+              // propagate RESULT from NT$13
                 RESULT = (Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
 		int xleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
 		int xright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
@@ -1177,7 +1281,7 @@ Global.add(x);
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 48: // MOT ::= nom 
+          case 51: // MOT ::= nom 
             {
               Object RESULT =null;
 		int xleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
@@ -1189,7 +1293,7 @@ Global.add(x);
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 49: // msgs ::= MESSAGE PO msg PF 
+          case 52: // msgs ::= MESSAGE PO msg PF 
             {
               Object RESULT =null;
 
@@ -1198,7 +1302,7 @@ Global.add(x);
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 50: // msg ::= nom VG msg 
+          case 53: // msg ::= nom VG msg 
             {
               Object RESULT =null;
 
@@ -1207,7 +1311,7 @@ Global.add(x);
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 51: // msg ::= cm VG msg 
+          case 54: // msg ::= cm VG msg 
             {
               Object RESULT =null;
 
@@ -1216,7 +1320,7 @@ Global.add(x);
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 52: // msg ::= nom 
+          case 55: // msg ::= nom 
             {
               Object RESULT =null;
 
@@ -1225,7 +1329,7 @@ Global.add(x);
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 53: // msg ::= cm 
+          case 56: // msg ::= cm 
             {
               Object RESULT =null;
 
@@ -1234,7 +1338,7 @@ Global.add(x);
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 54: // msg ::= nom PT ETAT msg 
+          case 57: // msg ::= nom PT ETAT msg 
             {
               Object RESULT =null;
 
@@ -1243,7 +1347,7 @@ Global.add(x);
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 55: // msg ::= nom PT ETAT 
+          case 58: // msg ::= nom PT ETAT 
             {
               Object RESULT =null;
 

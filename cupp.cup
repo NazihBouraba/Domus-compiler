@@ -94,7 +94,7 @@ parser code {:
 		
                          FileWriter fileWriter = null;
                 try{
-			fileWriter = new FileWriter("/home/zaki/Desktop/Git/CMaisonUser.java\n");
+			fileWriter = new FileWriter("/home/utilisateur/Bureau \n");
                      
 			//inherited method from java.io.OutputStreamWriter 
 		} catch (Exception e) {
@@ -103,10 +103,6 @@ parser code {:
 
                 return fileWriter ; 
                 
-
-
-
-
 }
 public String types(String s){
 
@@ -154,21 +150,38 @@ switch(s){
 
 }}
 
-    
 
+	public String retourner_type(String s){
 
+switch(s){
+                        case  "eclairage" :
+                            return "TypeAppareil.ECLAIRAGE";
+                      	
+						case "alarme" :
+                             return  "TypeAppareil.ALARME";
+                    		  
 
+						case "chauffage" :
+                              return "TypeAppareil.CHAUFFAGE";
+							
+							
+						case "fenetre" :
+                      		 return "TypeAppareil.FENETRE";
+						
 
+						case  "volet" :
+                   			 return "TypeAppareil.VOLET";
+							 
+						case  "autre_appareil" :
+                             return "TypeAppareil.AutreAppareil";
+                     	
+             
+           default :          
+         return s;                   
 
+}
 
-
-
-
-
-
-
-
-
+	}
 
 
 
@@ -185,8 +198,11 @@ List<String> chauffage = Arrays.asList("etat", "allumer","allumer_eco", "eteindr
 List<String> fenvol = Arrays.asList("etat", "ouvrir","ouvrir_partiel", "fermer", "fermer_partiel");
 List<String> autre = Arrays.asList("etat", "allumer", "eteindre");
 String ens = "";
+String scenario_contenu="";
 String use="" ;
 FileWriter file = null; 
+int f =0 ;
+int c=0;
 
 
 
@@ -205,7 +221,7 @@ non terminal dsd; // declaration scenarios detaillés
 non terminal scenario; // genere un scenario
 
 non terminal MOT; // mot pour generer des nom,nom,nom,nom
-non terminal x; // genere soit appareil ou nom
+non terminal String x; // genere soit appareil ou nom
 non terminal sinon; // genere le blok sinon apres si
 
 non terminal di;
@@ -447,10 +463,33 @@ commandes.put(us,"scenario");
 
 | ;  
 
-scenario ::= POURTOUT nom:n DP x {: variables.put(n,use); use=""; :} FAIRE scenario  FAIT PV scenario  {: variables.remove(n);:} // pourtout v:volet faire v.ouvrir ; fait;
+scenario ::= POURTOUT nom:n DP x:type {: variables.put(n,use); use=""; 
+f = 1;
+scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)\n {" ;
+scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+")) \n   ";
 
-| nom:n   PT ACTION:action {:if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);}             
+:} FAIRE scenario  FAIT  {:scenario_contenu+="} \n"; :} PV scenario  {: variables.remove(n);:} // pourtout v:volet faire v.ouvrir ; fait;
+
+| nom:n   PT ACTION:action {:
+
+if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);}             
            else {
+if(f == 1){
+  scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+");  \n";
+	f =0;
+}
+else if (c==1){
+
+scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action+"); } } } \n " ;
+ c=0;
+
+}
+else{
+scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)  \n {" ;
+scenario_contenu+="  if (appareil.getNomAppareil().equals("+n+"))  \n   ";
+scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+"); } \n";		
+		   }	 
+
 String str = variables.get(n) ; 
 if (str.startsWith("autre_appareil(")){str = "autre_appareil"; }
 if (variables.containsKey(str)){String[] k = variables.get(str).split(",");str =variables.get( k[0] );}
@@ -490,16 +529,21 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
 
 | EXECUTER_SCENARIO nom PV scenario// executer_scenario soirée;
 
-| SI PO nom PT ETAT DEGAL ETATS PF ALORS scenario  sinon  FSI PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
+| SI PO nom:n PT ETAT DEGAL ETATS:e {:
+c=1;
+scenario_contenu+="\n for(CAppareil appareil : this.l_appareils){ \n  ";
+scenario_contenu+="if (appareil.getNomAppareil().equals("+n+")){ \n ";
+scenario_contenu+= "if (appareil.etatAppareil.equals(TypeEtatAppareil."+e+")) { \n";
+:} PF ALORS scenario  sinon  FSI PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
 
 | msgs PV  scenario// afficher un message 
 
 
 |;
 
-sinon ::= SINON scenario   | ; // 
+sinon ::= SINON {:scenario_contenu+=" \n else { \n"; :}  scenario  {:scenario_contenu+="} \n";:}  | ; // 
 
-x ::= nom:n {:use=n;:} | APPAREIL_TYPE:n {:use=n;:} | AUTRE_APPAREIL:n {:use=n;:};
+x ::= nom:n {: RESULT = n; use=n;:} | APPAREIL_TYPE:n {:  RESULT = n; use=n;:} | AUTRE_APPAREIL:n {: RESULT = n; use=n;:};
 
 
 //<DECLARATION_INTERFACES>
