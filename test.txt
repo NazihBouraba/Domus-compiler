@@ -100,17 +100,14 @@
 
 // déclaration des commandes
 <DECLARATION_COMMANDES>
-	associer b1 = bonjour.
-	associer tel1 = test.
-	associer tab1 = test.
 	
 	
-
-	programmer soiree = (2012,_,1,18,0).    
 	programmer soiree_musique = {(2012,11,20,19,30),(2012,11,21,19,30)}.
 
-	associer b2 = depart.
-	associer t1 = depart.
+	programmer soiree = (2012,_,1,18,0).    
+	
+
+	
 </DECLARATION_COMMANDES>
 </PROGRAMME_DOMUS>
 

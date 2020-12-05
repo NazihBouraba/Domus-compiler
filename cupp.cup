@@ -203,6 +203,8 @@ String use="" ;
 FileWriter file = null; 
 int f =0 ;
 int c=0;
+int p=1;
+int d=1;
 
 
 
@@ -453,8 +455,21 @@ switch(str){
 
 
 
-:}      ds dc PDF  {:
+:}      ds dc {:
+
+
+
+
+
+
+
+:} PDF  {:
  System.out.println("Analyse terminne !!");
+        file.write("monHabitat = new HabitatSpecific(ma_liste_appareils,ma_liste_ens_appareils, ma_liste_scenarios,ma_liste_interfaces, ma_liste_programmations);\n");
+        file.write("}\n");
+         file.write("}\n");
+   
+
  try {
 				if (file!= null) {
 					file.flush();
@@ -613,32 +628,54 @@ did ::= INTERFACE_TYPE:type MOT PT {:
 //<DECLARATION_COMMANDES>
 dc::= DCO dcd DCF ;
 
-dcd ::= ASSOCIER nom:name  EGAL nom PT dcd {: if (!commandes.containsKey(name)){report_error("L'interface "+name+" n'a pas été declarée",name);}
+dcd ::= ASSOCIER nom:name  EGAL nom:scen PT dcd {: if (!commandes.containsKey(name)){report_error("L'interface "+name+" n'a pas été declarée",name);}
+ file.write(name+ ".addScenarioAssocie("+ scen +");\n");
 
 
  :}
 
 | ASSOCIER nom:name EGAL AO MOT AF PT  dcd {: if (!commandes.containsKey(name)){report_error("L'interface "+name+" n'a pas été declarée",name);}
-
-
- :}
-
-|PROGRAMMER nom:name EGAL AO dat AF PT dcd {: if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
-
+ for (int j=0;j<Global.size();j++){
+  file.write(name+ ".addScenarioAssocie("+ Global.get(j) +");\n");
+}
+ Global.clear();
 
  :}
 
-|PROGRAMMER nom:name EGAL DATE:d PT dcd {: if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
+|PROGRAMMER nom:name EGAL AO dat AF PT {: if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
+  file.write("CProgrammation p"+ p +" = new CProgrammation("+name+  ");\n");
+for (int j=0;j<Global.size();j++){
+
+  file.write("CDate p"+ p +"d"+d+" = new CDate"+Global.get(j)+ ";\n");
+ file.write("p"+ p +".addDate(p"+p+"d"+d+");\n");
+d++;
 
 
- :}
+}
+ file.write("ma_liste_programmations.add(p"+p+");\n");
+p++;
+  d= 1 ;
+Global.clear();
+ :} dcd 
+
+|PROGRAMMER nom:name EGAL DATE:dt PT {: if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
+
+  file.write("CProgrammation p"+ p +" = new CProgrammation("+name+  ");\n");
+  file.write("CDate p"+ p +"d"+d+" = new CDate"+dt+ ";\n");
+ file.write("p"+ p +".addDate(p"+p+"d"+d+");\n");
+  file.write("ma_liste_programmations.add(p"+p+");\n");
+  p++;
+  d= 1 ;
+           
+
+ :} dcd 
 
 | ;
 
 
 
-dat ::= DATE:dd VG dat {: verifier_date(dd); :} 
-| DATE:dd {: verifier_date(dd); :}  ;
+dat ::= DATE:dd VG dat {: verifier_date(dd); Global.add(dd);:} 
+| DATE:dd {: verifier_date(dd); Global.add(dd);:}  ;
 
 mesgouact ::= nom PT ACTION | msgs |mesgouact PV  nom PT ACTION  | mesgouact PV  msgs   ;
 
