@@ -339,7 +339,7 @@ public class parser extends java_cup.runtime.lr_parser {
 
 
 }
-public String retourner_type(String s){
+public String types(String s){
 
 
 s = s.substring(s.indexOf("(") + 1);
@@ -507,7 +507,7 @@ switch(str){
                      		 break;
 			case  "autre_appareil" :
 String ks = variables.get(key) ; 
-String st = retourner_type(ks);
+String st = types(ks);
   file.write("CAutreAppareil  "+key+ " = new CAutreAppareil (\""+key+"\", "+ st+");\n");
 
                      		 break;
