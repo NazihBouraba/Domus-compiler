@@ -332,6 +332,7 @@ switch(str){
 String ks = variables.get(key) ; 
 String st = types(ks);
   file.write("CAutreAppareil  "+key+ " = new CAutreAppareil (\""+key+"\", "+ st+");\n");
+   file.write("ma_liste_appareils.add("+key+");\n");  
 
                      		 break;
              
@@ -368,7 +369,22 @@ file.write("ma_liste_ens_appareils.add("+key+ ");\n");
 
 
 
-:}di ds dc PDF  {:
+:}di {:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:}      ds dc PDF  {:
  System.out.println("Analyse terminne !!");
  try {
 				if (file!= null) {
