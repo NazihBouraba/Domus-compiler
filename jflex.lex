@@ -24,9 +24,9 @@ date = "(" ([0-9]* | _ ) ","([0-9]*  | _ ) "," ([0-9]*) "," ([0-9]*) "," ([0-9]*
 
 type_appareil = ("volet"|"eclairage"|"fenetre"|"alarme"|"chauffage")
 
-type_interface = ("mobile"|"telephone"|"telecommande"|"tablette"|"interrupteur")
+type_interface = ("mobile"|"telephone"|"telecommande"|"tablette"|"interrupteur"|"ordinateur")
 
-autre_appareil = "autre_appareil("("tv"|"hifi"|"cafetiere"|"video_proj"|"lave_linge"|"lave_vaisselle"|"portail")")"
+autre_appareil = "autre_appareil("("tv"|"hifi"|"cafetiere"|"video_proj"|"lave_linge"|"lave_vaisselle"|"portail"|"seche_linge")")"
 
 acti = ("ouvrir" |"fermer" | "eteindre" | "allumer" | "tamiser" |"allumer_partiel"|"allumer_éco"|"fermer_partiel"|"allumer_eco"|"ouvrir_partiel" )
 
