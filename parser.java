@@ -339,6 +339,53 @@ public class parser extends java_cup.runtime.lr_parser {
 
 
 }
+public String retourner_type(String s){
+
+
+s = s.substring(s.indexOf("(") + 1);
+s = s.substring(0, s.indexOf(")"));
+
+
+
+
+
+switch(s){
+                        case  "tv" :
+ return  "TypeAppareil.AUTRE_APPAREIL_TV";
+                          
+
+                        case "hifi" :
+                            
+  return "TypeAppareil.AUTRE_APPAREIL_HIFI";
+
+                        case "cafetiere" :
+                            
+  return "TypeAppareil.AUTRE_APPAREIL_CAFE";
+
+                        case "video_proj" :
+                               return "TypeAppareil.AUTRE_APPAREIL_VP";
+
+
+                        case  "lave_linge" :
+                                return "TypeAppareil.AUTRE_APPAREIL_LL";
+
+                        case  "lave_vaisselle" :
+                             return "TypeAppareil.AUTRE_APPAREIL_LV";
+                        
+                        case  "seche_linge" :
+                             return "TypeAppareil.AUTRE_APPAREIL_SL";
+			
+			case  "portail" :
+                             return "TypeAppareil.AUTRE_APPAREIL_PORTAIL";
+
+
+
+           default : return s ; 
+       
+
+}}
+
+    
 
 
 
@@ -429,8 +476,9 @@ file.write("super();\n");
  
 
 for (String key : variables.keySet())
-{
-switch(variables.get(key)){
+{String str = variables.get(key) ;
+if (str.startsWith("autre_appareil(")){str="autre_appareil";}
+switch(str){
                         case  "eclairage" :
                                file.write("CEclairage "+key+ " = new CEclairage(\""+key+"\",TypeAppareil.ECLAIRAGE);\n");
       file.write("ma_liste_appareils.add("+key+");\n");  
@@ -453,16 +501,25 @@ switch(variables.get(key)){
 
                      		 break;
 			case  "volet" :
-                    file.write("CVoletFenetre  "+key+ " = new CVoletFenetre (\""+key+"\",TypeAppareil.ECLAIRAGE);\n");
+                    file.write("CVoletFenetre  "+key+ " = new CVoletFenetre (\""+key+"\",TypeAppareil.VOLET);\n");
       file.write("ma_liste_appareils.add("+key+");\n");  
 
                      		 break;
 			case  "autre_appareil" :
-                     file.write("CAutreAppareil "+key+ " = new CAutreAppareil(\""+key+"\",TypeAppareil.AutreAppareil);\n");
-      file.write("ma_liste_appareils.add("+key+");\n");  
+String ks = variables.get(key) ; 
+String st = retourner_type(ks);
+  file.write("CAutreAppareil  "+key+ " = new CAutreAppareil (\""+key+"\", "+ st+");\n");
 
                      		 break;
-                       default : 
+             
+                       default : if (str.contains(",")){ String[]  k = str.split(",");                                           
+ file.write("CEnsAppareil "+key+ " = new CEnsAppareil(\""+key+"\");\n");
+for (int i = 0; i <  k.length ; i++ )
+{
+    file.write(key+ ".addAppareil("+k[i]+");\n");
+}
+file.write("ma_liste_ens_appareils.add("+key+ ");\n");
+}
                              
 
 
@@ -499,7 +556,9 @@ switch(variables.get(key)){
               Object RESULT =null;
               // propagate RESULT from NT$1
                 RESULT = (Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
-		  try {
+		
+ System.out.println("Analyse terminne !!");
+ try {
 				if (file!= null) {
 					file.flush();
 					file.close();					
@@ -730,8 +789,7 @@ if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été dec
            else {
 String str = variables.get(n) ; 
 if (str.startsWith("autre_appareil(")){str = "autre_appareil"; }
-
-if (variables.containsKey(str)){String[] k = variables.get(str).split(",");str =variables.get( k[0] ); System.out.println(k[0]);}
+if (variables.containsKey(str)){String[] k = variables.get(str).split(",");str =variables.get( k[0] );}
 boolean b = false ; 
 
 
