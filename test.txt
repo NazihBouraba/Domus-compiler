@@ -27,7 +27,7 @@
    	interrupteur b1.
 	mobile t1.
 	telephone tel1.
-	tablette tab1,t1.
+	tablette tab1,tab2.
 	telecommande zap.
 	interrupteur b2.
 </DECLARATION_INTERFACES>
@@ -38,7 +38,7 @@
 	// déclaration du scenario bonjour
 	<SCENARIO bonjour>
 		pourtout v:volet faire v.ouvrir;pourtout v:volet faire v.ouvrir;  fait;fait;
-		zzzzzzzz.eteindre;
+		e1.eteindre;
 		cafe.allumer;
 		si (rad1.etat == eteint) alors si (rad1.etat == eteint) alors rad1.allumer; fsi;fsi;
 		hf.allumer;
@@ -103,10 +103,9 @@
 	associer b1 = bonjour.
 	associer tel1 = test.
 	associer tab1 = test.
-	associer za = test.
-
 	
-	programmer tes = (_,1,1,6,0).
+	
+
 	programmer soiree = (2012,_,1,18,0).    
 	programmer soiree_musique = {(2012,11,20,19,30),(2012,11,21,19,30)}.
 

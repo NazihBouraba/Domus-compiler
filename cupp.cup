@@ -4,6 +4,7 @@ import java.util.*;
 import java_cup.runtime.*;
 import java.lang.*;
 import java.util.*;
+import java.io.*;
 
 
 parser code {:
@@ -85,6 +86,43 @@ parser code {:
 
 
 	}
+       
+      
+      public FileWriter writer(){
+
+            
+		
+                         FileWriter fileWriter = null;
+                try{
+			fileWriter = new FileWriter("/home/zaki/Desktop/Git/CMaisonUser.java\n");
+                     
+			//inherited method from java.io.OutputStreamWriter 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+                return fileWriter ; 
+                
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -99,8 +137,9 @@ List<String> alarme = Arrays.asList("etat","allumer", "allumer_partiel", "eteind
 List<String> chauffage = Arrays.asList("etat", "allumer","allumer_eco", "eteindre");
 List<String> fenvol = Arrays.asList("etat", "ouvrir","ouvrir_partiel", "fermer", "fermer_partiel");
 List<String> autre = Arrays.asList("etat", "allumer", "eteindre");
-
+String ens = "";
 String use="" ;
+FileWriter file = null; 
 
 
 
@@ -201,7 +240,87 @@ terminal String ALORS ; // fsi
 
 
 //axiome
-S ::= PDO da di ds dc PDF  {: System.out.println(commandes);System.out.println("analyse terminée"); :};
+S ::= PDO {:file = writer (); 
+file.write("public class CMaisonUser extends CMaison {\n");  
+file.write("public CMaisonUser() {\n");  
+file.write("super();\n");  
+
+  
+  
+
+
+           :} da {: 
+
+for (String key : variables.keySet())
+{
+switch(variables.get(key)){
+                        case  "eclairage" :
+                               file.write("CEclairage "+key+ " = new CEclairage(\""+key+"\",TypeAppareil.ECLAIRAGE);\n");
+      file.write("ma_liste_appareils.add("+key+");\n");  
+
+                      		break;
+			case "alarme" :
+                               file.write("CAlarme "+key+ " = new CAlarme(\""+key+"\",TypeAppareil.ALARME);\n");
+      file.write("ma_liste_appareils.add("+key+");\n");  
+
+                    		  break;
+
+			case "chauffage" :
+                          file.write("CEclairage "+key+ " = new CEclairage(\""+key+"\",TypeAppareil.CHAUFFAGE);\n");
+      file.write("ma_liste_appareils.add("+key+");\n");  
+
+                    		  break;
+			case "fenetre" :
+                       file.write("CVoletFenetre "+key+ " = new CVoletFenetre(\""+key+"\",TypeAppareil.FENETRE);\n");
+      file.write("ma_liste_appareils.add("+key+");\n");  
+
+                     		 break;
+			case  "volet" :
+                    file.write("CVoletFenetre  "+key+ " = new CVoletFenetre (\""+key+"\",TypeAppareil.ECLAIRAGE);\n");
+      file.write("ma_liste_appareils.add("+key+");\n");  
+
+                     		 break;
+			case  "autre_appareil" :
+                     file.write("CAutreAppareil "+key+ " = new CAutreAppareil(\""+key+"\",TypeAppareil.AutreAppareil);\n");
+      file.write("ma_liste_appareils.add("+key+");\n");  
+
+                     		 break;
+                       default : 
+                             
+
+
+
+
+}  }
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:}di ds dc PDF  {:  try {
+				if (file!= null) {
+					file.flush();
+					file.close();					
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+  :};
 
 
 //declaration des appareils
@@ -227,8 +346,9 @@ dad::= APPAREIL_TYPE:type MOT  PT {:
 
 
 | DEFINIR nom:name EGAL AO MOT AF PT {:
-   if (!variables.containsKey(name)) {
-   variables.put(name,variables.get(Global.get(0)));} else {report_error("La variable "+name+" existe deja",name);}
+   for (int j=0;j<Global.size();j++){ens+=Global.get(j);if ((j+1)< Global.size()){ens+=",";}}if (!variables.containsKey(name)) {
+   variables.put(name,ens);} else {report_error("La variable "+name+" existe deja",name);}
+ens="";
    Global.clear();
 :} dad // definir mon eclairage_salon = {e1,e2}
 
@@ -258,6 +378,7 @@ scenario ::= POURTOUT nom:n DP x {: variables.put(n,use); use=""; :} FAIRE scena
            else {
 String str = variables.get(n) ; 
 if (str.startsWith("autre_appareil(")){str = "autre_appareil"; }
+
 boolean b = false ; 
 
 
@@ -266,19 +387,19 @@ switch(str){
                                if (eclairage.contains(action)) { b = true ;}
                       		break;
 			case "alarme" :
-                                if (alarme.contains(action)) { b = true;} ;
+                                if (alarme.contains(action)) { b = true;} 
                     		  break;
 			case "chauffage" :
-                                if (chauffage.contains(action)) { b = true;} ;
+                                if (chauffage.contains(action)) { b = true;} 
                     		  break;
 			case "fenetre" :
-                                 if (fenvol.contains(action)){ b = true;} ;
+                                 if (fenvol.contains(action)){ b = true;} 
                      		 break;
 			case  "volet" :
-                                if (fenvol.contains(action)) {b = true ;};
+                                if (fenvol.contains(action)) {b = true ;}
                      		 break;
 			case  "autre_appareil" :
-                               if (autre.contains(action))  {b = true;} ;
+                               if (autre.contains(action))  {b = true;} 
                      		 break;
                        default : 
                                b = false ;
