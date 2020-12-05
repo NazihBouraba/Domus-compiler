@@ -731,6 +731,7 @@ if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été dec
 String str = variables.get(n) ; 
 if (str.startsWith("autre_appareil(")){str = "autre_appareil"; }
 
+if (variables.containsKey(str)){String[] k = variables.get(str).split(",");str =variables.get( k[0] ); System.out.println(k[0]);}
 boolean b = false ; 
 
 
@@ -756,7 +757,7 @@ switch(str){
                        default : 
                                b = false ;
 }
-if (variables.containsKey(variables.get(n))) {b = true;}
+
 if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable "+n,action);     }
 
 
