@@ -75,30 +75,30 @@ ma_liste_interface.add(b1);
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(e1)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.eteint)) { 
- appareil.appliquer(TypeActionAppareil.allumer); } } } 
+ appareil.appliquer(TypeActionAppareil.allumer); } } } } 
   
  else { 
 
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(e1)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.demi)) { 
- appareil.appliquer(TypeActionAppareil.eteindre); } } } 
- } 
-
+ appareil.appliquer(TypeActionAppareil.eteindre); } } } } 
+ }} 
+}
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(e2)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.allume)) { 
- appareil.appliquer(TypeActionAppareil.tamiser); } } } 
- 
+ appareil.appliquer(TypeActionAppareil.tamiser); } } } } 
+ }
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(v1)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.ouvert)) { 
- appareil.appliquer(TypeActionAppareil.fermer_partiel); } } } 
- 
+ appareil.appliquer(TypeActionAppareil.fermer_partiel); } } } } 
+ }
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(v1)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.ferme)) { 
- appareil.appliquer(TypeActionAppareil.ouvrir_partiel); } } } 
+ appareil.appliquer(TypeActionAppareil.ouvrir_partiel); } } } } 
   
  System.out.println(" alors ") ;  
   
@@ -107,7 +107,7 @@ ma_liste_interface.add(b1);
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(v1)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.demi)) { 
- appareil.appliquer(TypeActionAppareil.fermer); } } } 
+ appareil.appliquer(TypeActionAppareil.fermer); } } } } 
   
  else { 
 
@@ -117,19 +117,19 @@ ma_liste_interface.add(b1);
  
  System.out.println(" sinon ") ;  
  } 
-} 
- " ; 
+}} 
+} " ; 
 
  String test = "
  for(CAppareil appareil : ensAppareil.lAppareils)
- {  if (ensAppareil.nomEnsAppareil.equals(elec_salon)) 
+ {  if (ensAppareil.nomEnsAppareil.equals(elec_salon)) { 
     
  System.out.println("Etat de ",e," = ",e.etat) ;  
  } 
 
  for(CAppareil appareil : this.l_appareils)
- {  if (appareil.typeAppareil.equals(autre_appareil(tv))) 
-   appareil.appliquer(TypeActionAppareil.allumer);  
+ {  if (appareil.typeAppareil.equals(autre_appareil(tv))) {
+   appareil.appliquer(TypeActionAppareil.allumer); } 
 } 
 
  this.execScenarioNum(2);
@@ -137,19 +137,19 @@ ma_liste_interface.add(b1);
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(a1)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.eteint)) { 
- appareil.appliquer(TypeActionAppareil.allumer_partiel); } } } 
- 
+ appareil.appliquer(TypeActionAppareil.allumer_partiel); } } } } 
+ }
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(a1)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.demi)) { 
- appareil.appliquer(TypeActionAppareil.allumer); } } } 
+ appareil.appliquer(TypeActionAppareil.allumer); } } } } 
   
  else { 
 
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(a1)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.allume)) { 
- appareil.appliquer(TypeActionAppareil.eteindre); } } } 
+ appareil.appliquer(TypeActionAppareil.eteindre); } } } } 
   
  else { 
 
@@ -157,47 +157,47 @@ ma_liste_interface.add(b1);
  {  if (appareil.getNomAppareil().equals(a2))  
    appareil.appliquer(TypeActionAppareil.allumer); } 
 } 
-} 
-
+}} 
+}
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(r1)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.eco)) { 
- appareil.appliquer(TypeActionAppareil.allumer); } } } 
- 
+ appareil.appliquer(TypeActionAppareil.allumer); } } } } 
+ }
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(r1)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.eteint)) { 
- appareil.appliquer(TypeActionAppareil.allumer_eco); } } } 
+ appareil.appliquer(TypeActionAppareil.allumer_eco); } } } } 
   
  else { 
 
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(r1)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.allume)) { 
- appareil.appliquer(TypeActionAppareil.eteindre); } } } 
+ appareil.appliquer(TypeActionAppareil.eteindre); } } } } 
   
  else { 
  
  System.out.println(" bip !") ;  
  } 
-} 
-
+}} 
+}
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(fen)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.ouvert)) { 
  
  System.out.println("fenêtre ouverte !") ;  
- 
+ }
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(cafe)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.allume)) { 
- appareil.appliquer(TypeActionAppareil.eteindre); } } } 
- 
+ appareil.appliquer(TypeActionAppareil.eteindre); } } } } 
+ }
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(cafe)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.eteint)) { 
- appareil.appliquer(TypeActionAppareil.allumer); } } } 
-  " ; 
+ appareil.appliquer(TypeActionAppareil.allumer); } } } } 
+ } " ; 
 
  String soiree_musique = "
  this.execScenarioNum(1);
@@ -209,39 +209,39 @@ ma_liste_interface.add(b1);
 
  String depart = "
  for(CAppareil appareil : this.l_appareils)
- {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) 
-   appareil.appliquer(TypeActionAppareil.fermer);  
+ {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) {
+   appareil.appliquer(TypeActionAppareil.fermer); } 
 } 
 
  for(CAppareil appareil : this.l_appareils)
- {  if (appareil.typeAppareil.equals(TypeAppareil.ECLAIRAGE)) 
-   appareil.appliquer(TypeActionAppareil.eteindre);  
+ {  if (appareil.typeAppareil.equals(TypeAppareil.ECLAIRAGE)) {
+   appareil.appliquer(TypeActionAppareil.eteindre); } 
 } 
 
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(fen)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.ferme)) { 
- appareil.appliquer(TypeActionAppareil.allumer); } } } 
+ appareil.appliquer(TypeActionAppareil.allumer); } } } } 
   
  else { 
  
  System.out.println( "Attention : la fenêtre ",fen," est ouverte !") ;  
  } 
-
+}
  for(CAppareil appareil : this.l_appareils)
- {  if (appareil.typeAppareil.equals(TypeAppareil.AutreAppareil)) 
-   appareil.appliquer(TypeActionAppareil.eteindre);  
+ {  if (appareil.typeAppareil.equals(TypeAppareil.AutreAppareil)) {
+   appareil.appliquer(TypeActionAppareil.eteindre); } 
 } 
  " ; 
 
  String bonjour = "
  for(CAppareil appareil : this.l_appareils)
- {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) 
-   appareil.appliquer(TypeActionAppareil.ouvrir);  
+ {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) {
+   appareil.appliquer(TypeActionAppareil.ouvrir); } 
 
  for(CAppareil appareil : this.l_appareils)
- {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) 
-   appareil.appliquer(TypeActionAppareil.ouvrir);  
+ {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) {
+   appareil.appliquer(TypeActionAppareil.ouvrir); } 
 } 
 } 
 
@@ -260,8 +260,8 @@ ma_liste_interface.add(b1);
  for(CAppareil appareil : this.l_appareils){ 
   if (appareil.getNomAppareil().equals(rad1)){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.eteint)) { 
- appareil.appliquer(TypeActionAppareil.allumer); } } } 
- 
+ appareil.appliquer(TypeActionAppareil.allumer); } } } } 
+ }}
  for(CAppareil appareil : this.l_appareils)  
  {  if (appareil.getNomAppareil().equals(hf))  
    appareil.appliquer(TypeActionAppareil.allumer); } 
@@ -269,12 +269,12 @@ ma_liste_interface.add(b1);
 
  String soiree = "
  for(CAppareil appareil : this.l_appareils)
- {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) 
-   appareil.appliquer(TypeActionAppareil.fermer);  
+ {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) {
+   appareil.appliquer(TypeActionAppareil.fermer); } 
 } 
 
  for(CAppareil appareil : ensAppareil.lAppareils)
- {  if (ensAppareil.nomEnsAppareil.equals(mon_eclairage_salon)) 
-   appareil.appliquer(TypeActionAppareil.allumer);  
+ {  if (ensAppareil.nomEnsAppareil.equals(mon_eclairage_salon)) { 
+   appareil.appliquer(TypeActionAppareil.allumer); } 
 } 
  " ; 
