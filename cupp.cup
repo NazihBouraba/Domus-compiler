@@ -94,7 +94,7 @@ parser code {:
 		
                          FileWriter fileWriter = null;
                 try{
-			fileWriter = new FileWriter("./CMaisonUser.java\n");
+			fileWriter = new FileWriter("./CMaisonUser.java");
                      
 			//inherited method from java.io.OutputStreamWriter 
 		} catch (Exception e) {
@@ -110,7 +110,7 @@ public FileWriter writerspecific(){
 		
                          FileWriter fileWriter = null;
                 try{
-			fileWriter = new FileWriter("./HabitatSpecific.java\n");
+			fileWriter = new FileWriter("./HabitatSpecific.java");
                      
 			//inherited method from java.io.OutputStreamWriter 
 		} catch (Exception e) {
@@ -248,7 +248,7 @@ String scenario_nom="";
 String message_content = " ";
 int p=1;
 int d=1;
-
+String co = "\\" + "\"";
 
 
 
@@ -338,6 +338,7 @@ terminal String ETATS ; // ETATS
 terminal String FSI ; // fsi
 terminal String EXECUTER_SCENARIO; // fsi
 terminal String ALORS ; // fsi
+
 
 
 
@@ -520,6 +521,7 @@ switch(str){
 
 
 :} PDF  {:
+System.out.println(co);
  System.out.println("Analyse terminne !!");
         file.write("monHabitat = new HabitatSpecific(ma_liste_appareils,ma_liste_ens_appareils, ma_liste_scenarios,ma_liste_interfaces, ma_liste_programmations);\n");
         file.write("}\n");
@@ -635,44 +637,44 @@ commandes.put(us,"scenario");
 
 scenario ::= POURTOUT nom:n DP x:type {: variables.put(n,use); use=""; 
 f = 1;
-//System.out.println(type);
+
 if(variables.containsKey(type)){ // declaration dans un ensemble
-scenario_contenu+="\n for(CEnsAppareil ensAppareil : this.l_ensembles)\n {" ;
-scenario_contenu+="  if (ensAppareil.nomEnsAppareil.equals("+retourner_type(type)+")) { \n   ";
+scenario_contenu+="for(CEnsAppareil ensAppareil : this.l_ensembles){" ;
+scenario_contenu+="  if (ensAppareil.nomEnsAppareil.equals("+retourner_type(type)+")) { ";
 
 }
 else if(type.equals("autre_appareil")){ // si autre appareil sans specifications
 
-scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)\n {" ;
-scenario_contenu+="  if (appareil.estTypeAutreAppareil())  {\n   ";
+scenario_contenu+="for(CAppareil appareil : this.l_appareils){" ;
+scenario_contenu+="  if (appareil.estTypeAutreAppareil())  { ";
 
 }
 else { // appareil ordinaires ou autre_appareil(hifi.....)
-scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)\n {" ;
-scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+")) {\n   ";
+scenario_contenu+=" for(CAppareil appareil : this.l_appareils) {" ;
+scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+")) {   ";
 
 }
 
-:} FAIRE scenario {:scenario_contenu+=" } }\n"; :} FAIT   PV scenario  {: variables.remove(n);:} // pourtout v:volet faire v.ouvrir ; fait;
+:} FAIRE scenario {:scenario_contenu+=" } }"; :} FAIT   PV scenario  {: variables.remove(n);:} // pourtout v:volet faire v.ouvrir ; fait;
 
 | nom:n   PT ACTION:action {:
 
 if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);}             
            else {
 if(f == 1){
-  scenario_contenu+="appareil.appliquer(TypeActionAppareil.\""+action+"\");  \n";
+  scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action.toUpperCase()+"); ";
 	f =0;
 }
 else if (c==1){
 
-scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action+");   \n " ;
+scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action.toUpperCase()+");   " ;
  c=0;
 
 }
 else{
-scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)  \n {" ;
-scenario_contenu+="  if (appareil.getNomAppareil().equals(\""+n+"\"))  \n   ";
-scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+"); } \n";		
+scenario_contenu+=" for(CAppareil appareil : this.l_appareils)   {" ;
+scenario_contenu+="  if (appareil.getNomAppareil().equals("+co+n+co+"))     ";
+scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action.toUpperCase()+"); } ";		
 		   }	 
 
 String str = variables.get(n) ; 
@@ -704,7 +706,7 @@ switch(str){
                                b = false ;
 }
 
-if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable "+n,action);     }
+if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable "+n,action.toUpperCase());     }
 
 
 }
@@ -716,17 +718,17 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
 
 | SI PO nom:n PT ETAT DEGAL ETATS:e {:
 c=1;
-scenario_contenu+="\n for(CAppareil appareil : this.l_appareils){ \n  ";
-scenario_contenu+="if (appareil.getNomAppareil().equals(\""+n+"\")){ \n ";
-scenario_contenu+= "if (appareil.etatAppareil.equals(TypeEtatAppareil."+e+")) { \n";
-:} PF ALORS scenario {:scenario_contenu+="}}}";:}  sinon  FSI PV   scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
+scenario_contenu+=" for(CAppareil appareil : this.l_appareils){   ";
+scenario_contenu+="if (appareil.getNomAppareil().equals("+co+n+co+")){ ";
+scenario_contenu+= "if (appareil.etatAppareil.equals(TypeEtatAppareil."+e.toUpperCase()+")) { ";
+:} PF ALORS scenario {:scenario_contenu+="}";:}  sinon {:scenario_contenu+="}}";:} FSI PV   scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
 
-| msgs PV  scenario {:scenario_contenu+=" \n System.out.println(" +message_content+ ") ;  \n " ; message_content="";  :}  // afficher un message 
+| msgs PV  scenario {:scenario_contenu+="  System.out.println(" +message_content+ ") ;  " ; message_content="";  :}  // afficher un message 
 
 
 |;
 
-sinon ::= SINON {:scenario_contenu+=" \n else { \n"; :}  scenario  {:scenario_contenu+="} \n";:}  | ; // 
+sinon ::= SINON {:scenario_contenu+=" \n else { "; :}  scenario  {:scenario_contenu+="} ";:}  | ; // 
 
 x ::= nom:n {: RESULT = n; use=n;:} | APPAREIL_TYPE:n {:  RESULT = n; use=n;:} | AUTRE_APPAREIL:n {: RESULT = n; use=n;:};
 
@@ -804,13 +806,13 @@ MOT ::= nom:x {:Global.add(x);:}VG MOT | nom:x {: Global.add(x); :};
 
 msgs ::= MESSAGE PO msg PF  ;
 
-msg ::= nom:n {:message_content+=(n+".getNomAppareil()"+',') ;:} VG msg |
-cm:c {:message_content+=c+',' ;:} VG msg |
+msg ::= nom:n {:  message_content+=(n+".getNomAppareil()"+',') ;:} VG msg |
+cm:c {:System.out.println( c.replace("\"",co)); message_content+=( c.replace("\"",co))+',' ;:} VG msg |
  nom :n {:message_content+= (n+".getNomAppareil()") ;:}  | 
-cm:c {:message_content+=c ;:}  | 
-nom:n PT ETAT:e {:message_content+=(n+".getNomAppareil()"+'.'+e) ;:}  msg 
+cm:c {:System.out.println( c.replace("\"",co));  message_content+=( c.replace("\"",co)) ;:}  | 
+nom:n PT ETAT:e {:message_content+=(n+".getNomAppareil()"+'.'+e.toUpperCase()) ;:}  msg 
 | 
-nom:n PT ETAT:e {:message_content+=n+'.'+e ;:};
+nom:n PT ETAT:e {:message_content+=n+'.'+e.toUpperCase() ;:};
 
 
 
