@@ -355,6 +355,23 @@ public class parser extends java_cup.runtime.lr_parser {
                 return fileWriter ; 
                 
 }
+public FileWriter writerspecific(){
+
+            
+		
+                         FileWriter fileWriter = null;
+                try{
+			fileWriter = new FileWriter("./HabitatSpecific.java\n");
+                     
+			//inherited method from java.io.OutputStreamWriter 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+                return fileWriter ; 
+                
+}
+
 
 
 
@@ -473,6 +490,7 @@ String ens = "";
 String scenario_contenu="";
 String use="" ;
 FileWriter file = null; 
+FileWriter sepi = null; 
 int f =0 ;
 int c=0;
 
@@ -514,6 +532,19 @@ int d=1;
             {
               Object RESULT =null;
 file = writer (); 
+sepi = writerspecific();
+
+sepi.write("import java.util.ArrayList;\n");
+sepi.write("public class HabitatSpecific extends Habitat {\n");
+sepi.write("public HabitatSpecific(ArrayList<CAppareil> lapp, ArrayList<CEnsAppareil> lens, ArrayList<CScenario> lscen, ArrayList<CInterface> lint, ArrayList<CProgrammation> lprog)\n{\n");
+sepi.write("super(lapp,lens,lscen,lint,lprog);\n}\n");
+sepi.write("public void execScenarioNum(int num)\n{\n System.out.println( \"Execution du scenario \"+this.l_scenarios.get(num).getNomScenario()+\"... \");\n switch(num) {\n");
+
+
+
+
+
+
 file.write("public class CMaisonUser extends CMaison {\n");  
 file.write("public CMaisonUser() {\n");  
 file.write("super();\n");  
@@ -714,12 +745,51 @@ switch(str){
         file.write("monHabitat = new HabitatSpecific(ma_liste_appareils,ma_liste_ens_appareils, ma_liste_scenarios,ma_liste_interfaces, ma_liste_programmations);\n");
         file.write("}\n");
          file.write("}\n");
+      for (String key : scenario_ordre.keySet()){
+
+        sepi.write(" case "+scenario_ordre.get(key)+":      \n");
+          sepi.write( scenario_map.get(key)  +   "\n");
+	sepi.write( "break;\n");
+
+
+}
+
+      sepi.write( "default :     \n");
+ sepi.write( "}\n}\n}\n");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    
 
  try {
 				if (file!= null) {
 					file.flush();
 					file.close();					
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+try {
+				if (sepi!= null) {
+					sepi.flush();
+					sepi.close();					
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
