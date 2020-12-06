@@ -167,6 +167,9 @@ switch(s){
 
 	public String retourner_type(String s){
 
+
+if(s.indexOf('(')==-1)
+{
 switch(s){
                         case  "eclairage" :
                             return "TypeAppareil.ECLAIRAGE";
@@ -191,9 +194,11 @@ switch(s){
                      	
              
            default :          
-         return s;                   
+         return s;       
+}            
 
 }
+else{ return types(s); }
 
 	}
 
@@ -561,28 +566,36 @@ commandes.put(us,"scenario");
 scenario ::= POURTOUT nom:n DP x:type {: variables.put(n,use); use=""; 
 f = 1;
 //System.out.println(type);
-if(variables.containsKey(type)){
-scenario_contenu+="\n for(CAppareil appareil : ensAppareil.lAppareils)\n {" ;
+if(variables.containsKey(type)){ // declaration dans un ensemble
+scenario_contenu+="\n for(CEnsAppareil ensAppareil : this.l_ensembles)\n {" ;
 scenario_contenu+="  if (ensAppareil.nomEnsAppareil.equals("+retourner_type(type)+")) { \n   ";
+
 }
-else {
+else if(type.equals("autre_appareil")){ // si autre appareil sans specifications
+
+scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)\n {" ;
+scenario_contenu+="  if (appareil.estTypeAutreAppareil())  {\n   ";
+
+}
+else { // appareil ordinaires ou autre_appareil(hifi.....)
 scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)\n {" ;
 scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+")) {\n   ";
+
 }
 
-:} FAIRE scenario  FAIT  {:scenario_contenu+="} \n"; :} PV scenario  {: variables.remove(n);:} // pourtout v:volet faire v.ouvrir ; fait;
+:} FAIRE scenario {:scenario_contenu+=" } }\n"; :} FAIT   PV scenario  {: variables.remove(n);:} // pourtout v:volet faire v.ouvrir ; fait;
 
 | nom:n   PT ACTION:action {:
 
 if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);}             
            else {
 if(f == 1){
-  scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+"); } \n";
+  scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+");  \n";
 	f =0;
 }
 else if (c==1){
 
-scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action+"); } } } } \n " ;
+scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action+");   \n " ;
  c=0;
 
 }
@@ -636,7 +649,7 @@ c=1;
 scenario_contenu+="\n for(CAppareil appareil : this.l_appareils){ \n  ";
 scenario_contenu+="if (appareil.getNomAppareil().equals("+n+")){ \n ";
 scenario_contenu+= "if (appareil.etatAppareil.equals(TypeEtatAppareil."+e+")) { \n";
-:} PF ALORS scenario  sinon  FSI PV {:scenario_contenu+="}";:}   scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
+:} PF ALORS scenario  sinon  FSI PV {:scenario_contenu+="}}}";:}   scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
 
 | msgs PV  scenario {:scenario_contenu+=" \n System.out.println(" +message_content+ ") ;  \n " ; message_content="";  :}  // afficher un message 
 

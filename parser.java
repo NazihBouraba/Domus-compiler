@@ -113,7 +113,7 @@ public class parser extends java_cup.runtime.lr_parser {
     "\057\uffee\001\002\000\004\057\uffdd\001\002\000\004\057" +
     "\uffdf\001\002\000\004\057\134\001\002\000\016\025\117" +
     "\052\120\053\116\055\124\056\uffe3\062\122\001\002\000" +
-    "\004\056\136\001\002\000\004\036\uffed\001\002\000\004" +
+    "\004\056\uffed\001\002\000\004\056\137\001\002\000\004" +
     "\036\140\001\002\000\024\022\uffe3\025\117\052\120\053" +
     "\116\054\uffe3\055\124\056\uffe3\061\uffe3\062\122\001\002" +
     "\000\012\022\uffec\054\uffec\056\uffec\061\uffec\001\002\000" +
@@ -197,7 +197,7 @@ public class parser extends java_cup.runtime.lr_parser {
     "\002\001\001\000\004\011\127\001\001\000\002\001\001" +
     "\000\004\035\132\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\006\007\134\022\122\001\001" +
-    "\000\002\001\001\000\004\036\136\001\001\000\002\001" +
+    "\000\004\036\135\001\001\000\002\001\001\000\002\001" +
     "\001\000\006\007\140\022\122\001\001\000\002\001\001" +
     "\000\006\007\142\022\122\001\001\000\002\001\001\000" +
     "\002\001\001\000\004\040\145\001\001\000\006\007\146" +
@@ -418,6 +418,9 @@ switch(s){
 
 	public String retourner_type(String s){
 
+
+if(s.indexOf('(')==-1)
+{
 switch(s){
                         case  "eclairage" :
                             return "TypeAppareil.ECLAIRAGE";
@@ -442,9 +445,11 @@ switch(s){
                      	
              
            default :          
-         return s;                   
+         return s;       
+}            
 
 }
+else{ return types(s); }
 
 	}
 
@@ -942,13 +947,21 @@ scenario_map.put(scenario_nom,scenario_contenu);
  variables.put(n,use); use=""; 
 f = 1;
 //System.out.println(type);
-if(variables.containsKey(type)){
-scenario_contenu+="\n for(CAppareil appareil : ensAppareil.lAppareils)\n {" ;
+if(variables.containsKey(type)){ // declaration dans un ensemble
+scenario_contenu+="\n for(CEnsAppareil ensAppareil : this.l_ensembles)\n {" ;
 scenario_contenu+="  if (ensAppareil.nomEnsAppareil.equals("+retourner_type(type)+")) { \n   ";
+
 }
-else {
+else if(type.equals("autre_appareil")){ // si autre appareil sans specifications
+
+scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)\n {" ;
+scenario_contenu+="  if (appareil.estTypeAutreAppareil())  {\n   ";
+
+}
+else { // appareil ordinaires ou autre_appareil(hifi.....)
 scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)\n {" ;
 scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+")) {\n   ";
+
 }
 
 
@@ -959,24 +972,24 @@ scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+"))
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 20: // NT$10 ::= 
             {
-              Object RESULT =(Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
-		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).right;
-		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-6)).value;
-		int typeleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
-		int typeright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
-		String type = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
-scenario_contenu+="} \n"; 
+              Object RESULT =(Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).right;
+		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-5)).value;
+		int typeleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
+		int typeright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
+		String type = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
+scenario_contenu+=" } }\n"; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$10",28, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // scenario ::= POURTOUT nom DP x NT$9 FAIRE scenario FAIT NT$10 PV scenario 
+          case 21: // scenario ::= POURTOUT nom DP x NT$9 FAIRE scenario NT$10 FAIT PV scenario 
             {
               Object RESULT =null;
               // propagate RESULT from NT$10
-                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
 		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)).right;
 		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-9)).value;
@@ -1003,12 +1016,12 @@ scenario_contenu+="} \n";
 if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);}             
            else {
 if(f == 1){
-  scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+"); } \n";
+  scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+");  \n";
 	f =0;
 }
 else if (c==1){
 
-scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action+"); } } } } \n " ;
+scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action+");   \n " ;
  c=0;
 
 }
@@ -1131,7 +1144,7 @@ scenario_contenu+= "if (appareil.etatAppareil.equals(TypeEtatAppareil."+e+")) { 
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).right;
 		String e = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-7)).value;
-scenario_contenu+="}";
+scenario_contenu+="}}}";
               CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$14",32, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
