@@ -73,11 +73,11 @@ ma_liste_interface.add(b1);
 
  String depart = "
  for(CAppareil appareil : this.l_appareils){ 
-  if (appareil.getNomAppareil().equals(fen)){ 
+  if (appareil.getNomAppareil().equals("fen")){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.ferme)) { 
 
  for(CAppareil appareil : this.l_appareils){ 
-  if (appareil.getNomAppareil().equals(e1)){ 
+  if (appareil.getNomAppareil().equals("e1")){ 
  if (appareil.etatAppareil.equals(TypeEtatAppareil.allume)) { 
  appareil.appliquer(TypeActionAppareil.eteindre);   
   

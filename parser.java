@@ -1016,7 +1016,7 @@ scenario_contenu+=" } }\n";
 if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);}             
            else {
 if(f == 1){
-  scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+");  \n";
+  scenario_contenu+="appareil.appliquer(TypeActionAppareil.\""+action+"\");  \n";
 	f =0;
 }
 else if (c==1){
@@ -1027,7 +1027,7 @@ scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action+");   \n " ;
 }
 else{
 scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)  \n {" ;
-scenario_contenu+="  if (appareil.getNomAppareil().equals("+n+"))  \n   ";
+scenario_contenu+="  if (appareil.getNomAppareil().equals(\""+n+"\"))  \n   ";
 scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+"); } \n";		
 		   }	 
 
@@ -1127,7 +1127,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
 
 c=1;
 scenario_contenu+="\n for(CAppareil appareil : this.l_appareils){ \n  ";
-scenario_contenu+="if (appareil.getNomAppareil().equals("+n+")){ \n ";
+scenario_contenu+="if (appareil.getNomAppareil().equals(\""+n+"\")){ \n ";
 scenario_contenu+= "if (appareil.etatAppareil.equals(TypeEtatAppareil."+e+")) { \n";
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$13",31, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);

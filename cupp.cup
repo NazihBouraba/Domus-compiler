@@ -590,7 +590,7 @@ scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+"))
 if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);}             
            else {
 if(f == 1){
-  scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+");  \n";
+  scenario_contenu+="appareil.appliquer(TypeActionAppareil.\""+action+"\");  \n";
 	f =0;
 }
 else if (c==1){
@@ -601,7 +601,7 @@ scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action+");   \n " ;
 }
 else{
 scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)  \n {" ;
-scenario_contenu+="  if (appareil.getNomAppareil().equals("+n+"))  \n   ";
+scenario_contenu+="  if (appareil.getNomAppareil().equals(\""+n+"\"))  \n   ";
 scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+"); } \n";		
 		   }	 
 
@@ -647,7 +647,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
 | SI PO nom:n PT ETAT DEGAL ETATS:e {:
 c=1;
 scenario_contenu+="\n for(CAppareil appareil : this.l_appareils){ \n  ";
-scenario_contenu+="if (appareil.getNomAppareil().equals("+n+")){ \n ";
+scenario_contenu+="if (appareil.getNomAppareil().equals(\""+n+"\")){ \n ";
 scenario_contenu+= "if (appareil.etatAppareil.equals(TypeEtatAppareil."+e+")) { \n";
 :} PF ALORS scenario  sinon  FSI PV {:scenario_contenu+="}}}";:}   scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
 
