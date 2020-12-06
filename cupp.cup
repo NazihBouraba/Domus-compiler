@@ -649,7 +649,7 @@ c=1;
 scenario_contenu+="\n for(CAppareil appareil : this.l_appareils){ \n  ";
 scenario_contenu+="if (appareil.getNomAppareil().equals(\""+n+"\")){ \n ";
 scenario_contenu+= "if (appareil.etatAppareil.equals(TypeEtatAppareil."+e+")) { \n";
-:} PF ALORS scenario  sinon  FSI PV {:scenario_contenu+="}}}";:}   scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
+:} PF ALORS scenario {:scenario_contenu+="}}}";:}  sinon  FSI PV   scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
 
 | msgs PV  scenario {:scenario_contenu+=" \n System.out.println(" +message_content+ ") ;  \n " ; message_content="";  :}  // afficher un message 
 
