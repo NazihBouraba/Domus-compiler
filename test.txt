@@ -102,9 +102,9 @@
 <DECLARATION_COMMANDES>
 	
 	
-	programmer soiree_musique = {(2012,11,20,19,30),(2012,11,21,19,30)}.
+	programmer soiree_musique = {(2012,_,20,19,30),(2012,11,21,19,30)}.
 
-	programmer soiree = (2012,_,1,18,0).    
+	programmer soiree = (2012,_,21,18,0).    
 	
 
 	

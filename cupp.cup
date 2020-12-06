@@ -74,6 +74,7 @@ parser code {:
      Calendar cal = Calendar.getInstance();
      cal.setLenient(false);
 	 if(res[0].length()!=4){ report_error("Erreur format date",result);}
+
      cal.set(Integer.parseInt(res[0]),Integer.parseInt(res[1]), Integer.parseInt(res[2]));
      try {
         cal.getTime();
@@ -376,6 +377,7 @@ file.write("super();\n");
 for (String key : variables.keySet())
 {String str = variables.get(key) ;
 if (str.startsWith("autre_appareil(")){str="autre_appareil";}
+
 switch(str){
                         case  "eclairage" :
                                file.write("CEclairage "+key+ " = new CEclairage(\""+key+"\",TypeAppareil.ECLAIRAGE);\n");
@@ -410,21 +412,25 @@ String st = types(ks);
    file.write("ma_liste_appareils.add("+key+");\n");  
 
                      		 break;
-             
-                       default : if (str.contains(",")){ String[]  k = str.split(",");                                           
- file.write("CEnsAppareil "+key+ " = new CEnsAppareil(\""+key+"\");\n");
-for (int i = 0; i <  k.length ; i++ )
+                    
+                       default : 
+
+}}
+
+for (String keys : variables.keySet()){
+
+if (variables.get(keys).contains(",")){
+ String[]  kk = variables.get(keys).split(",");                                           
+ file.write("CEnsAppareil "+keys+ " = new CEnsAppareil(\""+keys+"\");\n");
+for (int i = 0; i <  kk.length ; i++ )
 {
-    file.write(key+ ".addAppareil("+k[i]+");\n");
+    file.write(keys+ ".addAppareil("+kk[i]+");\n");
 }
-file.write("ma_liste_ens_appareils.add("+key+ ");\n");
+file.write("ma_liste_ens_appareils.add("+keys+ ");\n");
+
 }
-                             
 
-
-
-
-}  }
+}  
 
 
 
@@ -764,8 +770,8 @@ dcd ::= ASSOCIER nom:name  EGAL nom:scen PT dcd {: if (!commandes.containsKey(na
 |PROGRAMMER nom:name EGAL AO dat AF PT {: if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
   file.write("CProgrammation p"+ p +" = new CProgrammation("+name+  ");\n");
 for (int j=0;j<Global.size();j++){
-
-  file.write("CDate p"+ p +"d"+d+" = new CDate"+Global.get(j)+ ";\n");
+ String ds = Global.get(j).replace("_","-1");
+  file.write("CDate p"+ p +"d"+d+" = new CDate"+ds+ ";\n");
  file.write("p"+ p +".addDate(p"+p+"d"+d+");\n");
 d++;
 
@@ -777,10 +783,10 @@ p++;
 Global.clear();
  :} dcd 
 
-|PROGRAMMER nom:name EGAL DATE:dt PT {: if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
-
+|PROGRAMMER nom:name EGAL DATE:dt PT {:verifier_date(dt.replace("_","0001")); if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
+  String ds = dt.replace("_","-1");
   file.write("CProgrammation p"+ p +" = new CProgrammation("+name+  ");\n");
-  file.write("CDate p"+ p +"d"+d+" = new CDate"+dt+ ";\n");
+  file.write("CDate p"+ p +"d"+d+" = new CDate"+ds+ ";\n");
  file.write("p"+ p +".addDate(p"+p+"d"+d+");\n");
   file.write("ma_liste_programmations.add(p"+p+");\n");
   p++;
@@ -793,8 +799,8 @@ Global.clear();
 
 
 
-dat ::= DATE:dd VG dat {: verifier_date(dd); Global.add(dd);:} 
-| DATE:dd {: verifier_date(dd); Global.add(dd);:}  ;
+dat ::= DATE:dd VG dat {:verifier_date( dd.replace("_","0001") ); Global.add(dd);:} 
+| DATE:dd {:    verifier_date(dd.replace("_","0001") ); Global.add(dd);:}  ;
 
 mesgouact ::= nom PT ACTION | msgs |mesgouact PV  nom PT ACTION  | mesgouact PV  msgs   ;
 

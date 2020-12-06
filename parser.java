@@ -325,6 +325,7 @@ public class parser extends java_cup.runtime.lr_parser {
      Calendar cal = Calendar.getInstance();
      cal.setLenient(false);
 	 if(res[0].length()!=4){ report_error("Erreur format date",result);}
+
      cal.set(Integer.parseInt(res[0]),Integer.parseInt(res[1]), Integer.parseInt(res[2]));
      try {
         cal.getTime();
@@ -572,6 +573,7 @@ file.write("super();\n");
 for (String key : variables.keySet())
 {String str = variables.get(key) ;
 if (str.startsWith("autre_appareil(")){str="autre_appareil";}
+
 switch(str){
                         case  "eclairage" :
                                file.write("CEclairage "+key+ " = new CEclairage(\""+key+"\",TypeAppareil.ECLAIRAGE);\n");
@@ -606,21 +608,25 @@ String st = types(ks);
    file.write("ma_liste_appareils.add("+key+");\n");  
 
                      		 break;
-             
-                       default : if (str.contains(",")){ String[]  k = str.split(",");                                           
- file.write("CEnsAppareil "+key+ " = new CEnsAppareil(\""+key+"\");\n");
-for (int i = 0; i <  k.length ; i++ )
+                    
+                       default : 
+
+}}
+
+for (String keys : variables.keySet()){
+
+if (variables.get(keys).contains(",")){
+ String[]  kk = variables.get(keys).split(",");                                           
+ file.write("CEnsAppareil "+keys+ " = new CEnsAppareil(\""+keys+"\");\n");
+for (int i = 0; i <  kk.length ; i++ )
 {
-    file.write(key+ ".addAppareil("+k[i]+");\n");
+    file.write(keys+ ".addAppareil("+kk[i]+");\n");
 }
-file.write("ma_liste_ens_appareils.add("+key+ ");\n");
+file.write("ma_liste_ens_appareils.add("+keys+ ");\n");
+
 }
-                             
 
-
-
-
-}  }
+}  
 
 
 
@@ -1440,8 +1446,8 @@ scenario_contenu+=" \n else { ";
  if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
   file.write("CProgrammation p"+ p +" = new CProgrammation("+name+  ");\n");
 for (int j=0;j<Global.size();j++){
-
-  file.write("CDate p"+ p +"d"+d+" = new CDate"+Global.get(j)+ ";\n");
+ String ds = Global.get(j).replace("_","-1");
+  file.write("CDate p"+ p +"d"+d+" = new CDate"+ds+ ";\n");
  file.write("p"+ p +".addDate(p"+p+"d"+d+");\n");
 d++;
 
@@ -1480,10 +1486,10 @@ Global.clear();
 		int dtleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int dtright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		String dt = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
- if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
-
+verifier_date(dt.replace("_","0001")); if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
+  String ds = dt.replace("_","-1");
   file.write("CProgrammation p"+ p +" = new CProgrammation("+name+  ");\n");
-  file.write("CDate p"+ p +"d"+d+" = new CDate"+dt+ ";\n");
+  file.write("CDate p"+ p +"d"+d+" = new CDate"+ds+ ";\n");
  file.write("p"+ p +".addDate(p"+p+"d"+d+");\n");
   file.write("ma_liste_programmations.add(p"+p+");\n");
   p++;
@@ -1528,7 +1534,7 @@ Global.clear();
 		int ddleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int ddright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		String dd = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
-		 verifier_date(dd); Global.add(dd);
+		verifier_date( dd.replace("_","0001") ); Global.add(dd);
               CUP$parser$result = parser.getSymbolFactory().newSymbol("dat",11, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1540,7 +1546,7 @@ Global.clear();
 		int ddleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int ddright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String dd = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 verifier_date(dd); Global.add(dd);
+		    verifier_date(dd.replace("_","0001") ); Global.add(dd);
               CUP$parser$result = parser.getSymbolFactory().newSymbol("dat",11, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
