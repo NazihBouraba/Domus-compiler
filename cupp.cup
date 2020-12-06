@@ -94,7 +94,7 @@ parser code {:
 		
                          FileWriter fileWriter = null;
                 try{
-			fileWriter = new FileWriter("/home/zaki/Desktop/Git/CMaisonUser.java\n");
+			fileWriter = new FileWriter("./CMaisonUser.java\n");
                      
 			//inherited method from java.io.OutputStreamWriter 
 		} catch (Exception e) {
@@ -104,6 +104,37 @@ parser code {:
                 return fileWriter ; 
                 
 }
+public FileWriter writerspecific(){
+
+            
+		
+                         FileWriter fileWriter = null;
+                try{
+			fileWriter = new FileWriter("./HabitatSpecific.java\n");
+                     
+			//inherited method from java.io.OutputStreamWriter 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+                return fileWriter ; 
+                
+}
+
+
+
+
+			public int index_of_scenario(HashMap<String,Integer> h ,String nom_sce)
+			{
+                     return h.get(nom_sce);
+			}
+
+
+                
+
+
+
+
 public String types(String s){
 
 
@@ -191,6 +222,8 @@ action code {:
 
 HashMap<String, String> variables = new HashMap<String, String>();
 HashMap<String, String> commandes = new HashMap<String, String>();
+HashMap<String, Integer> scenario_ordre = new HashMap<String, Integer>();
+HashMap<String, String> scenario_map = new HashMap<String, String>();
 ArrayList<String> Global = new ArrayList<String>();
 List<String> eclairage = Arrays.asList("etat", "allumer", "eteindre", "tamiser");
 List<String> alarme = Arrays.asList("etat","allumer", "allumer_partiel", "eteindre");
@@ -201,8 +234,13 @@ String ens = "";
 String scenario_contenu="";
 String use="" ;
 FileWriter file = null; 
+FileWriter sepi = null; 
 int f =0 ;
 int c=0;
+
+int ordre=0;
+String scenario_nom="";
+String message_content = " ";
 int p=1;
 int d=1;
 
@@ -232,8 +270,8 @@ non terminal String dat;
 non terminal w;
 non terminal did,dcd;
 non terminal mesgouact;
-non terminal msgs;
-non terminal msg;
+non terminal String msgs;
+non terminal String msg;
 
 
 
@@ -306,6 +344,19 @@ terminal String ALORS ; // fsi
 
 //axiome
 S ::= PDO {:file = writer (); 
+sepi = writerspecific();
+
+sepi.write("import java.util.ArrayList;\n");
+sepi.write("public class HabitatSpecific extends Habitat {\n");
+sepi.write("public HabitatSpecific(ArrayList<CAppareil> lapp, ArrayList<CEnsAppareil> lens, ArrayList<CScenario> lscen, ArrayList<CInterface> lint, ArrayList<CProgrammation> lprog)\n{\n");
+sepi.write("super(lapp,lens,lscen,lint,lprog);\n}\n");
+sepi.write("public void execScenarioNum(int num)\n{\n System.out.println( \"Execution du scenario \"+this.l_scenarios.get(num).getNomScenario()+\"... \");\n switch(num) {\n");
+
+
+
+
+
+
 file.write("public class CMaisonUser extends CMaison {\n");  
 file.write("public CMaisonUser() {\n");  
 file.write("super();\n");  
@@ -468,12 +519,51 @@ switch(str){
         file.write("monHabitat = new HabitatSpecific(ma_liste_appareils,ma_liste_ens_appareils, ma_liste_scenarios,ma_liste_interfaces, ma_liste_programmations);\n");
         file.write("}\n");
          file.write("}\n");
+      for (String key : scenario_ordre.keySet()){
+
+        sepi.write(" case "+scenario_ordre.get(key)+":      \n");
+          sepi.write( scenario_map.get(key)  +   "\n");
+	sepi.write( "break;\n");
+
+
+}
+
+      sepi.write( "default :     \n");
+ sepi.write( "}\n}\n}\n");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    
 
  try {
 				if (file!= null) {
 					file.flush();
 					file.close();					
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+try {
+				if (sepi!= null) {
+					sepi.flush();
+					sepi.close();					
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -519,22 +609,36 @@ ens="";
 
 // declaration des scenarios
 
-ds ::= DSO dsd DSF  ;
+ds ::= DSO dsd DSF {:	for (String key : scenario_map.keySet()) {
+           file.write("\n String "+ key +" = " + "\""+ scenario_map.get(key) +" \" ; \n" );
+		}:}  ;
 
 dsd ::= DSCO:open {:  
 String[] str = open.split(" ");
 String u = str[1];
 String us= u.substring(0,u.length() - 1 );
+scenario_nom = us ;
 commandes.put(us,"scenario");
 
-               :} scenario DSCF:fin     dsd // declaration plusieurs scenarios
+               :} scenario DSCF:fin {:scenario_map.put(scenario_nom,scenario_contenu);  
+			     scenario_ordre.put(scenario_nom,ordre);
+				 ordre++;
+				 scenario_nom=""; scenario_contenu=""; 
+			    :}      dsd // declaration plusieurs scenarios
 
 | ;  
 
 scenario ::= POURTOUT nom:n DP x:type {: variables.put(n,use); use=""; 
 f = 1;
+//System.out.println(type);
+if(variables.containsKey(type)){
+scenario_contenu+="\n for(CAppareil appareil : ensAppareil.lAppareils)\n {" ;
+scenario_contenu+="  if (ensAppareil.nomEnsAppareil.equals("+retourner_type(type)+")) { \n   ";
+}
+else {
 scenario_contenu+="\n for(CAppareil appareil : this.l_appareils)\n {" ;
-scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+")) \n   ";
+scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+")) {\n   ";
+}
 
 :} FAIRE scenario  FAIT  {:scenario_contenu+="} \n"; :} PV scenario  {: variables.remove(n);:} // pourtout v:volet faire v.ouvrir ; fait;
 
@@ -543,12 +647,12 @@ scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+"))
 if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);}             
            else {
 if(f == 1){
-  scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+");  \n";
+  scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action+"); } \n";
 	f =0;
 }
 else if (c==1){
 
-scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action+"); } } } \n " ;
+scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action+"); } } } } \n " ;
  c=0;
 
 }
@@ -595,16 +699,16 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
 
    :} PV scenario // e1.allumer 
 
-| EXECUTER_SCENARIO nom PV scenario// executer_scenario soirée;
+| EXECUTER_SCENARIO nom:n PV {: scenario_contenu+="\n this.execScenarioNum("+index_of_scenario(scenario_ordre,n) +");\n  " ;  :}  scenario  // executer_scenario soirée;
 
 | SI PO nom:n PT ETAT DEGAL ETATS:e {:
 c=1;
 scenario_contenu+="\n for(CAppareil appareil : this.l_appareils){ \n  ";
 scenario_contenu+="if (appareil.getNomAppareil().equals("+n+")){ \n ";
 scenario_contenu+= "if (appareil.etatAppareil.equals(TypeEtatAppareil."+e+")) { \n";
-:} PF ALORS scenario  sinon  FSI PV  scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
+:} PF ALORS scenario  sinon  FSI PV {:scenario_contenu+="}";:}   scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
 
-| msgs PV  scenario// afficher un message 
+| msgs PV  scenario {:scenario_contenu+=" \n System.out.println(" +message_content+ ") ;  \n " ; message_content="";  :}  // afficher un message 
 
 
 |;
@@ -685,9 +789,15 @@ MOT ::= nom:x {:Global.add(x);:}VG MOT | nom:x {: Global.add(x); :};
 
 
 
-msgs ::= MESSAGE PO msg PF ;
+msgs ::= MESSAGE PO msg PF  ;
 
-msg ::= nom VG msg |cm VG msg | nom | cm | nom PT ETAT msg | nom PT ETAT;
+msg ::= nom:n {:message_content+=(n+".getNomAppareil()"+',') ;:} VG msg |
+cm:c {:message_content+=c+',' ;:} VG msg |
+ nom :n {:message_content+= (n+".getNomAppareil()") ;:}  | 
+cm:c {:message_content+=c ;:}  | 
+nom:n PT ETAT:e {:message_content+=(n+".getNomAppareil()"+'.'+e) ;:}  msg 
+| 
+nom:n PT ETAT:e {:message_content+=n+'.'+e ;:};
 
 
 

@@ -75,7 +75,7 @@ chaine = \".* \"
 
 {cote} {return new Symbol(sym.COTE);}
 
-{chaine} {return new Symbol(sym.cm);}
+{chaine} {return new Symbol(sym.cm, new String(yytext()) );}
 
 {date} {return new Symbol(sym.DATE, new String(yytext()));}
 
