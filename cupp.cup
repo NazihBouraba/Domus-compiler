@@ -876,11 +876,16 @@ MOT ::= nom:x {:Global.add(x);:}VG MOT | nom:x {: Global.add(x); :};
 
 
 
-msgs ::= MESSAGE PO msg PF  {::}  ;
 
-msg ::= cm:c {: System.out.println(c);  message_content+=( c.replace("\"",co))+',' ;:} VG msg 
+msgs ::= MESSAGE PO msg PF    ;
+
+msg ::= nom:n {:    message_content += co+ n +co+',' ;  :} VG msg |
+cm:c {: message_content+=( c.replace("\"",co))+',' ;:} VG msg |
+ nom :n {:    message_content += co+ n +co  ;   :}  | 
+cm:c {:  message_content+=( c.replace("\"",co)) ;:}  | 
+nom:n PT ETAT:e {:message_content+=(n+".getNomAppareil()"+'.'+e.toUpperCase()) ;:}  msg 
 | 
-cm:c {: System.out.println(c);  message_content+=( c.replace("\"",co)) ;:}  ;
+nom:n PT ETAT:e {:message_content+=n+'.'+e.toUpperCase() ;:};
 
 
 
