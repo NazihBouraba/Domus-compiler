@@ -251,6 +251,7 @@ int p=1;
 int d=1;
 String co = "\\" + "\"";
 int ensemble =0;
+String imbrication ="";
 
 
 
@@ -358,7 +359,7 @@ sepi.write("import java.util.ArrayList;\n");
 sepi.write("public class HabitatSpecific extends Habitat {\n");
 sepi.write("public HabitatSpecific(ArrayList<CAppareil> lapp, ArrayList<CEnsAppareil> lens, ArrayList<CScenario> lscen, ArrayList<CInterface> lint, ArrayList<CProgrammation> lprog)\n{\n");
 sepi.write("super(lapp,lens,lscen,lint,lprog);\n}\n");
-sepi.write("public void execScenarioNum(int num)\n{\n System.out.println( \"Execution du scenario \"+this.l_scenarios.get(num).getNomScenario()+num+\"... \");\n switch(num) {\n");
+sepi.write("public void execScenarioNum(int num)\n{\n System.out.println( \"Execution du scenario \"+this.l_scenarios.get(num).getNomScenario()+\"... \");\n switch(num) {\n");
 
 
 
@@ -677,6 +678,7 @@ scenario_contenu+="  if (appareil.estTypeAutreAppareil())  { ";
 
 }
 else { // appareil ordinaires ou autre_appareil(hifi.....)
+ensemble =0;
 scenario_contenu+=" for(CAppareil appareil : this.l_appareils) {" ;
 scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+")) {   ";
 
@@ -699,7 +701,7 @@ if(f == 1){
 }
 else if (c==1){
 
-scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action.toUpperCase()+");   " ;
+scenario_contenu+=" appareil"+imbrication+".appliquer(TypeActionAppareil."+action.toUpperCase()+");   " ;
  c=0;
 
 }
@@ -750,10 +752,15 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
 
 | SI PO nom:n PT ETAT DEGAL ETATS:e {:
 c=1;
-scenario_contenu+=" for(CAppareil appareil : this.l_appareils){   ";
-scenario_contenu+="if (appareil.getNomAppareil().equals("+co+n+co+")){ ";
-scenario_contenu+= "if (appareil.etatAppareil.equals(TypeEtatAppareil."+e.toUpperCase()+")) { ";
-:} PF ALORS scenario {:scenario_contenu+="}";:}  sinon {:scenario_contenu+="}}";:} FSI PV   scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
+if(imbrication==""){
+imbrication="0";
+}
+else {int k =(Integer.parseInt(imbrication)+1);
+imbrication= ""+k;}
+scenario_contenu+=" for(CAppareil appareil"+imbrication+" : this.l_appareils){   ";
+scenario_contenu+="if (appareil"+imbrication+".getNomAppareil().equals("+co+n+co+")){ ";
+scenario_contenu+= "if (appareil"+imbrication+".etatAppareil.equals(TypeEtatAppareil."+e.toUpperCase()+")) { ";
+:} PF ALORS scenario {:scenario_contenu+="}";:}  sinon {:scenario_contenu+="}}";imbrication=""; :} FSI PV   scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
 
 | msgs PV  scenario {:scenario_contenu+="  System.out.println(" +message_content+ ") ;  " ; message_content="";  :}  // afficher un message 
 
@@ -836,12 +843,12 @@ MOT ::= nom:x {:Global.add(x);:}VG MOT | nom:x {: Global.add(x); :};
 
 
 
-msgs ::= MESSAGE PO msg PF  ;
+msgs ::= MESSAGE PO msg PF  {:System.out.println("5ra");:}  ;
 
-msg ::= nom:n {:  message_content+=(n+".getNomAppareil()"+',') ;:} VG msg |
-cm:c {:System.out.println( c.replace("\"",co)); message_content+=( c.replace("\"",co))+',' ;:} VG msg |
- nom :n {:message_content+= (n+".getNomAppareil()") ;:}  | 
-cm:c {:System.out.println( c.replace("\"",co));  message_content+=( c.replace("\"",co)) ;:}  | 
+msg ::= nom:n {:    message_content += co+ n +co+',' ;  :} VG msg |
+cm:c {: message_content+=( c.replace("\"",co))+',' ;:} VG msg |
+ nom :n {:    message_content += co+ n +co  ;   :}  | 
+cm:c {:  message_content+=( c.replace("\"",co)) ;:}  | 
 nom:n PT ETAT:e {:message_content+=(n+".getNomAppareil()"+'.'+e.toUpperCase()) ;:}  msg 
 | 
 nom:n PT ETAT:e {:message_content+=n+'.'+e.toUpperCase() ;:};

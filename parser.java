@@ -507,6 +507,7 @@ int p=1;
 int d=1;
 String co = "\\" + "\"";
 int ensemble =0;
+String imbrication ="";
 
 
 
@@ -545,7 +546,7 @@ sepi.write("import java.util.ArrayList;\n");
 sepi.write("public class HabitatSpecific extends Habitat {\n");
 sepi.write("public HabitatSpecific(ArrayList<CAppareil> lapp, ArrayList<CEnsAppareil> lens, ArrayList<CScenario> lscen, ArrayList<CInterface> lint, ArrayList<CProgrammation> lprog)\n{\n");
 sepi.write("super(lapp,lens,lscen,lint,lprog);\n}\n");
-sepi.write("public void execScenarioNum(int num)\n{\n System.out.println( \"Execution du scenario \"+this.l_scenarios.get(num).getNomScenario()+num+\"... \");\n switch(num) {\n");
+sepi.write("public void execScenarioNum(int num)\n{\n System.out.println( \"Execution du scenario \"+this.l_scenarios.get(num).getNomScenario()+\"... \");\n switch(num) {\n");
 
 
 
@@ -1057,6 +1058,7 @@ scenario_contenu+="  if (appareil.estTypeAutreAppareil())  { ";
 
 }
 else { // appareil ordinaires ou autre_appareil(hifi.....)
+ensemble =0;
 scenario_contenu+=" for(CAppareil appareil : this.l_appareils) {" ;
 scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+")) {   ";
 
@@ -1124,7 +1126,7 @@ if(f == 1){
 }
 else if (c==1){
 
-scenario_contenu+=" appareil.appliquer(TypeActionAppareil."+action.toUpperCase()+");   " ;
+scenario_contenu+=" appareil"+imbrication+".appliquer(TypeActionAppareil."+action.toUpperCase()+");   " ;
  c=0;
 
 }
@@ -1229,9 +1231,14 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
 		String e = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 
 c=1;
-scenario_contenu+=" for(CAppareil appareil : this.l_appareils){   ";
-scenario_contenu+="if (appareil.getNomAppareil().equals("+co+n+co+")){ ";
-scenario_contenu+= "if (appareil.etatAppareil.equals(TypeEtatAppareil."+e.toUpperCase()+")) { ";
+if(imbrication==""){
+imbrication="0";
+}
+else {int k =(Integer.parseInt(imbrication)+1);
+imbrication= ""+k;}
+scenario_contenu+=" for(CAppareil appareil"+imbrication+" : this.l_appareils){   ";
+scenario_contenu+="if (appareil"+imbrication+".getNomAppareil().equals("+co+n+co+")){ ";
+scenario_contenu+= "if (appareil"+imbrication+".etatAppareil.equals(TypeEtatAppareil."+e.toUpperCase()+")) { ";
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$13",31, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -1262,7 +1269,7 @@ scenario_contenu+="}";
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).right;
 		String e = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-6)).value;
-scenario_contenu+="}}";
+scenario_contenu+="}}";imbrication=""; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$15",33, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1655,7 +1662,7 @@ Global.add(x);
           case 59: // msgs ::= MESSAGE PO msg PF 
             {
               String RESULT =null;
-
+		System.out.println("5ra");
               CUP$parser$result = parser.getSymbolFactory().newSymbol("msgs",16, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1667,7 +1674,7 @@ Global.add(x);
 		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-  message_content+=(n+".getNomAppareil()"+',') ;
+    message_content += co+ n +co+',' ;  
               CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$21",39, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1693,7 +1700,7 @@ Global.add(x);
 		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-System.out.println( c.replace("\"",co)); message_content+=( c.replace("\"",co))+',' ;
+ message_content+=( c.replace("\"",co))+',' ;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$22",40, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1719,7 +1726,7 @@ System.out.println( c.replace("\"",co)); message_content+=( c.replace("\"",co))+
 		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		message_content+= (n+".getNomAppareil()") ;
+		    message_content += co+ n +co  ;   
               CUP$parser$result = parser.getSymbolFactory().newSymbol("msg",17, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1731,7 +1738,7 @@ System.out.println( c.replace("\"",co)); message_content+=( c.replace("\"",co))+
 		int cleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		System.out.println( c.replace("\"",co));  message_content+=( c.replace("\"",co)) ;
+		  message_content+=( c.replace("\"",co)) ;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("msg",17, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
