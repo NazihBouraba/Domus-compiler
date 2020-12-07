@@ -37,7 +37,7 @@
 
 	// déclaration du scenario bonjour
 	<SCENARIO bonjour>
-		pourtout v:volet faire v.ouvrir; fait;
+		pourtout v:volet faire pourtout e:eclairage faire v.ouvrir;fait; fait;
 		e1.eteindre;
 		cafe.allumer;
 		si (rad1.etat == eteint) alors  rad1.allumer; fsi;
@@ -102,9 +102,7 @@
 <DECLARATION_COMMANDES>
 	
 	associer b1 = bonjour.
-	associer b2 = test.
-	associer b3 = test2.
-	associer b4 = depart.
+	
 	programmer soiree_musique = {(2012,_,20,19,30),(2012,11,21,19,30)}.
 
 	programmer soiree = (2012,_,21,18,0).    

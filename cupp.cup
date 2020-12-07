@@ -664,38 +664,47 @@ commandes.put(us,"scenario");
 
 scenario ::= POURTOUT nom:n DP x:type {: variables.put(n,use); use=""; 
 f = 1;
+if(imbrication==""){
+imbrication="0";
+}
+else {int k =(Integer.parseInt(imbrication)+1);
+imbrication= ""+k;}
 
 if(variables.containsKey(type)){ // declaration dans un ensemble
 ensemble =1;
-scenario_contenu+="for(CEnsAppareil ensAppareil : this.l_ensembles){" ;
-scenario_contenu+="  if (ensAppareil.nomEnsAppareil.equals("+co+retourner_type(type)+co+")) { ";
+scenario_contenu+="for(CEnsAppareil ensAppareil"+imbrication+" : this.l_ensembles){" ;
+scenario_contenu+="  if (ensAppareil"+imbrication+".nomEnsAppareil.equals("+co+retourner_type(type)+co+")) { ";
 
 }
 else if(type.equals("autre_appareil")){ // si autre appareil sans specifications
 
-scenario_contenu+="for(CAppareil appareil : this.l_appareils){" ;
-scenario_contenu+="  if (appareil.estTypeAutreAppareil())  { ";
+scenario_contenu+="for(CAppareil appareil"+imbrication+" : this.l_appareils){" ;
+scenario_contenu+="  if (appareil"+imbrication+".estTypeAutreAppareil())  { ";
 
 }
 else { // appareil ordinaires ou autre_appareil(hifi.....)
 ensemble =0;
-scenario_contenu+=" for(CAppareil appareil : this.l_appareils) {" ;
-scenario_contenu+="  if (appareil.typeAppareil.equals("+retourner_type(type)+")) {   ";
+scenario_contenu+=" for(CAppareil appareil"+imbrication+" : this.l_appareils) {" ;
+scenario_contenu+="  if (appareil"+imbrication+".typeAppareil.equals("+retourner_type(type)+")) {   ";
 
 }
 
-:} FAIRE scenario {:scenario_contenu+=" } }"; :} FAIT   PV scenario  {: variables.remove(n);:} // pourtout v:volet faire v.ouvrir ; fait;
+:} FAIRE scenario {:scenario_contenu+=" } }"; :} FAIT   PV {:imbrication="";:} scenario  {: variables.remove(n);:} // pourtout v:volet faire v.ouvrir ; fait;
 
 | nom:n   PT ACTION:action {:
 
 if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);}             
            else {
+
+
 if(f == 1){
 	if(ensemble==1){ ensemble=0 ;
-	scenario_contenu+="for(CAppareil appareil : ensAppareil.lAppareils) appareil.appliquer(TypeActionAppareil."+action.toUpperCase()+");" ;
+	scenario_contenu+="for(CAppareil appareil"+imbrication+" : ensAppareil"+imbrication+".lAppareils) appareil"+imbrication+".appliquer(TypeActionAppareil."+action.toUpperCase()+");" ;
+	
 	}
 	else{
-  scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action.toUpperCase()+"); ";
+  scenario_contenu+="appareil"+imbrication+".appliquer(TypeActionAppareil."+action.toUpperCase()+"); ";
+
 	}
 	f =0;
 }
