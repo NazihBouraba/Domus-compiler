@@ -795,7 +795,7 @@ scenario_contenu+= "if (appareil"+imbrication+".etatAppareil.equals(TypeEtatAppa
 
 :} PF ALORS scenario {:scenario_contenu+="}";:}  sinon {:scenario_contenu+="}}";imbrication=""; :} FSI PV   scenario //si(rad1.etat == eteint) alors rad1.allumer;fsi; ou sinon ...
 
-| msgs PV  scenario {:scenario_contenu+="  System.out.println(" +message_content+ ") ;  " ; message_content="";  :}  // afficher un message 
+| msgs PV  scenario {:message_content="\\\""+message_content.replace("\\\"","")+"\\\""; scenario_contenu+="  System.out.println(" +message_content+ ") ;  " ; message_content="";  :}  // afficher un message 
 
 
 |;
@@ -886,8 +886,6 @@ cm:c {:  message_content+=( c.replace("\"",co)) ;:}  |
 nom:n PT ETAT:e {:message_content+=(n+".getNomAppareil()"+'.'+e.toUpperCase()) ;:}  msg 
 | 
 nom:n PT ETAT:e {:message_content+=n+'.'+e.toUpperCase() ;:};
-
-
 
 
 

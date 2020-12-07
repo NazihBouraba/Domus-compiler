@@ -1345,7 +1345,7 @@ scenario_contenu+="}}";imbrication="";
           case 31: // scenario ::= msgs PV scenario 
             {
               Object RESULT =null;
-		scenario_contenu+="  System.out.println(" +message_content+ ") ;  " ; message_content="";  
+		message_content="\\\""+message_content.replace("\\\"","")+"\\\""; scenario_contenu+="  System.out.println(" +message_content+ ") ;  " ; message_content="";  
               CUP$parser$result = parser.getSymbolFactory().newSymbol("scenario",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
