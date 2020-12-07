@@ -24,7 +24,7 @@
 
 // déclaration des interfaces
 <DECLARATION_INTERFACES>
-   	interrupteur b1,b2,b3,b4.
+   	interrupteur b1,b3,b4.
 	mobile t1.
 	telephone tel1.
 	tablette tab1,tab2.
@@ -37,64 +37,22 @@
 
 	// déclaration du scenario bonjour
 	<SCENARIO bonjour>
-		pourtout v:volet faire pourtout e:eclairage faire v.ouvrir;fait; fait;
-		e1.eteindre;
-		cafe.allumer;
-		si (rad1.etat == eteint) alors  rad1.allumer; fsi;
-		hf.allumer;
+		pourtout v:mon_eclairage_salon faire si(v.etat==eteint) alors v.allumer;fsi; fait;
+
 	</SCENARIO bonjour>
+	
+		<SCENARIO hello>
+		pourtout v:mon_eclairage_salon faire  v.allumer; fait;
 
-	<SCENARIO soiree>
-		pourtout v:volet faire v.fermer; fait;
-		pourtout e:mon_eclairage_salon faire e.allumer; fait;
-	</SCENARIO soiree>
+	</SCENARIO hello>
 
-	<SCENARIO soiree_musique>
-		executer_scenario soiree; 
-		hf.allumer;
-	</SCENARIO soiree_musique>
 
-	<SCENARIO depart>
-		pourtout v:volet faire v.fermer; fait;
-		pourtout e:eclairage faire e.eteindre; fait;
-		si (fen.etat == ferme) alors a1.allumer; 
-		sinon message("Attention : la fenêtre est ouverte !"); fsi;
-		pourtout e:autre_appareil faire e.eteindre; fait;
-	</SCENARIO depart>
 
-	// déclaration du scenario de test
-	<SCENARIO test>
-		///pourtout e:elec_salon faire message("Etat de ",e," = ",e.etat); fait;
-		pourtout e:autre_appareil(tv) faire e.allumer; fait;
-		executer_scenario soiree_musique; 
-		
-	// test de l'alarme
-		si (a1.etat == eteint) alors a1.allumer_partiel; fsi;
-		si (a1.etat == demi) alors a1.allumer;
-		sinon si (a1.etat == allume) alors a1.eteindre; 
-			sinon a2.allumer; fsi;  fsi;
-		
-		si (r1.etat == eco) alors r1.allumer; fsi;
-		si (r1.etat == eteint) alors r1.allumer_eco; // chauffage
-		sinon si (r1.etat == allume) alors r1.eteindre;  // fin chauffage
-			sinon message(" bip !"); fsi;  fsi;
 
-		si (fen.etat == ouvert) alors message("fenêtre ouverte !"); fsi;
+	
 
-		si (cafe.etat == allume) alors cafe.eteindre; fsi ;
-		si (cafe.etat == eteint) alors cafe.allumer; fsi;
-	</SCENARIO test>
 
-	<SCENARIO test2>
-		si (e1.etat == eteint) alors e1.allumer;
-		sinon si (e1.etat == demi) alors e1.eteindre; fsi;  fsi;	
-		si (e2.etat == allume) alors e2.tamiser; fsi ;
 
-		si (v1.etat == ouvert) alors v1.fermer_partiel; fsi;
-		si (v1.etat == ferme) alors v1.ouvrir_partiel; message(" alors ");
-		sinon si (v1.etat == demi) alors v1.fermer; 
-			sinon v1.ouvrir; message(" sinon "); fsi; fsi;
-	</SCENARIO test2>
 // fin scenarii
 </DECLARATION_SCENARII>
 
