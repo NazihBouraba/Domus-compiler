@@ -56,44 +56,44 @@ CEnsAppareil mon_eclairage_salon = new CEnsAppareil("mon_eclairage_salon");
 mon_eclairage_salon.addAppareil(e2);
 mon_eclairage_salon.addAppareil(e3);
 ma_liste_ens_appareils.add(mon_eclairage_salon);
-CInterface tel1 = new CInterface("tel1",TypeAppareil.TELEPHONE);
-ma_liste_interface.add(tel1);
-CInterface   b2 = new CInterface("b2",TypeAppareil.INTERRUPTEUR);
-ma_liste_interface.add(b2);
-CInterface zap = new CInterface("zap",TypeAppareil.TELECOMMANDE);
-ma_liste_interface.add(zap);
-CInterface tab1 = new CInterface("tab1",TypeAppareil.TABLETTE);
-ma_liste_interface.add(tab1);
-CInterface tab2 = new CInterface("tab2",TypeAppareil.TABLETTE);
-ma_liste_interface.add(tab2);
-CInterface t1 = new CInterface("t1",TypeAppareil.MOBILE);
-ma_liste_interface.add(t1);
-CInterface   b1 = new CInterface("b1",TypeAppareil.INTERRUPTEUR);
-ma_liste_interface.add(b1);
+CInterface tel1 = new CInterface("tel1",TypeInterface.TELEPHONE);
+ma_liste_interfaces.add(tel1);
+CInterface   b2 = new CInterface("b2",TypeInterface.INTERRUPTEUR);
+ma_liste_interfaces.add(b2);
+CInterface zap = new CInterface("zap",TypeInterface.TELECOMMANDE);
+ma_liste_interfaces.add(zap);
+CInterface tab1 = new CInterface("tab1",TypeInterface.TABLETTE);
+ma_liste_interfaces.add(tab1);
+CInterface tab2 = new CInterface("tab2",TypeInterface.TABLETTE);
+ma_liste_interfaces.add(tab2);
+CInterface t1 = new CInterface("t1",TypeInterface.MOBILE);
+ma_liste_interfaces.add(t1);
+CInterface   b1 = new CInterface("b1",TypeInterface.INTERRUPTEUR);
+ma_liste_interfaces.add(b1);
 
- String test2 = " for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"e1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ETEINT)) {  appareil.appliquer(TypeActionAppareil.ALLUMER);   } 
- else {  for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"e1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.DEMI)) {  appareil.appliquer(TypeActionAppareil.ETEINDRE);   }}}} }} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"e2\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ALLUME)) {  appareil.appliquer(TypeActionAppareil.TAMISER);   }}} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"v1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.OUVERT)) {  appareil.appliquer(TypeActionAppareil.FERMER_PARTIEL);   }}} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"v1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.FERME)) {  appareil.appliquer(TypeActionAppareil.OUVRIR_PARTIEL);     System.out.println(\" alors \") ;  } 
- else {  for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"v1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.DEMI)) {  appareil.appliquer(TypeActionAppareil.FERMER);   } 
- else {  for(CAppareil appareil : this.l_appareils)   {  if (appareil.getNomAppareil().equals(\"v1\"))     appareil.appliquer(TypeActionAppareil.OUVRIR); }   System.out.println(\" sinon \") ;  } }}} }} " ; 
+ String test2_contenu  = " for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"e2\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ALLUME)) {  appareil.appliquer(TypeActionAppareil.TAMISER);   }}} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"v1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.OUVERT)) {  appareil.appliquer(TypeActionAppareil.FERMER_PARTIEL);   }}} " ; 
+CScenario test2 = new CScenario("test2",test2_contenu ) ;
+ma_liste_scenarios.add(test2); 
 
- String test = "for(CEnsAppareil ensAppareil : this.l_ensembles){  if (ensAppareil.nomEnsAppareil.equals(elec_salon)) {   System.out.println(\"Etat de \",e,\" = \",e.ETAT) ;   } } for(CAppareil appareil : this.l_appareils) {  if (appareil.typeAppareil.equals(TypeAppareil.AUTRE_APPAREIL_TV)) {   appareil.appliquer(TypeActionAppareil.ALLUMER);  } }
- this.execScenarioNum(2);
-   for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"a1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ETEINT)) {  appareil.appliquer(TypeActionAppareil.ALLUMER_PARTIEL);   }}} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"a1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.DEMI)) {  appareil.appliquer(TypeActionAppareil.ALLUMER);   } 
- else {  for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"a1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ALLUME)) {  appareil.appliquer(TypeActionAppareil.ETEINDRE);   } 
- else {  for(CAppareil appareil : this.l_appareils)   {  if (appareil.getNomAppareil().equals(\"a2\"))     appareil.appliquer(TypeActionAppareil.ALLUMER); } } }}} }} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"r1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ECO)) {  appareil.appliquer(TypeActionAppareil.ALLUMER);   }}} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"r1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ETEINT)) {  appareil.appliquer(TypeActionAppareil.ALLUMER_ECO);   } 
- else {  for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"r1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ALLUME)) {  appareil.appliquer(TypeActionAppareil.ETEINDRE);   } 
- else {   System.out.println(\" bip !\") ;  } }}} }} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"fen\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.OUVERT)) {   System.out.println(\"fenêtre ouverte !\") ;  }}} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"cafe\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ALLUME)) {  appareil.appliquer(TypeActionAppareil.ETEINDRE);   }}} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"cafe\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ETEINT)) {  appareil.appliquer(TypeActionAppareil.ALLUMER);   }}} " ; 
+ String test_contenu  = " for(CAppareil appareil : this.l_appareils) {  if (appareil.typeAppareil.equals(TypeAppareil.AUTRE_APPAREIL_TV)) {   ensAppareil.appliquer(TypeActionAppareil.ALLUMER);  } } this.execScenarioNum(2);  for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"a1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ETEINT)) {  appareil.appliquer(TypeActionAppareil.ALLUMER_PARTIEL);   }}} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"r1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ECO)) {  appareil.appliquer(TypeActionAppareil.ALLUMER);   }}} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"cafe\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ALLUME)) {  appareil.appliquer(TypeActionAppareil.ETEINDRE);   }}} for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"cafe\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ETEINT)) {  appareil.appliquer(TypeActionAppareil.ALLUMER);   }}} " ; 
+CScenario test = new CScenario("test",test_contenu ) ;
+ma_liste_scenarios.add(test); 
 
- String soiree_musique = "
- this.execScenarioNum(1);
-   for(CAppareil appareil : this.l_appareils)   {  if (appareil.getNomAppareil().equals(\"hf\"))     appareil.appliquer(TypeActionAppareil.ALLUMER); }  " ; 
+ String soiree_musique_contenu  = " this.execScenarioNum(1);  for(CAppareil appareil : this.l_appareils)   {  if (appareil.getNomAppareil().equals(\"hf\"))     appareil.appliquer(TypeActionAppareil.ALLUMER); }  " ; 
+CScenario soiree_musique = new CScenario("soiree_musique",soiree_musique_contenu ) ;
+ma_liste_scenarios.add(soiree_musique); 
 
- String depart = " for(CAppareil appareil : this.l_appareils) {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) {   appareil.appliquer(TypeActionAppareil.FERMER);  } } for(CAppareil appareil : this.l_appareils) {  if (appareil.typeAppareil.equals(TypeAppareil.ECLAIRAGE)) {   appareil.appliquer(TypeActionAppareil.ETEINDRE);  } } for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"fen\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.FERME)) {  appareil.appliquer(TypeActionAppareil.ALLUMER);   } 
- else {   System.out.println( \"Attention : la fenêtre \",fen,\" est ouverte !\") ;  } }}for(CAppareil appareil : this.l_appareils){  if (appareil.estTypeAutreAppareil())  { appareil.appliquer(TypeActionAppareil.ETEINDRE);  } } " ; 
+ String depart_contenu  = " for(CAppareil appareil : this.l_appareils) {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) {   ensAppareil.appliquer(TypeActionAppareil.FERMER);  } } for(CAppareil appareil : this.l_appareils) {  if (appareil.typeAppareil.equals(TypeAppareil.ECLAIRAGE)) {   ensAppareil.appliquer(TypeActionAppareil.ETEINDRE);  } }for(CAppareil appareil : this.l_appareils){  if (appareil.estTypeAutreAppareil())  { ensAppareil.appliquer(TypeActionAppareil.ETEINDRE);  } } " ; 
+CScenario depart = new CScenario("depart",depart_contenu ) ;
+ma_liste_scenarios.add(depart); 
 
- String bonjour = " for(CAppareil appareil : this.l_appareils) {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) {   appareil.appliquer(TypeActionAppareil.OUVRIR);  for(CAppareil appareil : this.l_appareils) {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) {   appareil.appliquer(TypeActionAppareil.OUVRIR);  } } } } for(CAppareil appareil : this.l_appareils)   {  if (appareil.getNomAppareil().equals(\"e1\"))     appareil.appliquer(TypeActionAppareil.ETEINDRE); }  for(CAppareil appareil : this.l_appareils)   {  if (appareil.getNomAppareil().equals(\"cafe\"))     appareil.appliquer(TypeActionAppareil.ALLUMER); }  for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"rad1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ETEINT)) {  for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"rad1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ETEINT)) {  appareil.appliquer(TypeActionAppareil.ALLUMER);   }}}}}} for(CAppareil appareil : this.l_appareils)   {  if (appareil.getNomAppareil().equals(\"hf\"))     appareil.appliquer(TypeActionAppareil.ALLUMER); }  " ; 
+ String bonjour_contenu  = " for(CAppareil appareil : this.l_appareils) {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) {   appareil.appliquer(TypeActionAppareil.OUVRIR);  } } for(CAppareil appareil : this.l_appareils)   {  if (appareil.getNomAppareil().equals(\"e1\"))     appareil.appliquer(TypeActionAppareil.ETEINDRE); }  for(CAppareil appareil : this.l_appareils)   {  if (appareil.getNomAppareil().equals(\"cafe\"))     appareil.appliquer(TypeActionAppareil.ALLUMER); }  for(CAppareil appareil : this.l_appareils){   if (appareil.getNomAppareil().equals(\"rad1\")){ if (appareil.etatAppareil.equals(TypeEtatAppareil.ETEINT)) {  appareil.appliquer(TypeActionAppareil.ALLUMER);   }}} for(CAppareil appareil : this.l_appareils)   {  if (appareil.getNomAppareil().equals(\"hf\"))     appareil.appliquer(TypeActionAppareil.ALLUMER); }  " ; 
+CScenario bonjour = new CScenario("bonjour",bonjour_contenu ) ;
+ma_liste_scenarios.add(bonjour); 
 
- String soiree = " for(CAppareil appareil : this.l_appareils) {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) {   appareil.appliquer(TypeActionAppareil.FERMER);  } }for(CEnsAppareil ensAppareil : this.l_ensembles){  if (ensAppareil.nomEnsAppareil.equals(mon_eclairage_salon)) { appareil.appliquer(TypeActionAppareil.ALLUMER);  } } " ; 
+ String soiree_contenu  = " for(CAppareil appareil : this.l_appareils) {  if (appareil.typeAppareil.equals(TypeAppareil.VOLET)) {   appareil.appliquer(TypeActionAppareil.FERMER);  } }for(CEnsAppareil ensAppareil : this.l_ensembles){  if (ensAppareil.nomEnsAppareil.equals(\"mon_eclairage_salon\")) { ensAppareil.appliquer(TypeActionAppareil.ALLUMER);  } } " ; 
+CScenario soiree = new CScenario("soiree",soiree_contenu ) ;
+ma_liste_scenarios.add(soiree); 
 CProgrammation p1 = new CProgrammation(soiree_musique);
 CDate p1d1 = new CDate(2012,11,21,19,30);
 p1.addDate(p1d1);

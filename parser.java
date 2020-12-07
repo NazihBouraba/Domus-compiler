@@ -346,7 +346,7 @@ public class parser extends java_cup.runtime.lr_parser {
 		
                          FileWriter fileWriter = null;
                 try{
-			fileWriter = new FileWriter("./CMaisonUser.java");
+			fileWriter = new FileWriter("../test/code_exemple_projet/CMaisonUser.java");
                      
 			//inherited method from java.io.OutputStreamWriter 
 		} catch (Exception e) {
@@ -362,7 +362,7 @@ public FileWriter writerspecific(){
 		
                          FileWriter fileWriter = null;
                 try{
-			fileWriter = new FileWriter("./HabitatSpecific.java");
+			fileWriter = new FileWriter("../test/code_exemple_projet/HabitatSpecific.java");
                      
 			//inherited method from java.io.OutputStreamWriter 
 		} catch (Exception e) {
@@ -506,6 +506,7 @@ String message_content = " ";
 int p=1;
 int d=1;
 String co = "\\" + "\"";
+int ensemble =0;
 
 
 
@@ -544,7 +545,7 @@ sepi.write("import java.util.ArrayList;\n");
 sepi.write("public class HabitatSpecific extends Habitat {\n");
 sepi.write("public HabitatSpecific(ArrayList<CAppareil> lapp, ArrayList<CEnsAppareil> lens, ArrayList<CScenario> lscen, ArrayList<CInterface> lint, ArrayList<CProgrammation> lprog)\n{\n");
 sepi.write("super(lapp,lens,lscen,lint,lprog);\n}\n");
-sepi.write("public void execScenarioNum(int num)\n{\n System.out.println( \"Execution du scenario \"+this.l_scenarios.get(num).getNomScenario()+\"... \");\n switch(num) {\n");
+sepi.write("public void execScenarioNum(int num)\n{\n System.out.println( \"Execution du scenario \"+this.l_scenarios.get(num).getNomScenario()+num+\"... \");\n switch(num) {\n");
 
 
 
@@ -664,34 +665,34 @@ for (String key : commandes.keySet())
 {String str = commandes.get(key) ;
 switch(str){
                         case  "mobile" :
-                               file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeAppareil."+str.toUpperCase()+");\n");
-      file.write("ma_liste_interface.add("+key+");\n");  
+                               file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeInterface."+str.toUpperCase()+");\n");
+      file.write("ma_liste_interfaces.add("+key+");\n");  
 
                       		break;
 			case "telephone" :
-                               file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeAppareil."+str.toUpperCase()+");\n");
-      file.write("ma_liste_interface.add("+key+");\n");  
+                               file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeInterface."+str.toUpperCase()+");\n");
+      file.write("ma_liste_interfaces.add("+key+");\n");  
 
                     		  break;
 
 			case "telecommande" :
-                          file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeAppareil."+str.toUpperCase()+");\n");
-      file.write("ma_liste_interface.add("+key+");\n");  
+                          file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeInterface."+str.toUpperCase()+");\n");
+      file.write("ma_liste_interfaces.add("+key+");\n");  
 
                     		  break;
 			case "tablette" :
-                       file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeAppareil."+str.toUpperCase()+");\n");
-      file.write("ma_liste_interface.add("+key+");\n");  
+                       file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeInterface."+str.toUpperCase()+");\n");
+      file.write("ma_liste_interfaces.add("+key+");\n");  
 
                      		 break;
-			case  "interrupteur" :
-                    file.write("CInterface   "+key+ " = new CInterface(\""+key+"\",TypeAppareil."+str.toUpperCase()+");\n");
-      file.write("ma_liste_interface.add("+key+");\n");  
+			case  "interrupteur" : 
+                    file.write("CInterface   "+key+ " = new CInterface(\""+key+"\",TypeInterface."+str.toUpperCase()+");\n");
+      file.write("ma_liste_interfaces.add("+key+");\n");  
 
                      		 break;
                        case  "ordinateur" :
-                    file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeAppareil."+str.toUpperCase()+");\n");
-      file.write("ma_liste_interface.add("+key+");\n");  
+                    file.write("CInterface "+key+ " = new CInterface(\""+key+"\",TypeInterface."+str.toUpperCase()+");\n");
+      file.write("ma_liste_interfaces.add("+key+");\n");  
 
                      		 break;
 			
@@ -760,7 +761,8 @@ System.out.println(co);
       for (String key : scenario_ordre.keySet()){
 
         sepi.write(" case "+scenario_ordre.get(key)+":      \n");
-          sepi.write( scenario_map.get(key)  +   "\n");
+		//System.out.println("l  ecriturte "+ key + "  "+scenario_ordre.get(key));
+          sepi.write( scenario_map.get(key).replace("\\","")  +   "\n");
 	sepi.write( "break;\n");
 
 
@@ -940,9 +942,26 @@ ens="";
           case 14: // ds ::= DSO dsd DSF 
             {
               Object RESULT =null;
+			
+
+				for (int i=0; i<scenario_ordre.size();i++){
+					
 			for (String key : scenario_map.keySet()) {
-           file.write("\n String "+ key +" = " + "\""+ scenario_map.get(key) +" \" ; \n" );
+				if(i== scenario_ordre.get(key)){
+             file.write("\n String "+ key+"_contenu  = " + "\""+ scenario_map.get(key) +" \" ; \n" );
+		      file.write("CScenario "+ key +" = new CScenario(\""+key+"\","+key+"_contenu ) ;\n");
+			  file.write("ma_liste_scenarios.add("+key+"); \n");
+				}
+           
+
 		}
+
+
+
+				}
+			
+			
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ds",3, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -978,6 +997,7 @@ commandes.put(us,"scenario");
 		String fin = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 scenario_map.put(scenario_nom,scenario_contenu);  
 			     scenario_ordre.put(scenario_nom,ordre);
+				// System.out.println("ordre scenario est "+ scenario_nom + "  "+ordre);
 				 ordre++;
 				 scenario_nom=""; scenario_contenu=""; 
 			    
@@ -1025,8 +1045,9 @@ scenario_map.put(scenario_nom,scenario_contenu);
 f = 1;
 
 if(variables.containsKey(type)){ // declaration dans un ensemble
+ensemble =1;
 scenario_contenu+="for(CEnsAppareil ensAppareil : this.l_ensembles){" ;
-scenario_contenu+="  if (ensAppareil.nomEnsAppareil.equals("+retourner_type(type)+")) { ";
+scenario_contenu+="  if (ensAppareil.nomEnsAppareil.equals("+co+retourner_type(type)+co+")) { ";
 
 }
 else if(type.equals("autre_appareil")){ // si autre appareil sans specifications
@@ -1093,7 +1114,12 @@ scenario_contenu+=" } }";
 if (!variables.containsKey(n)){report_error("La variable "+n+" n'a pas été declarée",n);}             
            else {
 if(f == 1){
+	if(ensemble==1){ ensemble=0 ;
+	scenario_contenu+="for(CAppareil appareil : ensAppareil.lAppareils) appareil.appliquer(TypeActionAppareil."+action.toUpperCase()+");" ;
+	}
+	else{
   scenario_contenu+="appareil.appliquer(TypeActionAppareil."+action.toUpperCase()+"); ";
+	}
 	f =0;
 }
 else if (c==1){
@@ -1172,7 +1198,7 @@ if ( b== false ) {   report_error(action+ " n'est pas autorisee pour la variable
 		int nleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		String n = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
- scenario_contenu+="\n this.execScenarioNum("+index_of_scenario(scenario_ordre,n) +");\n  " ;  
+ scenario_contenu+=" this.execScenarioNum("+index_of_scenario(scenario_ordre,n) +"); " ;  
               CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$12",30, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1280,7 +1306,7 @@ scenario_contenu+="}}";
           case 32: // NT$16 ::= 
             {
               Object RESULT =null;
-scenario_contenu+=" \n else { "; 
+scenario_contenu+="  else { "; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$16",34, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1410,7 +1436,7 @@ scenario_contenu+=" \n else { ";
 		int scenright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		String scen = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
 		 if (!commandes.containsKey(name)){report_error("L'interface "+name+" n'a pas été declarée",name);}
- file.write(name+ ".addScenarioAssocie("+ scen +");\n");
+ file.write(name+ ".addScenarioAssocie(\""+ scen +"\");\n");
 
 
  
@@ -1427,7 +1453,7 @@ scenario_contenu+=" \n else { ";
 		String name = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-6)).value;
 		 if (!commandes.containsKey(name)){report_error("L'interface "+name+" n'a pas été declarée",name);}
  for (int j=0;j<Global.size();j++){
-  file.write(name+ ".addScenarioAssocie("+ Global.get(j) +");\n");
+  file.write(name+ ".addScenarioAssocie(\""+ Global.get(j) +"\");\n");
 }
  Global.clear();
 
@@ -1444,7 +1470,7 @@ scenario_contenu+=" \n else { ";
 		int nameright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).right;
 		String name = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-5)).value;
  if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
-  file.write("CProgrammation p"+ p +" = new CProgrammation("+name+  ");\n");
+  file.write("CProgrammation p"+ p +" = new CProgrammation(\""+name+"\");\n");
 for (int j=0;j<Global.size();j++){
  String ds = Global.get(j).replace("_","-1");
   file.write("CDate p"+ p +"d"+d+" = new CDate"+ds+ ";\n");
@@ -1488,7 +1514,7 @@ Global.clear();
 		String dt = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 verifier_date(dt.replace("_","0001")); if (!commandes.containsKey(name)){report_error("Le scenario "+name+" n'a pas été declarée",name);}
   String ds = dt.replace("_","-1");
-  file.write("CProgrammation p"+ p +" = new CProgrammation("+name+  ");\n");
+  file.write("CProgrammation p"+ p +" = new CProgrammation(\""+name+"\");\n");
   file.write("CDate p"+ p +"d"+d+" = new CDate"+ds+ ";\n");
  file.write("p"+ p +".addDate(p"+p+"d"+d+");\n");
   file.write("ma_liste_programmations.add(p"+p+");\n");
